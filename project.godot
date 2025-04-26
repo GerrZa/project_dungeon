@@ -13,3 +13,20 @@ config_version=5
 config/name="project dungeon"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Global="*res://src/util/Global.gd"
+BattleManager="*res://src/util/BattleManager.gd"
+
+[display]
+
+window/size/viewport_width=400
+window/size/viewport_height=340
+window/size/window_width_override=800
+window/size/window_height_override=680
+window/stretch/mode="viewport"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
