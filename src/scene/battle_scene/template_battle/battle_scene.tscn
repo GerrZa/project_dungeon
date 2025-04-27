@@ -1,6 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://c47c7ye7uve8e"]
+[gd_scene load_steps=4 format=3 uid="uid://c47c7ye7uve8e"]
 
 [ext_resource type="Script" uid="uid://b0ghequy16oj3" path="res://src/scene/battle_scene/template_battle/battle_scene.gd" id="1_mf5ti"]
+[ext_resource type="Script" uid="uid://60d7jbct36lj" path="res://src/scene/battle_scene/template_battle/player_battle.gd" id="2_8eyfl"]
+[ext_resource type="Script" uid="uid://dqimh2hcktsed" path="res://src/scene/battle_scene/template_battle/dummy_enemy.gd" id="3_hr0kv"]
 
 [node name="BattleScene" type="Node2D"]
 script = ExtResource("1_mf5ti")
+player_path = NodePath("player")
+enemy_path = NodePath("enemy")
+
+[node name="player" type="Node2D" parent="."]
+script = ExtResource("2_8eyfl")
+
+[node name="enemy" type="Node2D" parent="."]
+script = ExtResource("3_hr0kv")
