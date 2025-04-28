@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://4jkq8ymrduja"
-path="res://.godot/imported/Smol font.ttf-56de3772033dbc8d7f309733e4e88b6d.fontdata"
+path="res://.godot/imported/Smol font.ttf-a3c34871733a8ce029dfcb777549346e.fontdata"
 
 [deps]
 
-source_file="res://asset/place_holder/Smol font.ttf"
-dest_files=["res://.godot/imported/Smol font.ttf-56de3772033dbc8d7f309733e4e88b6d.fontdata"]
+source_file="res://asset/ui/Smol font.ttf"
+dest_files=["res://.godot/imported/Smol font.ttf-a3c34871733a8ce029dfcb777549346e.fontdata"]
 
 [params]
 
