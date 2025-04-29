@@ -1,14 +1,34 @@
-[gd_scene load_steps=5 format=3 uid="uid://do78dko0vly72"]
+[gd_scene load_steps=5 format=3 uid="uid://mt6p1y42mhmj"]
 
-[ext_resource type="Script" uid="uid://22r1onxsoed8" path="res://src/ui/battle_ui/button/battle_button.gd" id="1_ygwun"]
 [ext_resource type="Texture2D" uid="uid://dx03kxesagkcb" path="res://asset/ui/battle_ui/button/label_button_idle.png" id="2_xksmx"]
 [ext_resource type="Texture2D" uid="uid://dj8k7svwmeu1x" path="res://asset/ui/battle_ui/button/label_button_hover.png" id="3_xksmx"]
+
+[sub_resource type="GDScript" id="GDScript_ygwun"]
+script/source = "class_name BattleButton
+extends Area2D
+
+var mouse_in = false
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	connect(\"mouse_entered\", func(): mouse_in = true)
+	connect(\"mouse_exited\", func(): mouse_in = false)
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	if mouse_in:
+		$idle_spr.visible = false
+		$hover_spr.visible = true
+	else:
+		$idle_spr.visible = true
+		$hover_spr.visible = false
+"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fdkmb"]
 size = Vector2(79, 14)
 
 [node name="BattleButton" type="Area2D"]
-script = ExtResource("1_ygwun")
+script = SubResource("GDScript_ygwun")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(39.5, 7)

@@ -4,11 +4,14 @@ extends Node2D
 
 var max_hp = 100
 var hp = 100
-var fx_list = {}
 
 @onready var Battle : BattleScene = get_parent()
 
-var actionset_list = {} #fill with ActionSets, ActionSet fill with Actions
+@export var effect_group_path : NodePath
+@export var actionset_group_path : NodePath
+
+@onready var effect_group := get_node(effect_group_path)
+@onready var actionset_group := get_node(actionset_group_path)
 
 signal died
 signal fx_added(effect_id)
@@ -20,15 +23,40 @@ var can_play = false
 
 #SETTER GETTER
 #----------------FX
-func add_fx(fx : Dictionary):
-	emit_signal("fx_added", fx["meta"]["id"])
-	fx_list[fx["meta"]["id"]] = fx
-	print("fx_added")
+#for UI displaying
+func get_fx_list():
+	var list = {}
+	for i in effect_group.get_children():
+		list[String(i.name)] = i.display
+	return list
 
-func remove_fx(fx : Dictionary):
-	emit_signal("fx_expired", fx["meta"]["id"])
-	fx_list.erase(fx["meta"]["id"])
-	print("fx_remove")
+func add_fx(fx : PackedScene, duration : int):
+	var fx_ins = fx.instantiate() as Effect
+	fx_ins.duration = duration
+	effect_group.add_child(fx_ins)
+
+#for UI displaying
+func get_actionset_list():
+	var list = {} #id : display
+	for i in actionset_group.get_children():
+		list[String(i.name)] = i.actionset_display_name
+	
+	return list
+
+#for UI displaying
+func get_action_list(actionset_id : String):
+	var list = {} #id : display
+	for i in actionset_group.get_node(actionset_id).actions.keys():
+		list[i] = actionset_group.get_node(actionset_id).actions[i]["display"]
+	
+	return list
+
+#func add_fx(fx : Dictionary):
+	#print("fx_added")
+#
+#func remove_fx(fx : Dictionary):
+	#emit_signal("fx_expired", fx["meta"]["id"])
+	#print("fx_remove")
 
 #----------------ACTION & WEAPON
 func clear_hold_action():
