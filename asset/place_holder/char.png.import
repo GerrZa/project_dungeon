@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bwukx8to563w5"
-path="res://.godot/imported/wait_cell.png-35d95c2a7798773980b3aaec2a4ba16a.ctex"
+uid="uid://dfxx66bhhfeiu"
+path="res://.godot/imported/char.png-1cef734b3e48adc0d4d266a6f5a69939.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asset/place_holder/wait_cell.png"
-dest_files=["res://.godot/imported/wait_cell.png-35d95c2a7798773980b3aaec2a4ba16a.ctex"]
+source_file="res://asset/place_holder/char.png"
+dest_files=["res://.godot/imported/char.png-1cef734b3e48adc0d4d266a6f5a69939.ctex"]
 
 [params]
 

@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="project dungeon"
+run/main_scene="uid://dkosn3qlbta03"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -37,4 +38,4 @@ m1={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
-environment/defaults/default_clear_color=Color(0.0784314, 0.0627451, 0.0470588, 1)
+environment/defaults/default_clear_color=Color(0.0620227, 0.0603185, 0.0758406, 1)

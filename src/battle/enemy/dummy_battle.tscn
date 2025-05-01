@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://b6bywhdtj8ef3"]
+
+[ext_resource type="Script" uid="uid://df12wirskgxlv" path="res://src/battle/enemy/dummy_battle.gd" id="1_pcqhq"]
+[ext_resource type="Texture2D" uid="uid://dfxx66bhhfeiu" path="res://asset/place_holder/char.png" id="1_tvdfv"]
+[ext_resource type="FontFile" uid="uid://b488m1liu66xo" path="res://asset/place_holder/SmolFont.ttf" id="3_4ikan"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tvdfv"]
+size = Vector2(42, 60)
+
+[sub_resource type="LabelSettings" id="LabelSettings_atngr"]
+font = ExtResource("3_4ikan")
+font_size = 8
+font_color = Color(1, 0, 0, 1)
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+
+[node name="DummyBattle" type="Area2D"]
+script = ExtResource("1_pcqhq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -24)
+shape = SubResource("RectangleShape2D_tvdfv")
+
+[node name="Char" type="Sprite2D" parent="."]
+modulate = Color(1, 0, 0, 1)
+position = Vector2(-18, -51)
+texture = ExtResource("1_tvdfv")
+centered = false
+flip_h = true
+
+[node name="hp_label" type="Label" parent="."]
+offset_left = -13.0
+offset_top = -63.0
+offset_right = 27.0
+offset_bottom = -40.0
+text = "HP : 100"
+label_settings = SubResource("LabelSettings_atngr")
