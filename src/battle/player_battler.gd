@@ -56,4 +56,4 @@ func _process(delta: float) -> void:
 	position = lerp(position, to_pos, 0.1)
 	battle_scene = get_tree().current_scene
 	
-	print()
+	$lane.text = var_to_str(lane)

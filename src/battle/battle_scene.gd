@@ -97,3 +97,71 @@ func _draw() -> void:
 	
 	for i in range(lane_y_pos.size()):
 		draw_line(Vector2(0, lane_y_pos[i]), Vector2(400, lane_y_pos[i]), Color(1,0,0,0.2), 4)
+
+
+func _on_attack_pressed() -> void:
+	if selecting_player == null or enemy_lane[selecting_player.lane].size() <= 0 or player_action_point <= 0:
+		return
+	
+	enemy_lane[selecting_player.lane][0].take_damage(15, selecting_player.char_type)
+	player_action_point -= 1
+
+
+func _on_swapup_pressed() -> void:
+	if selecting_player.lane >= 2 or player_action_point <= 0:
+		return
+	
+	var main_lane = selecting_player.lane
+	var swap_lane = main_lane+1
+	
+	var main_pos = selecting_player.to_pos
+	var swap_pos = player_lane[swap_lane].to_pos
+	
+	print("----------")
+	print(main_lane)
+	print(swap_lane)
+	print("----------")
+	
+	player_lane[main_lane].to_pos = swap_pos
+	player_lane[swap_lane].to_pos = main_pos
+	
+	player_lane[swap_lane].lane = main_lane
+	player_lane[main_lane].lane = swap_lane
+	
+	var main_plr = player_lane[main_lane]
+	var swap_plr = player_lane[swap_lane]
+	
+	player_lane[main_lane] = swap_plr
+	player_lane[swap_lane] = main_plr
+	
+	player_action_point -= 1
+
+
+func _on_swapdown_pressed() -> void:
+	if selecting_player.lane <=0 or player_action_point <= 0:
+		return
+	
+	var main_lane = selecting_player.lane
+	var swap_lane = main_lane-1
+	
+	var main_pos = selecting_player.to_pos
+	var swap_pos = player_lane[swap_lane].to_pos
+	
+	print("----------")
+	print(main_lane)
+	print(swap_lane)
+	print("----------")
+	
+	player_lane[main_lane].to_pos = swap_pos
+	player_lane[swap_lane].to_pos = main_pos
+	
+	player_lane[swap_lane].lane = main_lane
+	player_lane[main_lane].lane = swap_lane
+	
+	var main_plr = player_lane[main_lane]
+	var swap_plr = player_lane[swap_lane]
+	
+	player_lane[main_lane] = swap_plr
+	player_lane[swap_lane] = main_plr
+	
+	player_action_point -= 1

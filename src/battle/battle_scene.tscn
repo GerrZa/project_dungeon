@@ -57,9 +57,32 @@ theme_override_fonts/font = ExtResource("4_6cbqe")
 theme_override_font_sizes/font_size = 8
 show_percentage = false
 
-[node name="attack button" type="Button" parent="ui"]
-offset_right = 8.0
-offset_bottom = 8.0
+[node name="attack" type="Button" parent="ui"]
+offset_left = 203.0
+offset_top = 224.0
+offset_right = 284.0
+offset_bottom = 240.0
+theme_override_fonts/font = ExtResource("4_6cbqe")
+theme_override_font_sizes/font_size = 8
+text = "attack"
+
+[node name="swapup" type="Button" parent="ui"]
+offset_left = 203.0
+offset_top = 263.0
+offset_right = 284.0
+offset_bottom = 279.0
+theme_override_fonts/font = ExtResource("4_6cbqe")
+theme_override_font_sizes/font_size = 8
+text = "swap up"
+
+[node name="swapdown" type="Button" parent="ui"]
+offset_left = 203.0
+offset_top = 243.0
+offset_right = 284.0
+offset_bottom = 259.0
+theme_override_fonts/font = ExtResource("4_6cbqe")
+theme_override_font_sizes/font_size = 8
+text = "swap down"
 
 [node name="player0" type="Area2D" parent="."]
 position = Vector2(48, 159)
@@ -76,6 +99,10 @@ centered = false
 position = Vector2(0, -23.5)
 shape = SubResource("RectangleShape2D_6ynu5")
 
+[node name="lane" type="Label" parent="player0"]
+offset_right = 40.0
+offset_bottom = 23.0
+
 [node name="player1" type="Area2D" parent="."]
 position = Vector2(65, 119)
 script = ExtResource("2_6ynu5")
@@ -90,6 +117,10 @@ centered = false
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="player1"]
 position = Vector2(0, -23)
 shape = SubResource("RectangleShape2D_6ynu5")
+
+[node name="lane" type="Label" parent="player1"]
+offset_right = 40.0
+offset_bottom = 23.0
 
 [node name="player2" type="Area2D" parent="."]
 position = Vector2(80, 78)
@@ -107,9 +138,17 @@ centered = false
 position = Vector2(-1, -24)
 shape = SubResource("RectangleShape2D_6ynu5")
 
+[node name="lane" type="Label" parent="player2"]
+offset_right = 40.0
+offset_bottom = 23.0
+
 [node name="Label" type="Label" parent="."]
 offset_right = 40.0
 offset_bottom = 23.0
 text = "action left : "
 label_settings = SubResource("LabelSettings_jdlxq")
 script = SubResource("GDScript_r6mhw")
+
+[connection signal="pressed" from="ui/attack" to="." method="_on_attack_pressed"]
+[connection signal="pressed" from="ui/swapup" to="." method="_on_swapup_pressed"]
+[connection signal="pressed" from="ui/swapdown" to="." method="_on_swapdown_pressed"]

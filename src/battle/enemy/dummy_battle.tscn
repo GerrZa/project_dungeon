@@ -35,3 +35,6 @@ offset_right = 27.0
 offset_bottom = -40.0
 text = "HP : 100"
 label_settings = SubResource("LabelSettings_atngr")
+
+[node name="weak_ind" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0, -66, -3, -71, 0, -76, 3, -71)
