@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dkosn3qlbta03"]
+[gd_scene load_steps=12 format=3 uid="uid://dkosn3qlbta03"]
 
 [ext_resource type="Script" uid="uid://ck3t6pbp8tsvq" path="res://src/battle/battle_scene.gd" id="1_1msw3"]
 [ext_resource type="Script" uid="uid://d2e7nekiglg7r" path="res://src/battle/player_battler.gd" id="2_6ynu5"]
@@ -14,7 +14,10 @@ func _process(delta: float) -> void:
 	if battle.selecting_player != null:
 		var color = battle.selecting_player.get_node(\"Char\").modulate
 		$Port.modulate = Color(color.r, color.g, color.b, 1.0)
+		$hp_bar.max_value = battle.selecting_player.max_hp
 		$hp_bar.value = battle.selecting_player.hp
+	
+	$endturn.visible = get_tree().current_scene.turn == \"p\" and get_tree().current_scene.player_action_point <= 0
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6ynu5"]
@@ -28,6 +31,20 @@ script/source = "extends Label
 
 func _process(delta: float) -> void:
 	text = \"action left : \" + var_to_str(get_tree().current_scene.player_action_point)
+"
+
+[sub_resource type="GDScript" id="GDScript_jdlxq"]
+script/source = "extends Label
+
+func _process(delta: float) -> void:
+	text = \"combo : \" + var_to_str(get_tree().current_scene.combo_active)
+"
+
+[sub_resource type="GDScript" id="GDScript_w6n6o"]
+script/source = "extends Label
+
+func _process(delta: float) -> void:
+	text = var_to_str(get_tree().current_scene.curr_combo)
 "
 
 [node name="BattleScene" type="Node2D"]
@@ -68,26 +85,37 @@ text = "attack"
 
 [node name="swapup" type="Button" parent="ui"]
 offset_left = 203.0
-offset_top = 263.0
+offset_top = 245.0
 offset_right = 284.0
-offset_bottom = 279.0
+offset_bottom = 261.0
 theme_override_fonts/font = ExtResource("4_6cbqe")
 theme_override_font_sizes/font_size = 8
 text = "swap up"
 
 [node name="swapdown" type="Button" parent="ui"]
 offset_left = 203.0
-offset_top = 243.0
+offset_top = 264.0
 offset_right = 284.0
-offset_bottom = 259.0
+offset_bottom = 280.0
 theme_override_fonts/font = ExtResource("4_6cbqe")
 theme_override_font_sizes/font_size = 8
 text = "swap down"
+
+[node name="endturn" type="Button" parent="ui"]
+offset_left = 301.0
+offset_top = 243.0
+offset_right = 382.0
+offset_bottom = 259.0
+theme_override_fonts/font = ExtResource("4_6cbqe")
+theme_override_font_sizes/font_size = 8
+text = "end turn
+"
 
 [node name="player0" type="Area2D" parent="."]
 position = Vector2(48, 159)
 script = ExtResource("2_6ynu5")
 char_type = 1
+max_hp = 70
 metadata/_edit_group_ = true
 
 [node name="Char" type="Sprite2D" parent="player0"]
@@ -103,10 +131,20 @@ shape = SubResource("RectangleShape2D_6ynu5")
 offset_right = 40.0
 offset_bottom = 23.0
 
+[node name="hp" type="ProgressBar" parent="player0"]
+offset_left = -21.0
+offset_top = -32.0
+offset_right = 21.0
+offset_bottom = -20.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("4_6cbqe")
+theme_override_font_sizes/font_size = 8
+
 [node name="player1" type="Area2D" parent="."]
 position = Vector2(65, 119)
 script = ExtResource("2_6ynu5")
 lane = 1
+max_hp = 130
 metadata/_edit_group_ = true
 
 [node name="Char" type="Sprite2D" parent="player1"]
@@ -121,6 +159,15 @@ shape = SubResource("RectangleShape2D_6ynu5")
 [node name="lane" type="Label" parent="player1"]
 offset_right = 40.0
 offset_bottom = 23.0
+
+[node name="hp" type="ProgressBar" parent="player1"]
+offset_left = -21.0
+offset_top = -32.0
+offset_right = 21.0
+offset_bottom = -20.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("4_6cbqe")
+theme_override_font_sizes/font_size = 8
 
 [node name="player2" type="Area2D" parent="."]
 position = Vector2(80, 78)
@@ -142,6 +189,15 @@ shape = SubResource("RectangleShape2D_6ynu5")
 offset_right = 40.0
 offset_bottom = 23.0
 
+[node name="hp" type="ProgressBar" parent="player2"]
+offset_left = -21.0
+offset_top = -32.0
+offset_right = 21.0
+offset_bottom = -20.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("4_6cbqe")
+theme_override_font_sizes/font_size = 8
+
 [node name="Label" type="Label" parent="."]
 offset_right = 40.0
 offset_bottom = 23.0
@@ -149,6 +205,24 @@ text = "action left : "
 label_settings = SubResource("LabelSettings_jdlxq")
 script = SubResource("GDScript_r6mhw")
 
+[node name="combo_label" type="Label" parent="."]
+offset_left = 283.0
+offset_top = 2.0
+offset_right = 371.0
+offset_bottom = 25.0
+text = "combo : "
+label_settings = SubResource("LabelSettings_jdlxq")
+script = SubResource("GDScript_jdlxq")
+
+[node name="comb_name" type="Label" parent="."]
+offset_left = 153.0
+offset_top = 1.0
+offset_right = 241.0
+offset_bottom = 24.0
+label_settings = SubResource("LabelSettings_jdlxq")
+script = SubResource("GDScript_w6n6o")
+
 [connection signal="pressed" from="ui/attack" to="." method="_on_attack_pressed"]
 [connection signal="pressed" from="ui/swapup" to="." method="_on_swapup_pressed"]
 [connection signal="pressed" from="ui/swapdown" to="." method="_on_swapdown_pressed"]
+[connection signal="pressed" from="ui/endturn" to="." method="_on_endturn_pressed"]

@@ -44,8 +44,8 @@ func take_damage(dmg, type):
 		get_tree().current_scene.enemy_lane[lane].erase(self)
 		get_tree().current_scene.rearrange_ene()
 
-func attack():
-	get_tree().current_scene.player_lane[lane].hp -= 15
+func attack(dmg):
+	get_tree().current_scene.player_lane[lane].hp -= dmg
 
 func swapdown():
 	if lane <= 0:

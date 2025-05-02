@@ -9,6 +9,7 @@ enum TYPE{
 }
 @export var char_type : TYPE = TYPE.ORANGE
 
+@export var max_hp = 100
 var hp = 100
 
 var to_pos = Vector2.ZERO
@@ -24,6 +25,8 @@ var action_list = {
 func _ready() -> void:
 	super()
 	to_pos = position
+	
+	hp = max_hp
 	
 	match char_type:
 		TYPE.ORANGE:
@@ -55,5 +58,8 @@ func _physics_process(delta: float) -> void:
 func _process(delta: float) -> void:
 	position = lerp(position, to_pos, 0.1)
 	battle_scene = get_tree().current_scene
+	
+	$hp.max_value = max_hp
+	$hp.value = hp
 	
 	$lane.text = var_to_str(lane)
