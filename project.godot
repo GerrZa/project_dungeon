@@ -25,7 +25,14 @@ window/size/viewport_width=400
 window/size/viewport_height=300
 window/size/window_width_override=800
 window/size/window_height_override=600
-window/stretch/mode="viewport"
+window/stretch/mode="canvas_items"
+
+[file_customization]
+
+folder_colors={
+"res://src/battle/": "green",
+"res://src/util/": "purple"
+}
 
 [input]
 

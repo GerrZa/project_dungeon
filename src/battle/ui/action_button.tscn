@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://cwdwpxxcklt1c"]
+
+[ext_resource type="Script" uid="uid://dtx4dkvhp65w4" path="res://src/battle/ui/action_button.gd" id="1_a33q4"]
+[ext_resource type="Texture2D" uid="uid://vhqsfptucw36" path="res://asset/place_holder/ptt_button.png" id="2_s105h"]
+[ext_resource type="FontFile" uid="uid://b488m1liu66xo" path="res://asset/place_holder/SmolFont.ttf" id="3_i4h52"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s105h"]
+
+[node name="ActionButton" type="Panel"]
+modulate = Color(0.8, 0.8, 0.8, 1)
+custom_minimum_size = Vector2(0, 18)
+offset_right = 91.0
+offset_bottom = 18.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_s105h")
+script = ExtResource("1_a33q4")
+text = "Hello"
+
+[node name="anchor" type="Node2D" parent="."]
+
+[node name="PttButton" type="Sprite2D" parent="anchor"]
+texture = ExtResource("2_s105h")
+centered = false
+
+[node name="RichTextLabel" type="RichTextLabel" parent="anchor"]
+offset_right = 91.0
+offset_bottom = 16.0
+mouse_filter = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/normal_font = ExtResource("3_i4h52")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "Hello"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1

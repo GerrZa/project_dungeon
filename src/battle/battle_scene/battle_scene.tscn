@@ -1,0 +1,62 @@
+[gd_scene load_steps=9 format=3 uid="uid://dkosn3qlbta03"]
+
+[ext_resource type="Script" uid="uid://ck3t6pbp8tsvq" path="res://src/battle/battle_scene/battle_scene.gd" id="1_1msw3"]
+[ext_resource type="Texture2D" uid="uid://do7m478n6pln3" path="res://asset/place_holder/port.png" id="2_jdlxq"]
+[ext_resource type="Script" uid="uid://cnhodbq5x7f4l" path="res://src/battle/battle_scene/ui.gd" id="2_oafii"]
+[ext_resource type="FontFile" uid="uid://b488m1liu66xo" path="res://asset/place_holder/SmolFont.ttf" id="4_6cbqe"]
+[ext_resource type="Script" uid="uid://be0vwr4sw3kdf" path="res://src/util/class/CameraPlus2D.gd" id="5_gpduh"]
+[ext_resource type="PackedScene" uid="uid://dmfef746xj7hh" path="res://src/battle/player/red/redplayer.tscn" id="5_px77a"]
+[ext_resource type="PackedScene" uid="uid://b6jepkox3hkts" path="res://src/battle/player/green/greenplayer.tscn" id="5_uqsyo"]
+[ext_resource type="PackedScene" uid="uid://ciugcs0xshn8b" path="res://src/battle/player/blue/blueplayer.tscn" id="7_pfvi3"]
+
+[node name="BattleScene" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_1msw3")
+
+[node name="ui" type="CanvasLayer" parent="."]
+script = ExtResource("2_oafii")
+
+[node name="ColorRect" type="ColorRect" parent="ui"]
+offset_top = 202.0
+offset_right = 400.0
+offset_bottom = 300.0
+color = Color(0.125848, 0.119866, 0.143806, 1)
+
+[node name="Port" type="Sprite2D" parent="ui"]
+position = Vector2(33, 234)
+texture = ExtResource("2_jdlxq")
+centered = false
+
+[node name="hp_bar" type="ProgressBar" parent="ui"]
+offset_left = 88.0
+offset_top = 248.0
+offset_right = 184.0
+offset_bottom = 260.0
+theme_override_fonts/font = ExtResource("4_6cbqe")
+theme_override_font_sizes/font_size = 8
+show_percentage = false
+
+[node name="action_button" type="VBoxContainer" parent="ui"]
+clip_contents = true
+offset_left = 203.0
+offset_top = 214.0
+offset_right = 392.0
+offset_bottom = 295.0
+mouse_filter = 2
+theme_override_constants/separation = 4
+
+[node name="GreenPlayer" parent="." instance=ExtResource("5_uqsyo")]
+position = Vector2(87, 68)
+lane = 2
+char_type = 2
+
+[node name="RedPlayer" parent="." instance=ExtResource("5_px77a")]
+position = Vector2(80, 112)
+
+[node name="BluePlayer" parent="." instance=ExtResource("7_pfvi3")]
+position = Vector2(71, 164)
+
+[node name="CameraPlus2D" type="Camera2D" parent="."]
+anchor_mode = 0
+script = ExtResource("5_gpduh")
+metadata/_custom_type_script = "uid://be0vwr4sw3kdf"
