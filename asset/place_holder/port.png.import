@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://30vs87qowyoj"
-path="res://.godot/imported/label_button.png-f5ecfabd5850fdd56cc515c65b47eba0.ctex"
+uid="uid://do7m478n6pln3"
+path="res://.godot/imported/port.png-88f174c0a0c93217c7754ac56a868003.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asset/ui/battle_ui/label_button.png"
-dest_files=["res://.godot/imported/label_button.png-f5ecfabd5850fdd56cc515c65b47eba0.ctex"]
+source_file="res://asset/place_holder/port.png"
+dest_files=["res://.godot/imported/port.png-88f174c0a0c93217c7754ac56a868003.ctex"]
 
 [params]
 

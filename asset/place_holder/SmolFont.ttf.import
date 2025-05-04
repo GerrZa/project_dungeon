@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://4jkq8ymrduja"
-path="res://.godot/imported/Smol font.ttf-a3c34871733a8ce029dfcb777549346e.fontdata"
+uid="uid://b488m1liu66xo"
+path="res://.godot/imported/SmolFont.ttf-2f9ae0eaf3ab4710957a5f11749e5e6b.fontdata"
 
 [deps]
 
-source_file="res://asset/ui/Smol font.ttf"
-dest_files=["res://.godot/imported/Smol font.ttf-a3c34871733a8ce029dfcb777549346e.fontdata"]
+source_file="res://asset/place_holder/SmolFont.ttf"
+dest_files=["res://.godot/imported/SmolFont.ttf-2f9ae0eaf3ab4710957a5f11749e5e6b.fontdata"]
 
 [params]
 
@@ -33,8 +33,7 @@ preload=[{
 "chars": [],
 "glyphs": [],
 "name": "New Configuration",
-"size": Vector2i(16, 0),
-&"variation_embolden": 0.0
+"size": Vector2i(16, 0)
 }]
 language_support={}
 script_support={}
