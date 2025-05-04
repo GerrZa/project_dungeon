@@ -37,7 +37,7 @@ func _process(delta: float) -> void:
 script/source = "extends Label
 
 func _process(delta: float) -> void:
-	text = \"combo : \" + var_to_str(get_tree().current_scene.combo_active)
+	text = \"can_combo : \" + var_to_str(get_tree().current_scene.can_combo)
 "
 
 [sub_resource type="GDScript" id="GDScript_w6n6o"]
@@ -206,10 +206,10 @@ label_settings = SubResource("LabelSettings_jdlxq")
 script = SubResource("GDScript_r6mhw")
 
 [node name="combo_label" type="Label" parent="."]
-offset_left = 283.0
-offset_top = 2.0
-offset_right = 371.0
-offset_bottom = 25.0
+offset_left = 235.0
+offset_top = 1.0
+offset_right = 323.0
+offset_bottom = 24.0
 text = "combo : "
 label_settings = SubResource("LabelSettings_jdlxq")
 script = SubResource("GDScript_jdlxq")

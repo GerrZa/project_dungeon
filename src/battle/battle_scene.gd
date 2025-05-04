@@ -18,7 +18,7 @@ var turn_count = 0
 
 var curr_combo = "null"
 var combo_list = ["RoB", "B1", "Rc", "BoG"]
-var combo_active = false
+var can_combo = true
 
 func _ready() -> void:
 	#set up
@@ -103,29 +103,7 @@ func _process(delta: float) -> void:
 		enemy_lane[rnd_lane][0].take_damage(10)
 	
 	curr_combo = combo_list[0]
-	combo_active = false
 	
-	match curr_combo:
-		"RoB":
-			var half = false
-			for i in player_lane:
-				if i.char_type == 1:
-					half = true
-				if half and i.char_type == 0:
-					combo_active = true
-		"B1":
-			if player_lane[2].char_type == 1:
-				combo_active = true
-		"Rc":
-			if player_lane[1].char_type == 0:
-				combo_active = true
-		"BoG":
-			var half = false
-			for i in player_lane:
-				if i.char_type == 2:
-					half = true
-				if half and i.char_type == 1:
-					combo_active = true
 
 func _draw() -> void:
 	if lane_y_pos.size() < lane_count:
@@ -202,6 +180,37 @@ func _on_swapdown_pressed() -> void:
 func _on_endturn_pressed() -> void:
 	turn = "e"
 	
+	var damage_all_ene = func():
+		for i in enemy_lane:
+			if i.size() > 0:
+				i[0].take_damage(10,5)
+				continue
+		
+		can_combo = false
+	
+	if can_combo:
+		match curr_combo:
+			"RoB":
+				var half = false
+				for i in player_lane:
+					if i.char_type == 1:
+						half = true
+					if half and i.char_type == 0:
+						damage_all_ene.call()
+			"B1":
+				if player_lane[2].char_type == 1:
+					damage_all_ene.call()
+			"Rc":
+				if player_lane[1].char_type == 0:
+					damage_all_ene.call()
+			"BoG":
+				var half = false
+				for i in player_lane:
+					if i.char_type == 2:
+						half = true
+					if half and i.char_type == 1:
+						damage_all_ene.call()
+	
 	await get_tree().create_timer(1).timeout
 	
 	#enemy atk
@@ -221,13 +230,7 @@ func _on_endturn_pressed() -> void:
 				
 				rearrange_ene()
 			else:
-				var dmg = 15
-				
-				if combo_active:
-					dmg *= 0.5
-					dmg = round(dmg)
-				
-				i[0].attack(dmg)
+				i[0].attack(15)
 	
 	turn_count += 1
 	
@@ -241,6 +244,8 @@ func _on_endturn_pressed() -> void:
 		#add_enemy(ene_ins, rnd_lane)
 		
 		combo_list.shuffle()
+		
+		can_combo = true
 	
 	turn = "p"
 	player_action_point = 3
