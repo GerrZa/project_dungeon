@@ -7,13 +7,13 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s105h"]
 
 [node name="ActionButton" type="Panel"]
-modulate = Color(0.8, 0.8, 0.8, 1)
+modulate = Color(0.5, 0.5, 0.5, 1)
+self_modulate = Color(0, 0, 0, 0)
 custom_minimum_size = Vector2(0, 18)
 offset_right = 91.0
 offset_bottom = 18.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_s105h")
 script = ExtResource("1_a33q4")
-text = "Hello"
 
 [node name="anchor" type="Node2D" parent="."]
 
@@ -29,7 +29,6 @@ theme_override_constants/outline_size = 3
 theme_override_fonts/normal_font = ExtResource("3_i4h52")
 theme_override_font_sizes/normal_font_size = 8
 bbcode_enabled = true
-text = "Hello"
 fit_content = true
 scroll_active = false
 horizontal_alignment = 1

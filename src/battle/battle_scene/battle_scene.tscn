@@ -1,33 +1,65 @@
-[gd_scene load_steps=9 format=3 uid="uid://dkosn3qlbta03"]
+[gd_scene load_steps=16 format=3 uid="uid://dkosn3qlbta03"]
 
 [ext_resource type="Script" uid="uid://ck3t6pbp8tsvq" path="res://src/battle/battle_scene/battle_scene.gd" id="1_1msw3"]
 [ext_resource type="Texture2D" uid="uid://do7m478n6pln3" path="res://asset/place_holder/port.png" id="2_jdlxq"]
 [ext_resource type="Script" uid="uid://cnhodbq5x7f4l" path="res://src/battle/battle_scene/ui.gd" id="2_oafii"]
 [ext_resource type="FontFile" uid="uid://b488m1liu66xo" path="res://asset/place_holder/SmolFont.ttf" id="4_6cbqe"]
 [ext_resource type="Script" uid="uid://be0vwr4sw3kdf" path="res://src/util/class/CameraPlus2D.gd" id="5_gpduh"]
+[ext_resource type="PackedScene" uid="uid://cwdwpxxcklt1c" path="res://src/battle/ui/action_button.tscn" id="5_pfvi3"]
 [ext_resource type="PackedScene" uid="uid://dmfef746xj7hh" path="res://src/battle/player/red/redplayer.tscn" id="5_px77a"]
 [ext_resource type="PackedScene" uid="uid://b6jepkox3hkts" path="res://src/battle/player/green/greenplayer.tscn" id="5_uqsyo"]
+[ext_resource type="Script" uid="uid://dtx4dkvhp65w4" path="res://src/battle/ui/action_button.gd" id="7_c7sli"]
 [ext_resource type="PackedScene" uid="uid://ciugcs0xshn8b" path="res://src/battle/player/blue/blueplayer.tscn" id="7_pfvi3"]
+[ext_resource type="Texture2D" uid="uid://dcx3kmr4ii7er" path="res://asset/battle/ui/swap_up_button.png" id="8_2dtis"]
+[ext_resource type="Texture2D" uid="uid://c3sf85q0i3nc2" path="res://asset/battle/ui/swap_down_button.png" id="9_c7sli"]
+[ext_resource type="Texture2D" uid="uid://cpk4q0tvkqkvo" path="res://asset/battle/ui/inventory_button.png" id="10_2dtis"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s105h"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2dtis"]
+font = ExtResource("4_6cbqe")
+font_size = 64
 
 [node name="BattleScene" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_1msw3")
+enemy_gap = 32
+lane0_init = ["skeleton", "skeleton"]
+lane1_init = ["skeleton"]
+lane2_init = ["skeleton", "skeleton", "skeleton"]
+
+[node name="CameraPlus2D" type="Camera2D" parent="."]
+anchor_mode = 0
+script = ExtResource("5_gpduh")
+metadata/_custom_type_script = "uid://be0vwr4sw3kdf"
 
 [node name="ui" type="CanvasLayer" parent="."]
 script = ExtResource("2_oafii")
 
-[node name="ColorRect" type="ColorRect" parent="ui"]
+[node name="anchor" type="Control" parent="ui"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="ColorRect" type="ColorRect" parent="ui/anchor"]
+layout_mode = 0
 offset_top = 202.0
 offset_right = 400.0
 offset_bottom = 300.0
 color = Color(0.125848, 0.119866, 0.143806, 1)
 
-[node name="Port" type="Sprite2D" parent="ui"]
+[node name="Port" type="Sprite2D" parent="ui/anchor"]
 position = Vector2(33, 234)
 texture = ExtResource("2_jdlxq")
 centered = false
 
-[node name="hp_bar" type="ProgressBar" parent="ui"]
+[node name="hp_bar" type="ProgressBar" parent="ui/anchor"]
+layout_mode = 0
 offset_left = 88.0
 offset_top = 248.0
 offset_right = 184.0
@@ -36,27 +68,151 @@ theme_override_fonts/font = ExtResource("4_6cbqe")
 theme_override_font_sizes/font_size = 8
 show_percentage = false
 
-[node name="action_button" type="VBoxContainer" parent="ui"]
-clip_contents = true
-offset_left = 203.0
-offset_top = 214.0
-offset_right = 392.0
-offset_bottom = 295.0
+[node name="endturn_button" parent="ui/anchor" instance=ExtResource("5_pfvi3")]
+layout_mode = 0
+offset_left = 295.0
+offset_top = 272.0
+offset_right = 386.0
+offset_bottom = 290.0
+text = "Endturn"
+
+[node name="swap_up" type="Panel" parent="ui/anchor"]
+modulate = Color(0.5, 0.5, 0.5, 1)
+self_modulate = Color(0, 0, 0, 0)
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 0
+offset_left = 295.0
+offset_top = 232.0
+offset_right = 349.0
+offset_bottom = 250.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_s105h")
+script = ExtResource("7_c7sli")
+metadata/_edit_group_ = true
+
+[node name="anchor" type="Node2D" parent="ui/anchor/swap_up"]
+
+[node name="PttButton" type="Sprite2D" parent="ui/anchor/swap_up/anchor"]
+texture = ExtResource("8_2dtis")
+centered = false
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ui/anchor/swap_up/anchor"]
+offset_right = 91.0
+offset_bottom = 16.0
 mouse_filter = 2
-theme_override_constants/separation = 4
+theme_override_constants/outline_size = 3
+theme_override_fonts/normal_font = ExtResource("4_6cbqe")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="swap_down" type="Panel" parent="ui/anchor"]
+modulate = Color(0.5, 0.5, 0.5, 1)
+self_modulate = Color(0, 0, 0, 0)
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 0
+offset_left = 295.0
+offset_top = 252.0
+offset_right = 349.0
+offset_bottom = 270.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_s105h")
+script = ExtResource("7_c7sli")
+metadata/_edit_group_ = true
+
+[node name="anchor" type="Node2D" parent="ui/anchor/swap_down"]
+
+[node name="PttButton" type="Sprite2D" parent="ui/anchor/swap_down/anchor"]
+texture = ExtResource("9_c7sli")
+centered = false
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ui/anchor/swap_down/anchor"]
+offset_right = 91.0
+offset_bottom = 16.0
+mouse_filter = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/normal_font = ExtResource("4_6cbqe")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="inventory" type="Panel" parent="ui/anchor"]
+modulate = Color(0.5, 0.5, 0.5, 1)
+self_modulate = Color(0, 0, 0, 0)
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 0
+offset_left = 350.0
+offset_top = 232.0
+offset_right = 386.0
+offset_bottom = 270.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_s105h")
+script = ExtResource("7_c7sli")
+metadata/_edit_group_ = true
+
+[node name="anchor" type="Node2D" parent="ui/anchor/inventory"]
+
+[node name="PttButton" type="Sprite2D" parent="ui/anchor/inventory/anchor"]
+texture = ExtResource("10_2dtis")
+centered = false
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ui/anchor/inventory/anchor"]
+offset_right = 91.0
+offset_bottom = 16.0
+mouse_filter = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/normal_font = ExtResource("4_6cbqe")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="action_button" type="VBoxContainer" parent="ui/anchor"]
+clip_contents = true
+layout_mode = 0
+offset_left = 194.0
+offset_top = 212.0
+offset_right = 285.0
+offset_bottom = 291.0
+mouse_filter = 2
+theme_override_constants/separation = 2
+metadata/_edit_group_ = true
+
+[node name="action1" parent="ui/anchor/action_button" instance=ExtResource("5_pfvi3")]
+layout_mode = 2
+text = "Action"
+
+[node name="action2" parent="ui/anchor/action_button" instance=ExtResource("5_pfvi3")]
+layout_mode = 2
+text = "Action"
+
+[node name="action3" parent="ui/anchor/action_button" instance=ExtResource("5_pfvi3")]
+layout_mode = 2
+text = "Action"
+
+[node name="action4" parent="ui/anchor/action_button" instance=ExtResource("5_pfvi3")]
+layout_mode = 2
+text = "Action"
 
 [node name="GreenPlayer" parent="." instance=ExtResource("5_uqsyo")]
-position = Vector2(87, 68)
-lane = 2
-char_type = 2
+position = Vector2(74, 88)
 
 [node name="RedPlayer" parent="." instance=ExtResource("5_px77a")]
-position = Vector2(80, 112)
+position = Vector2(72, 137)
 
 [node name="BluePlayer" parent="." instance=ExtResource("7_pfvi3")]
-position = Vector2(71, 164)
+position = Vector2(71, 182)
 
-[node name="CameraPlus2D" type="Camera2D" parent="."]
-anchor_mode = 0
-script = ExtResource("5_gpduh")
-metadata/_custom_type_script = "uid://be0vwr4sw3kdf"
+[node name="win" type="Label" parent="."]
+visible = false
+offset_right = 400.0
+offset_bottom = 202.0
+text = "WIN!"
+label_settings = SubResource("LabelSettings_2dtis")
+horizontal_alignment = 1
+vertical_alignment = 1

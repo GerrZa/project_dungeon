@@ -6,3 +6,10 @@ enum TYPE{
 	BLUE,
 	GREEN
 }
+
+var player_stat ={
+	"red" : {
+		"max_hp" : 100,
+		"hp" : 100
+	}
+}

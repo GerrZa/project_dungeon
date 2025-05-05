@@ -5,10 +5,19 @@ var enemy_lane = []
 var player_lane = []
 
 @export var player_action_point = 3
+@export var max_player_action_point = 3
+@export var init_player = 1
 @export var lane_count = 3
 
+@export var enemy_base_x_pos = 270
 @export var enemy_gap = 24
 @onready var camera : CameraPlus2D = $CameraPlus2D
+@onready var ui = $ui
+
+@export_category("Init enemy")
+@export var lane0_init : PackedStringArray = [] #just put enemy name in it, ex 3 dummy -> "dummy", "dummy", "dummy"
+@export var lane1_init : PackedStringArray = []
+@export var lane2_init : PackedStringArray = []
 
 #LOW LEVEL
 var lane_y_pos = []
@@ -16,10 +25,14 @@ var lane_y_pos = []
 var hover_player = null
 var selecting_player = null
 
-var turn = "p"
+var last_selected_player = null
+
+var turn = "setup"
 var turn_count = 0
 
 func _ready() -> void:
+	player_action_point = max_player_action_point
+	
 	#set up
 	for i in range(lane_count):
 		enemy_lane.append([])
@@ -27,36 +40,121 @@ func _ready() -> void:
 	for i in range(lane_count):
 		player_lane.append(null)
 	
-	#for i in range(lane_count):
-		#lane_y_pos.append(0.0)
 
 func _process(delta: float) -> void:
 	queue_redraw()
 	
-	if lane_y_pos.size() < 3 and player_lane.has(null) == false:
-		for i in player_lane:
-			lane_y_pos.append(i.position.y)
-	
-	#player mouse checking
-	hover_player = null
-	
-	if player_lane.has(null):
-		return
-	
-	for i in player_lane:
-		if i != null and i.mouse_in:
-			hover_player = i
+	match turn:
+		"setup":
+			#set up
+			if lane_y_pos.size() < 3 and player_lane.has(null) == false:
+				
+				var ii = 1
+				for i in player_lane:
+					lane_y_pos.append(i.position.y)
+					i.to_pos = i.position
+					i.position.x -= 200 + (100*ii)
+					ii+=1
+				
+				
+				#init enemy
+				for i in lane0_init:
+					add_enemy(0, "res://src/battle/enemy/" +i+ "/" +i+ "_battle.tscn")
+				if lane_count > 1:
+					for i in lane1_init:
+						add_enemy(1, "res://src/battle/enemy/" +i+ "/" +i+ "_battle.tscn")
+				if lane_count > 2:
+					for i in lane2_init:
+						add_enemy(2, "res://src/battle/enemy/" +i+ "/" +i+ "_battle.tscn")
+				
+				
+				await get_tree().create_timer(0.3 * lane_count).timeout
+				
+				selecting_player = player_lane[clamp(init_player, 0, lane_count)]
+				print(selecting_player)
+				switch_turn("p")
+		"p":
 			
-			if Input.is_action_just_pressed("m1"):
-				selecting_player = i
-				$ui.reload_action_list()
-			break
-	
-	if Input.is_action_just_pressed("ui_accept"):
-		add_enemy(1,"res://src/battle/enemy/dummy_battle.tscn")
-	if Input.is_action_just_pressed("ui_up"):
-		swap_enemy(enemy_lane[0][0], 2, 0)
+			#player mouse checking
+			hover_player = null
+			
+			for i in player_lane:
+				if i != null and i.mouse_in:
+					hover_player = i
+					
+					if Input.is_action_just_pressed("m1"):
+						selecting_player = i
+						$ui.reload_action_list()
+					break
+			
+			#debug shit
+			#if Input.is_action_just_pressed("ui_accept"):
+				#randomize()
+				#
+				#var rng = randi_range(0,2)
+				#
+				#add_enemy(rng,"res://src/battle/enemy/dummy/dummy_battle.tscn")
+			#if Input.is_action_just_pressed("ui_up"):
+				#swap_player(0,2)
+			
+		"e":
+			hover_player = null
+			selecting_player = null
+		"win":
+			$win.visible = true
 
+#Game stuff
+func use_action_point(amt = 1):
+	player_action_point -= amt
+
+func reset_action_point():
+	player_action_point = max_player_action_point
+
+func add_action_point(amt = 1):
+	player_action_point += amt
+
+func switch_turn(to_who):
+	turn = to_who
+	match turn:
+		"p":
+			reset_action_point()
+			if last_selected_player != null:
+				selecting_player = last_selected_player
+			$ui.reload_action_list()
+		"e":
+			last_selected_player = selecting_player
+			call_enemy_action()
+			$ui.disable_all()
+		"win":
+			$ui.disable_all()
+
+func check_win():
+	var sum_ene = 0
+	
+	for i in enemy_lane:
+		sum_ene += i.size()
+	
+	if sum_ene <= 0:
+		switch_turn("win")
+
+#Player stuff
+func swap_player(from_lane, to_lane):
+	var from_pos = player_lane[from_lane].to_pos
+	var to_pos = player_lane[to_lane].to_pos
+	
+	var from_player = player_lane[from_lane]
+	var to_player = player_lane[to_lane]
+	
+	from_player.to_pos = to_pos
+	to_player.to_pos = from_pos
+	
+	from_player.lane = to_lane
+	to_player.lane = from_lane
+	
+	player_lane[from_lane] = to_player
+	player_lane[to_lane] = from_player
+
+#Enemy stuff
 func add_enemy(lane, enemy_file, index = -1):
 	var ene = load(enemy_file)
 	var ene_ins = ene.instantiate()
@@ -100,11 +198,26 @@ func rearrange_enemy():
 	for i in range(enemy_lane.size()):
 		for j in range(enemy_lane[i].size()):
 			
-			enemy_lane[i][j].to_pos = Vector2((300) + (j * enemy_gap), lane_y_pos[i])
-			enemy_lane[i][j].z_index = enemy_lane[i].size()-j
+			enemy_lane[i][j].to_pos = Vector2((enemy_base_x_pos) + (j * enemy_gap), lane_y_pos[i])
+			enemy_lane[i][j].z_index = enemy_lane[i].size()-j + ((enemy_lane.size() - i)*10)
 			
+
+func call_enemy_action():
+	for i in (enemy_lane.size()):
+		var ii = enemy_lane.size() - i - 1
+		if enemy_lane[ii].size() > 0:
+			enemy_lane[ii][0].perform_action()
+			
+			await enemy_lane[ii][0].action_finish
+	
+	switch_turn("p")
+	pass
 
 func _draw() -> void:
 	#for i in lane_y_pos:
 		#draw_line(Vector2(0, i),Vector2(400, i), Color.RED, 2)
 	pass
+
+#UI stuff
+func on_endturn_button_pressed():
+	switch_turn("e")

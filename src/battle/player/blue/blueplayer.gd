@@ -1,20 +1,21 @@
 extends Player
 
 var action_list = {
-	"Spell" : attack,
-	"Some Fantasy shit" : attack
+	"Spell" : {"call" : attack, "cond" : func(): return true},
+	"Some Fantasy shit" : {"call" : attack, "cond" : func(): return false}
 }
 
 func _physics_process(delta: float) -> void:
 	super(delta)
-	
+	$lane_label.text = var_to_str(lane)
 
 func attack():
 	if curr_scene.enemy_lane[lane].size() > 0:
-		curr_scene.enemy_lane[lane].take_damge(15)
-		curr_scene.camera.shake(0.4, 8)
+		curr_scene.enemy_lane[lane][0].take_damage(15)
+		curr_scene.camera.shake(0.3, 4)
 		
-		curr_scene.player_action_point -= 1
+		curr_scene.use_action_point()
+		
+		await get_tree().create_timer(1).timeout
+		
 		return true
-	else:
-		return false

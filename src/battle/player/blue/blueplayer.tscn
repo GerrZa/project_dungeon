@@ -5,12 +5,12 @@
 [ext_resource type="Texture2D" uid="uid://3nxu6i2f38v" path="res://asset/battle/char/witch_battle.png" id="3_h5byj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bttv4"]
-size = Vector2(32, 60)
+size = Vector2(31, 60)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gsw3i"]
 resource_local_to_scene = true
 shader = ExtResource("2_s5517")
-shader_parameter/outline_color = Color(0.664, 0.8, 0.707067, 1)
+shader_parameter/outline_color = Color(0.64, 0.8, 0.770667, 1)
 shader_parameter/active = true
 shader_parameter/alpha = 1.0
 
@@ -18,9 +18,10 @@ shader_parameter/alpha = 1.0
 
 [node name="BluePlayer" type="Area2D"]
 script = ExtResource("1_pxdyg")
+char_type = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, -29)
+position = Vector2(1.5, -29)
 shape = SubResource("RectangleShape2D_bttv4")
 
 [node name="spr_pivot" type="Node2D" parent="."]
@@ -36,3 +37,11 @@ offset = Vector2(-25, -66)
 libraries = {
 &"": SubResource("AnimationLibrary_2tmpj")
 }
+
+[node name="lane_label" type="Label" parent="."]
+visible = false
+offset_left = -36.0
+offset_top = -38.0
+offset_right = 4.0
+offset_bottom = -15.0
+text = "0"

@@ -1,0 +1,125 @@
+[gd_scene load_steps=11 format=3 uid="uid://bcpehbbao0bx7"]
+
+[ext_resource type="Script" uid="uid://cuhkdmib7reak" path="res://src/battle/enemy/skeleton/skeleton_battle.gd" id="1_26ngx"]
+[ext_resource type="Shader" uid="uid://snu2d4w8a06f" path="res://src/util/shader/outline_shader.gdshader" id="2_d7rbs"]
+[ext_resource type="Texture2D" uid="uid://crbtxa628ji7b" path="res://asset/battle/enemy/skeleton/skeleton_battle.png" id="3_26ngx"]
+[ext_resource type="FontFile" uid="uid://b488m1liu66xo" path="res://asset/place_holder/SmolFont.ttf" id="4_v0ds7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tvdfv"]
+size = Vector2(29, 50)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rrdu5"]
+shader = ExtResource("2_d7rbs")
+shader_parameter/outline_color = Color(0.74, 0.1332, 0.1332, 1)
+shader_parameter/active = false
+shader_parameter/alpha = 1.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_atngr"]
+font = ExtResource("4_v0ds7")
+font_size = 8
+font_color = Color(1, 0, 0, 1)
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_atngr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("spr_anchor/spr:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("spr_anchor/spr:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_4ikan"]
+resource_name = "attack"
+length = 0.3
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("spr_anchor/spr:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.03, 0.14),
+"transitions": PackedFloat32Array(0.329877, -2.63902, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-17, 0), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("spr_anchor/spr:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.06, 0.26),
+"transitions": PackedFloat32Array(0.329877, -2.63902, 1),
+"update": 0,
+"values": [0.0, -0.0785398, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_atngr"]
+_data = {
+&"RESET": SubResource("Animation_atngr"),
+&"attack": SubResource("Animation_4ikan")
+}
+
+[node name="SkeletonBattle" type="Area2D"]
+script = ExtResource("1_26ngx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2.5, -26)
+shape = SubResource("RectangleShape2D_tvdfv")
+
+[node name="spr_anchor" type="Node2D" parent="."]
+
+[node name="spr" type="Sprite2D" parent="spr_anchor"]
+material = SubResource("ShaderMaterial_rrdu5")
+texture = ExtResource("3_26ngx")
+centered = false
+offset = Vector2(-20, -55)
+
+[node name="hp_label" type="Label" parent="."]
+visible = false
+offset_left = -13.0
+offset_top = -63.0
+offset_right = 27.0
+offset_bottom = -40.0
+text = "HP : 100"
+label_settings = SubResource("LabelSettings_atngr")
+
+[node name="name" type="Label" parent="."]
+visible = false
+offset_left = -13.0
+offset_top = -79.0
+offset_right = 27.0
+offset_bottom = -56.0
+label_settings = SubResource("LabelSettings_atngr")
+
+[node name="weak_ind" type="Polygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(0, -66, -3, -71, 0, -76, 3, -71)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_atngr")
+}

@@ -5,9 +5,9 @@ extends MouseDetectArea2D
 var hp = 100
 
 var to_pos = Vector2.ZERO
-var lane = 0
+@export var lane = 0
 
-@onready var curr_scene = get_tree().current_scene
+@onready var curr_scene : BattleScene = get_tree().current_scene
 
 signal dead
 signal action_finish
@@ -20,12 +20,21 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	position = lerp(position, to_pos, 0.2)
+	
+	modulate.v = 0.6
+	
+	if curr_scene.selecting_player != null and curr_scene.selecting_player.lane == lane:
+		modulate.v = 1
 
 func take_damage(dmg):
 	hp -= dmg
 	
 	if hp <= 0:
 		emit_signal("dead")
+
+func remove_self():
+	curr_scene.enemy_lane[lane].erase(self)
+	curr_scene.rearrange_enemy()
 
 func perform_action():
 	
