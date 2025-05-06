@@ -30,6 +30,8 @@ var last_selected_player = null
 var turn = "setup"
 var turn_count = 0
 
+var hover_enemy = null
+
 func _ready() -> void:
 	player_action_point = max_player_action_point
 	
@@ -43,6 +45,16 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	queue_redraw()
+	
+	#multi turn function
+	if turn == "e" or turn == "p":
+		hover_enemy = null
+		
+		for i in enemy_lane:
+			for j in i:
+				if j.mouse_in:
+					hover_enemy = j
+					break
 	
 	match turn:
 		"setup":
@@ -83,8 +95,9 @@ func _process(delta: float) -> void:
 					hover_player = i
 					
 					if Input.is_action_just_pressed("m1"):
-						selecting_player = i
-						$ui.reload_action_list()
+						if hover_player != selecting_player:
+							selecting_player = i
+							$ui.reload_action_list()
 					break
 			
 			#debug shit
@@ -96,12 +109,13 @@ func _process(delta: float) -> void:
 				#add_enemy(rng,"res://src/battle/enemy/dummy/dummy_battle.tscn")
 			#if Input.is_action_just_pressed("ui_up"):
 				#swap_player(0,2)
-			
 		"e":
 			hover_player = null
 			selecting_player = null
 		"win":
 			$win.visible = true
+			hover_player = null
+			selecting_player = null
 
 #Game stuff
 func use_action_point(amt = 1):
@@ -118,6 +132,7 @@ func switch_turn(to_who):
 	match turn:
 		"p":
 			reset_action_point()
+			turn_count += 1
 			if last_selected_player != null:
 				selecting_player = last_selected_player
 			$ui.reload_action_list()
@@ -136,6 +151,9 @@ func check_win():
 	
 	if sum_ene <= 0:
 		switch_turn("win")
+		return true
+	
+	return false
 
 #Player stuff
 func swap_player(from_lane, to_lane):
@@ -208,6 +226,8 @@ func call_enemy_action():
 		if enemy_lane[ii].size() > 0:
 			enemy_lane[ii][0].perform_action()
 			
+			ui.refresh_hp_and_res()
+			
 			await enemy_lane[ii][0].action_finish
 	
 	switch_turn("p")
@@ -220,4 +240,5 @@ func _draw() -> void:
 
 #UI stuff
 func on_endturn_button_pressed():
+	check_win()
 	switch_turn("e")

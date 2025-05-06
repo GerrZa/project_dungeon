@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://ciugcs0xshn8b"]
+[gd_scene load_steps=9 format=3 uid="uid://ciugcs0xshn8b"]
 
 [ext_resource type="Script" uid="uid://cakb3nkco3lt" path="res://src/battle/player/blue/blueplayer.gd" id="1_pxdyg"]
 [ext_resource type="Shader" uid="uid://snu2d4w8a06f" path="res://src/util/shader/outline_shader.gdshader" id="2_s5517"]
@@ -14,7 +14,43 @@ shader_parameter/outline_color = Color(0.64, 0.8, 0.770667, 1)
 shader_parameter/active = true
 shader_parameter/alpha = 1.0
 
+[sub_resource type="Animation" id="Animation_jq5bs"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("spr_pivot/spr:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_h5byj"]
+resource_name = "hurt"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("spr_pivot/spr:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4),
+"transitions": PackedFloat32Array(0.09, 0.09, 0.09, 0.09, 0.09, 0.09, 0.09, 0.09, 0.09),
+"update": 0,
+"values": [Vector2(-8, 0), Vector2(8, 0), Vector2(-5, 0), Vector2(5, 0), Vector2(-2, 0), Vector2(2, 0), Vector2(-1, 0), Vector2(1, 0), Vector2(0, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2tmpj"]
+_data = {
+&"RESET": SubResource("Animation_jq5bs"),
+&"hurt": SubResource("Animation_h5byj")
+}
 
 [node name="BluePlayer" type="Area2D"]
 script = ExtResource("1_pxdyg")
@@ -28,12 +64,12 @@ shape = SubResource("RectangleShape2D_bttv4")
 
 [node name="spr" type="Sprite2D" parent="spr_pivot"]
 material = SubResource("ShaderMaterial_gsw3i")
-position = Vector2(1, -3)
 texture = ExtResource("3_h5byj")
 centered = false
-offset = Vector2(-25, -66)
+offset = Vector2(-25, -69)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="spr_pivot/spr"]
+root_node = NodePath("../../..")
 libraries = {
 &"": SubResource("AnimationLibrary_2tmpj")
 }

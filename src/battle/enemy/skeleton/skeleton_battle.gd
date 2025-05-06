@@ -13,6 +13,7 @@ func _physics_process(delta: float) -> void:
 	
 	$hp_label.text = var_to_str(hp)
 	$name.text = name
+	
 
 func perform_action():
 	curr_scene.player_lane[lane].take_damage(15)

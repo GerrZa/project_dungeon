@@ -1,0 +1,59 @@
+[gd_scene load_steps=4 format=3 uid="uid://y17u3vtym25o"]
+
+[ext_resource type="Texture2D" uid="uid://t8e8f6jdpqam" path="res://asset/battle/ui/progress_bar_bg.png" id="1_2oolk"]
+[ext_resource type="Script" uid="uid://bgj01hjjrpx4k" path="res://src/battle/ui/custom_progress_bar.gd" id="2_2bs4k"]
+[ext_resource type="FontFile" uid="uid://b488m1liu66xo" path="res://asset/place_holder/SmolFont.ttf" id="3_2bs4k"]
+
+[node name="bg_bar" type="NinePatchRect"]
+custom_minimum_size = Vector2(10, 10)
+offset_right = 90.0
+offset_bottom = 18.0
+mouse_filter = 1
+texture = ExtResource("1_2oolk")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+script = ExtResource("2_2bs4k")
+
+[node name="bar" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.835294, 0.835294, 0.835294, 1)
+
+[node name="bar_shine" type="ColorRect" parent="bar"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 1.0
+offset_bottom = 2.0
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="tooltip" type="RichTextLabel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/normal_font = ExtResource("3_2bs4k")
+theme_override_font_sizes/normal_font_size = 8
+text = "N/A: 100/100"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1

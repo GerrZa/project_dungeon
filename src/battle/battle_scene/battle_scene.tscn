@@ -1,9 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://dkosn3qlbta03"]
+[gd_scene load_steps=17 format=3 uid="uid://dkosn3qlbta03"]
 
 [ext_resource type="Script" uid="uid://ck3t6pbp8tsvq" path="res://src/battle/battle_scene/battle_scene.gd" id="1_1msw3"]
-[ext_resource type="Texture2D" uid="uid://do7m478n6pln3" path="res://asset/place_holder/port.png" id="2_jdlxq"]
 [ext_resource type="Script" uid="uid://cnhodbq5x7f4l" path="res://src/battle/battle_scene/ui.gd" id="2_oafii"]
 [ext_resource type="FontFile" uid="uid://b488m1liu66xo" path="res://asset/place_holder/SmolFont.ttf" id="4_6cbqe"]
+[ext_resource type="Texture2D" uid="uid://dc5brwq7v4wrv" path="res://asset/battle/char/port/port-frame.png" id="5_6uvr7"]
 [ext_resource type="Script" uid="uid://be0vwr4sw3kdf" path="res://src/util/class/CameraPlus2D.gd" id="5_gpduh"]
 [ext_resource type="PackedScene" uid="uid://cwdwpxxcklt1c" path="res://src/battle/ui/action_button.tscn" id="5_pfvi3"]
 [ext_resource type="PackedScene" uid="uid://dmfef746xj7hh" path="res://src/battle/player/red/redplayer.tscn" id="5_px77a"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://dcx3kmr4ii7er" path="res://asset/battle/ui/swap_up_button.png" id="8_2dtis"]
 [ext_resource type="Texture2D" uid="uid://c3sf85q0i3nc2" path="res://asset/battle/ui/swap_down_button.png" id="9_c7sli"]
 [ext_resource type="Texture2D" uid="uid://cpk4q0tvkqkvo" path="res://asset/battle/ui/inventory_button.png" id="10_2dtis"]
+[ext_resource type="PackedScene" uid="uid://y17u3vtym25o" path="res://src/battle/ui/CustomProgressBar.tscn" id="10_b5dvc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s105h"]
 
@@ -24,9 +25,7 @@ font_size = 64
 y_sort_enabled = true
 script = ExtResource("1_1msw3")
 enemy_gap = 32
-lane0_init = ["skeleton", "skeleton"]
 lane1_init = ["skeleton"]
-lane2_init = ["skeleton", "skeleton", "skeleton"]
 
 [node name="CameraPlus2D" type="Camera2D" parent="."]
 anchor_mode = 0
@@ -48,15 +47,20 @@ metadata/_edit_lock_ = true
 
 [node name="ColorRect" type="ColorRect" parent="ui/anchor"]
 layout_mode = 0
-offset_top = 202.0
+offset_top = 211.0
 offset_right = 400.0
 offset_bottom = 300.0
 color = Color(0.125848, 0.119866, 0.143806, 1)
 
 [node name="Port" type="Sprite2D" parent="ui/anchor"]
-position = Vector2(33, 234)
-texture = ExtResource("2_jdlxq")
+position = Vector2(20, 232)
 centered = false
+
+[node name="Port-frame" type="Sprite2D" parent="ui/anchor/Port"]
+modulate = Color(0.306152, 0.363773, 0.445313, 1)
+show_behind_parent = true
+position = Vector2(24, 24)
+texture = ExtResource("5_6uvr7")
 
 [node name="hp_bar" type="ProgressBar" parent="ui/anchor"]
 layout_mode = 0
@@ -71,9 +75,9 @@ show_percentage = false
 [node name="endturn_button" parent="ui/anchor" instance=ExtResource("5_pfvi3")]
 layout_mode = 0
 offset_left = 295.0
-offset_top = 272.0
+offset_top = 276.0
 offset_right = 386.0
-offset_bottom = 290.0
+offset_bottom = 294.0
 text = "Endturn"
 
 [node name="swap_up" type="Panel" parent="ui/anchor"]
@@ -82,14 +86,17 @@ self_modulate = Color(0, 0, 0, 0)
 custom_minimum_size = Vector2(0, 18)
 layout_mode = 0
 offset_left = 295.0
-offset_top = 232.0
+offset_top = 216.0
 offset_right = 349.0
-offset_bottom = 250.0
+offset_bottom = 234.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_s105h")
 script = ExtResource("7_c7sli")
 metadata/_edit_group_ = true
 
 [node name="anchor" type="Node2D" parent="ui/anchor/swap_up"]
+modulate = Color(0.5, 0.5, 0.5, 1)
+top_level = true
+position = Vector2(295, 216)
 
 [node name="PttButton" type="Sprite2D" parent="ui/anchor/swap_up/anchor"]
 texture = ExtResource("8_2dtis")
@@ -114,14 +121,17 @@ self_modulate = Color(0, 0, 0, 0)
 custom_minimum_size = Vector2(0, 18)
 layout_mode = 0
 offset_left = 295.0
-offset_top = 252.0
+offset_top = 236.0
 offset_right = 349.0
-offset_bottom = 270.0
+offset_bottom = 254.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_s105h")
 script = ExtResource("7_c7sli")
 metadata/_edit_group_ = true
 
 [node name="anchor" type="Node2D" parent="ui/anchor/swap_down"]
+modulate = Color(0.5, 0.5, 0.5, 1)
+top_level = true
+position = Vector2(295, 236)
 
 [node name="PttButton" type="Sprite2D" parent="ui/anchor/swap_down/anchor"]
 texture = ExtResource("9_c7sli")
@@ -146,14 +156,17 @@ self_modulate = Color(0, 0, 0, 0)
 custom_minimum_size = Vector2(0, 18)
 layout_mode = 0
 offset_left = 350.0
-offset_top = 232.0
+offset_top = 216.0
 offset_right = 386.0
-offset_bottom = 270.0
+offset_bottom = 254.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_s105h")
 script = ExtResource("7_c7sli")
 metadata/_edit_group_ = true
 
 [node name="anchor" type="Node2D" parent="ui/anchor/inventory"]
+modulate = Color(0.5, 0.5, 0.5, 1)
+top_level = true
+position = Vector2(350, 216)
 
 [node name="PttButton" type="Sprite2D" parent="ui/anchor/inventory/anchor"]
 texture = ExtResource("10_2dtis")
@@ -172,15 +185,54 @@ scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="action_button" type="VBoxContainer" parent="ui/anchor"]
+[node name="hp" parent="ui/anchor" instance=ExtResource("10_b5dvc")]
+modulate = Color(0.890625, 0.334528, 0.24353, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.0025
+anchor_top = -0.0133333
+anchor_right = 0.0725
+anchor_bottom = 0.0166667
+offset_left = 86.0
+offset_top = 236.0
+offset_right = 156.0
+offset_bottom = 244.0
+value_name = "HP"
+
+[node name="res1" parent="ui/anchor" instance=ExtResource("10_b5dvc")]
+modulate = Color(0.9375, 0.739632, 0.270996, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.0025
+anchor_top = -0.0133333
+anchor_right = 0.0725
+anchor_bottom = 0.0166667
+offset_left = 86.0
+offset_top = 258.0
+offset_right = 156.0
+offset_bottom = 261.0
+
+[node name="res2" parent="ui/anchor" instance=ExtResource("10_b5dvc")]
+modulate = Color(0.554504, 0.592212, 0.617188, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.0025
+anchor_top = -0.0133333
+anchor_right = 0.0725
+anchor_bottom = 0.0166667
+offset_left = 86.0
+offset_top = 272.0
+offset_right = 156.0
+offset_bottom = 275.0
+
+[node name="action_button" type="Control" parent="ui/anchor"]
 clip_contents = true
-layout_mode = 0
+anchors_preset = 0
 offset_left = 194.0
-offset_top = 212.0
+offset_top = 216.0
 offset_right = 285.0
-offset_bottom = 291.0
+offset_bottom = 295.0
 mouse_filter = 2
-theme_override_constants/separation = 2
 metadata/_edit_group_ = true
 
 [node name="action1" parent="ui/anchor/action_button" instance=ExtResource("5_pfvi3")]
@@ -189,21 +241,27 @@ text = "Action"
 
 [node name="action2" parent="ui/anchor/action_button" instance=ExtResource("5_pfvi3")]
 layout_mode = 2
+offset_top = 20.0
+offset_bottom = 38.0
 text = "Action"
 
 [node name="action3" parent="ui/anchor/action_button" instance=ExtResource("5_pfvi3")]
 layout_mode = 2
+offset_top = 40.0
+offset_bottom = 58.0
 text = "Action"
 
 [node name="action4" parent="ui/anchor/action_button" instance=ExtResource("5_pfvi3")]
 layout_mode = 2
+offset_top = 60.0
+offset_bottom = 78.0
 text = "Action"
 
 [node name="GreenPlayer" parent="." instance=ExtResource("5_uqsyo")]
 position = Vector2(74, 88)
 
 [node name="RedPlayer" parent="." instance=ExtResource("5_px77a")]
-position = Vector2(72, 137)
+position = Vector2(73, 135)
 
 [node name="BluePlayer" parent="." instance=ExtResource("7_pfvi3")]
 position = Vector2(71, 182)

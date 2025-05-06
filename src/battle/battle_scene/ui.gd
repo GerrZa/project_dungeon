@@ -33,6 +33,8 @@ func reload_action_list(): #when switching player
 	
 	disable_all()
 	
+	var k = 0
+	
 	if curr_scene.selecting_player != null:
 		for i in $anchor/action_button.get_children():
 			i.free()
@@ -50,14 +52,19 @@ func reload_action_list(): #when switching player
 			action_condition[act_ins] = curr_scene.selecting_player.action_list[i]["cond"]
 			
 			$anchor/action_button.add_child(act_ins)
-		
-		print("----------")
+			
+			act_ins.position = Vector2(0,20 * k)
+			
+			k+=1
 		
 		for i in action_condition.keys():
 			print(i)
 		
 		disable_all()
 		enable_all_avai()
+		refresh_hp_and_res()
+		
+		$anchor/Port.texture = curr_scene.selecting_player.port
 
 func disable_all():
 	$anchor/swap_down.disable = true
@@ -83,6 +90,10 @@ func enable_all_avai():
 			if action_condition[i].call() == true and curr_scene.player_action_point > 0:
 				i.disable = false
 
+func refresh_hp_and_res():
+	$anchor/hp.value = curr_scene.selecting_player.hp
+	$anchor/hp.max_value = curr_scene.selecting_player.max_hp
+
 func on_action_pressed(call : Callable): #check for every time action button pressed
 	if can_act == false:
 		return
@@ -91,10 +102,15 @@ func on_action_pressed(call : Callable): #check for every time action button pre
 	
 	can_act = false
 	await call.call()
-	curr_scene.check_win()
-	can_act = true
 	
-	enable_all_avai()
+	refresh_hp_and_res()
+	
+	if curr_scene.check_win():
+		return
+	else:
+		can_act = true
+		
+		enable_all_avai()
 
 func swap_up():
 	if can_act == false:

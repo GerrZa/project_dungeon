@@ -6,7 +6,7 @@ uniform bool active = true;
 uniform float alpha : hint_range(0.0, 1.0, 0.1) = 1.0;
 
 void fragment() {
-	
+
 	if (active){
 		if (texture(TEXTURE, UV + vec2(TEXTURE_PIXEL_SIZE.x, 0)).a > 0.0 && COLOR.a < 0.1||
 			texture(TEXTURE, UV + vec2(-TEXTURE_PIXEL_SIZE.x, 0)).a > 0.0 && COLOR.a < 0.1||
@@ -17,7 +17,7 @@ void fragment() {
 			COLOR.a = alpha;
 		}
 	}
-	
+
 }
 
 //void light() {

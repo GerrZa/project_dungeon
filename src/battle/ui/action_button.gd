@@ -1,20 +1,28 @@
 @tool
 extends ButtonPanel
 
+func _ready() -> void:
+	$anchor.top_level = true
+	$anchor.global_position = global_position
+	super()
+
 func _process(delta: float) -> void:
 	super(delta)
 	
 	$anchor/RichTextLabel.text = text
 	
-	modulate = Color.WHITE
+	$anchor.modulate = Color.WHITE
 	
 	if mouse_in:
-		modulate.v = 1
+		$anchor.modulate.v = 1
 	else:
-		modulate.v = 0.8
-		
+		$anchor.modulate.v = 0.8
+	
 	if pressing:
-		modulate.v = 0.5
+		$anchor.modulate.v = 0.5
 	
 	if disable:
-		modulate.v = 0.5
+		$anchor.modulate.v = 0.5
+
+func _physics_process(delta: float) -> void:
+	$anchor.global_position = lerp($anchor.global_position, global_position, 0.3)

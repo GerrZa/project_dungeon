@@ -5,9 +5,17 @@ var action_list = {
 	"WVINKKK" : {"call" : attack, "cond" : func(): return true}
 }
 
+var port = preload("res://asset/battle/char/port/theif_port.png")
+
 func _physics_process(delta: float) -> void:
 	super(delta)
 	$lane_label.text = var_to_str(lane)
+
+func take_damage(dmg, effect_name = "slash"):
+	super(dmg)
+	
+	if hp > 0:
+		$spr_pivot/spr/AnimationPlayer.play("hurt")
 
 func attack():
 	if curr_scene.enemy_lane[lane].size() > 0:

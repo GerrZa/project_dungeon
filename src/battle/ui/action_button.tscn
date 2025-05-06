@@ -16,6 +16,8 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_s105h")
 script = ExtResource("1_a33q4")
 
 [node name="anchor" type="Node2D" parent="."]
+modulate = Color(0.5, 0.5, 0.5, 1)
+top_level = true
 
 [node name="PttButton" type="Sprite2D" parent="anchor"]
 texture = ExtResource("2_s105h")
