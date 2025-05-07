@@ -39,6 +39,31 @@ offset_bottom = 2.0
 grow_horizontal = 2
 mouse_filter = 2
 
+[node name="slow_bar" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.84, 0.84, 0.84, 0.352941)
+
+[node name="bar_shine" type="ColorRect" parent="slow_bar"]
+visible = false
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 1.0
+offset_bottom = 2.0
+grow_horizontal = 2
+mouse_filter = 2
+
 [node name="tooltip" type="RichTextLabel" parent="."]
 visible = false
 layout_mode = 1
