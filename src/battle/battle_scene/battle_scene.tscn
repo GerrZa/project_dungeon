@@ -1,7 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://dkosn3qlbta03"]
+[gd_scene load_steps=23 format=3 uid="uid://dkosn3qlbta03"]
 
 [ext_resource type="Script" uid="uid://ck3t6pbp8tsvq" path="res://src/battle/battle_scene/battle_scene.gd" id="1_1msw3"]
+[ext_resource type="Script" uid="uid://bwxmgxkfikw88" path="res://src/battle/battle_scene/init_enemy.gd" id="2_6uvr7"]
 [ext_resource type="Script" uid="uid://cnhodbq5x7f4l" path="res://src/battle/battle_scene/ui.gd" id="2_oafii"]
+[ext_resource type="PackedScene" uid="uid://dm8p72kolv6jr" path="res://src/battle/ui/tooltip.tscn" id="3_6uvr7"]
 [ext_resource type="FontFile" uid="uid://b488m1liu66xo" path="res://asset/place_holder/SmolFont.ttf" id="4_6cbqe"]
 [ext_resource type="Texture2D" uid="uid://dc5brwq7v4wrv" path="res://asset/battle/char/port/port-frame.png" id="5_6uvr7"]
 [ext_resource type="Script" uid="uid://be0vwr4sw3kdf" path="res://src/util/class/CameraPlus2D.gd" id="5_gpduh"]
@@ -12,10 +14,130 @@
 [ext_resource type="PackedScene" uid="uid://ciugcs0xshn8b" path="res://src/battle/player/blue/blueplayer.tscn" id="7_pfvi3"]
 [ext_resource type="Texture2D" uid="uid://dcx3kmr4ii7er" path="res://asset/battle/ui/swap_up_button.png" id="8_2dtis"]
 [ext_resource type="Texture2D" uid="uid://c3sf85q0i3nc2" path="res://asset/battle/ui/swap_down_button.png" id="9_c7sli"]
-[ext_resource type="Texture2D" uid="uid://cpk4q0tvkqkvo" path="res://asset/battle/ui/inventory_button.png" id="10_2dtis"]
 [ext_resource type="PackedScene" uid="uid://y17u3vtym25o" path="res://src/battle/ui/CustomProgressBar.tscn" id="10_b5dvc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s105h"]
+
+[sub_resource type="Animation" id="Animation_1v401"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../CameraPlus2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 42)]
+}
+
+[sub_resource type="Animation" id="Animation_evjvq"]
+resource_name = "init"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../CameraPlus2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -48)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 93)]
+}
+
+[sub_resource type="Animation" id="Animation_yxysj"]
+resource_name = "slide_in"
+length = 0.3
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(-3.73213, 1),
+"update": 0,
+"values": [Vector2(0, 93), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../CameraPlus2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(-3.73213, 1),
+"update": 0,
+"values": [Vector2(0, -48), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_kxpl5"]
+resource_name = "slide_out"
+length = 0.3
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(-3.73213, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 93)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../CameraPlus2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(-3.73213, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -48)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kxpl5"]
+_data = {
+&"RESET": SubResource("Animation_1v401"),
+&"init": SubResource("Animation_evjvq"),
+&"slide_in": SubResource("Animation_yxysj"),
+&"slide_out": SubResource("Animation_kxpl5")
+}
 
 [sub_resource type="LabelSettings" id="LabelSettings_2dtis"]
 font = ExtResource("4_6cbqe")
@@ -25,7 +147,12 @@ font_size = 64
 y_sort_enabled = true
 script = ExtResource("1_1msw3")
 enemy_gap = 32
-lane1_init = ["skeleton"]
+
+[node name="init_enemy" type="Node" parent="."]
+script = ExtResource("2_6uvr7")
+lane0 = ["skeleton", "skeleton"]
+lane1 = ["skeleton", "skeleton"]
+lane2 = ["skeleton", "skeleton", "skeleton"]
 
 [node name="CameraPlus2D" type="Camera2D" parent="."]
 anchor_mode = 0
@@ -40,6 +167,8 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 42.0
+offset_bottom = 42.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -85,9 +214,9 @@ modulate = Color(0.5, 0.5, 0.5, 1)
 self_modulate = Color(0, 0, 0, 0)
 custom_minimum_size = Vector2(0, 18)
 layout_mode = 0
-offset_left = 295.0
+offset_left = 313.0
 offset_top = 216.0
-offset_right = 349.0
+offset_right = 367.0
 offset_bottom = 234.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_s105h")
 script = ExtResource("7_c7sli")
@@ -96,7 +225,7 @@ metadata/_edit_group_ = true
 [node name="anchor" type="Node2D" parent="ui/anchor/swap_up"]
 modulate = Color(0.5, 0.5, 0.5, 1)
 top_level = true
-position = Vector2(295, 216)
+position = Vector2(313, 258)
 
 [node name="PttButton" type="Sprite2D" parent="ui/anchor/swap_up/anchor"]
 texture = ExtResource("8_2dtis")
@@ -120,9 +249,9 @@ modulate = Color(0.5, 0.5, 0.5, 1)
 self_modulate = Color(0, 0, 0, 0)
 custom_minimum_size = Vector2(0, 18)
 layout_mode = 0
-offset_left = 295.0
+offset_left = 313.0
 offset_top = 236.0
-offset_right = 349.0
+offset_right = 367.0
 offset_bottom = 254.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_s105h")
 script = ExtResource("7_c7sli")
@@ -131,48 +260,13 @@ metadata/_edit_group_ = true
 [node name="anchor" type="Node2D" parent="ui/anchor/swap_down"]
 modulate = Color(0.5, 0.5, 0.5, 1)
 top_level = true
-position = Vector2(295, 236)
+position = Vector2(313, 278)
 
 [node name="PttButton" type="Sprite2D" parent="ui/anchor/swap_down/anchor"]
 texture = ExtResource("9_c7sli")
 centered = false
 
 [node name="RichTextLabel" type="RichTextLabel" parent="ui/anchor/swap_down/anchor"]
-offset_right = 91.0
-offset_bottom = 16.0
-mouse_filter = 2
-theme_override_constants/outline_size = 3
-theme_override_fonts/normal_font = ExtResource("4_6cbqe")
-theme_override_font_sizes/normal_font_size = 8
-bbcode_enabled = true
-fit_content = true
-scroll_active = false
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="inventory" type="Panel" parent="ui/anchor"]
-modulate = Color(0.5, 0.5, 0.5, 1)
-self_modulate = Color(0, 0, 0, 0)
-custom_minimum_size = Vector2(0, 18)
-layout_mode = 0
-offset_left = 350.0
-offset_top = 216.0
-offset_right = 386.0
-offset_bottom = 254.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_s105h")
-script = ExtResource("7_c7sli")
-metadata/_edit_group_ = true
-
-[node name="anchor" type="Node2D" parent="ui/anchor/inventory"]
-modulate = Color(0.5, 0.5, 0.5, 1)
-top_level = true
-position = Vector2(350, 216)
-
-[node name="PttButton" type="Sprite2D" parent="ui/anchor/inventory/anchor"]
-texture = ExtResource("10_2dtis")
-centered = false
-
-[node name="RichTextLabel" type="RichTextLabel" parent="ui/anchor/inventory/anchor"]
 offset_right = 91.0
 offset_bottom = 16.0
 mouse_filter = 2
@@ -212,6 +306,17 @@ offset_left = 86.0
 offset_top = 258.0
 offset_right = 156.0
 offset_bottom = 261.0
+slow_bar = true
+
+[node name="share_info1" parent="ui/anchor" instance=ExtResource("3_6uvr7")]
+layout_mode = 0
+offset_left = 181.0
+offset_top = 258.0
+offset_right = 191.0
+offset_bottom = 268.0
+tip_text = ""
+editor_show_text = false
+text_margin = Vector2(8, 8)
 
 [node name="res2" parent="ui/anchor" instance=ExtResource("10_b5dvc")]
 modulate = Color(0.554504, 0.592212, 0.617188, 1)
@@ -222,12 +327,22 @@ anchor_top = -0.0133333
 anchor_right = 0.0725
 anchor_bottom = 0.0166667
 offset_left = 86.0
-offset_top = 272.0
+offset_top = 273.0
 offset_right = 156.0
-offset_bottom = 275.0
+offset_bottom = 276.0
+slow_bar = true
+
+[node name="share_info2" parent="ui/anchor" instance=ExtResource("3_6uvr7")]
+layout_mode = 0
+offset_left = 181.0
+offset_top = 273.0
+offset_right = 191.0
+offset_bottom = 283.0
+tip_text = ""
+editor_show_text = false
+text_margin = Vector2(8, 8)
 
 [node name="action_button" type="Control" parent="ui/anchor"]
-clip_contents = true
 anchors_preset = 0
 offset_left = 194.0
 offset_top = 216.0
@@ -257,6 +372,12 @@ layout_mode = 2
 offset_top = 60.0
 offset_bottom = 78.0
 text = "Action"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ui/anchor"]
+libraries = {
+&"": SubResource("AnimationLibrary_kxpl5")
+}
+autoplay = "init"
 
 [node name="GreenPlayer" parent="." instance=ExtResource("5_uqsyo")]
 position = Vector2(74, 88)

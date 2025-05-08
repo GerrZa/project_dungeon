@@ -5,9 +5,9 @@
 [ext_resource type="FontFile" uid="uid://b488m1liu66xo" path="res://asset/place_holder/SmolFont.ttf" id="3_2bs4k"]
 
 [node name="bg_bar" type="NinePatchRect"]
-custom_minimum_size = Vector2(10, 10)
-offset_right = 90.0
-offset_bottom = 18.0
+custom_minimum_size = Vector2(7, 7)
+offset_right = 88.0
+offset_bottom = 10.0
 mouse_filter = 1
 texture = ExtResource("1_2oolk")
 patch_margin_left = 3
@@ -15,6 +15,7 @@ patch_margin_top = 3
 patch_margin_right = 3
 patch_margin_bottom = 3
 script = ExtResource("2_2bs4k")
+metadata/_edit_group_ = true
 
 [node name="bar" type="ColorRect" parent="."]
 layout_mode = 1
@@ -77,6 +78,7 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
 theme_override_fonts/normal_font = ExtResource("3_2bs4k")
 theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
 text = "N/A: 100/100"
 fit_content = true
 scroll_active = false

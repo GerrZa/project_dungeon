@@ -1,8 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://b6jepkox3hkts"]
+[gd_scene load_steps=12 format=3 uid="uid://b6jepkox3hkts"]
 
 [ext_resource type="Script" uid="uid://bedcii0hdbmyj" path="res://src/battle/player/green/greenplayer.gd" id="1_ptagj"]
 [ext_resource type="Shader" uid="uid://snu2d4w8a06f" path="res://src/util/shader/outline_shader.gdshader" id="2_dqjdj"]
 [ext_resource type="Texture2D" uid="uid://2bberxk6pi22" path="res://asset/battle/char/theif_battle.png" id="3_ptagj"]
+[ext_resource type="PackedScene" uid="uid://y17u3vtym25o" path="res://src/battle/ui/CustomProgressBar.tscn" id="4_s3s54"]
+[ext_resource type="Texture2D" uid="uid://qgonas1hkh1l" path="res://asset/battle/char/etc/combo_ring_lower.png" id="5_0wjdd"]
+[ext_resource type="Texture2D" uid="uid://do2lgd1ragd1d" path="res://asset/battle/char/etc/combo_ring_upper.png" id="6_y4khj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bttv4"]
 size = Vector2(30, 51)
@@ -12,6 +15,7 @@ resource_local_to_scene = true
 shader = ExtResource("2_dqjdj")
 shader_parameter/outline_color = Color(0.7776, 0.8, 0.632, 1)
 shader_parameter/active = true
+shader_parameter/thick = false
 shader_parameter/alpha = 1.0
 
 [sub_resource type="Animation" id="Animation_s3s54"]
@@ -75,6 +79,20 @@ libraries = {
 &"": SubResource("AnimationLibrary_2tmpj")
 }
 
+[node name="combo_ring" type="Node2D" parent="spr_pivot/spr"]
+position = Vector2(-1, 0)
+
+[node name="ComboRingLower" type="Sprite2D" parent="spr_pivot/spr/combo_ring"]
+position = Vector2(-21, -13)
+texture = ExtResource("5_0wjdd")
+centered = false
+
+[node name="ComboRingUpper" type="Sprite2D" parent="spr_pivot/spr/combo_ring"]
+z_index = -1
+position = Vector2(-21, -21)
+texture = ExtResource("6_y4khj")
+centered = false
+
 [node name="lane_label" type="Label" parent="."]
 visible = false
 offset_left = -36.0
@@ -82,3 +100,12 @@ offset_top = -38.0
 offset_right = 4.0
 offset_bottom = -15.0
 text = "0"
+
+[node name="mini_hp_bar" parent="." instance=ExtResource("4_s3s54")]
+modulate = Color(0.87451, 0.278431, 0.0901961, 1)
+offset_left = -20.0
+offset_top = -60.0
+offset_right = 20.0
+offset_bottom = -53.0
+show_text = false
+slow_bar = true

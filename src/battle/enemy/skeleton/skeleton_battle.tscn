@@ -1,17 +1,21 @@
-[gd_scene load_steps=11 format=3 uid="uid://bcpehbbao0bx7"]
+[gd_scene load_steps=13 format=3 uid="uid://bcpehbbao0bx7"]
 
 [ext_resource type="Script" uid="uid://cuhkdmib7reak" path="res://src/battle/enemy/skeleton/skeleton_battle.gd" id="1_26ngx"]
 [ext_resource type="Shader" uid="uid://snu2d4w8a06f" path="res://src/util/shader/outline_shader.gdshader" id="2_d7rbs"]
 [ext_resource type="Texture2D" uid="uid://crbtxa628ji7b" path="res://asset/battle/enemy/skeleton/skeleton_battle.png" id="3_26ngx"]
 [ext_resource type="FontFile" uid="uid://b488m1liu66xo" path="res://asset/place_holder/SmolFont.ttf" id="4_v0ds7"]
+[ext_resource type="PackedScene" uid="uid://dm8p72kolv6jr" path="res://src/battle/ui/tooltip.tscn" id="5_2khgo"]
+[ext_resource type="Texture2D" uid="uid://f5pwoa03trc0" path="res://asset/battle/ui/tooltip/runaway_icon.png" id="6_cvv43"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tvdfv"]
 size = Vector2(29, 50)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rrdu5"]
+resource_local_to_scene = true
 shader = ExtResource("2_d7rbs")
 shader_parameter/outline_color = Color(0.74, 0.1332, 0.1332, 1)
 shader_parameter/active = false
+shader_parameter/thick = false
 shader_parameter/alpha = 1.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_atngr"]
@@ -123,3 +127,16 @@ polygon = PackedVector2Array(0, -66, -3, -71, 0, -76, 3, -71)
 libraries = {
 &"": SubResource("AnimationLibrary_atngr")
 }
+
+[node name="tooltips" type="Node2D" parent="."]
+position = Vector2(9, -49)
+
+[node name="runaway" parent="tooltips" instance=ExtResource("5_2khgo")]
+visible = false
+offset_left = -8.0
+offset_top = -11.0
+offset_right = 1.0
+offset_bottom = 0.0
+tip_text = "[color=crimson]This unit will
+evade this turn"
+icon_texture = ExtResource("6_cvv43")

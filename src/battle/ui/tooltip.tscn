@@ -1,0 +1,57 @@
+[gd_scene load_steps=6 format=3 uid="uid://dm8p72kolv6jr"]
+
+[ext_resource type="Script" uid="uid://jcnhr6j17jio" path="res://src/battle/ui/tooltip.gd" id="1_fcfki"]
+[ext_resource type="Texture2D" uid="uid://dew21ug7ohg6r" path="res://asset/battle/ui/info_panel_9slice.png" id="3_rl8pi"]
+[ext_resource type="Shader" uid="uid://snu2d4w8a06f" path="res://src/util/shader/outline_shader.gdshader" id="3_ukls5"]
+[ext_resource type="FontFile" uid="uid://b488m1liu66xo" path="res://asset/place_holder/SmolFont.ttf" id="4_ukls5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2tl6g"]
+resource_local_to_scene = true
+shader = ExtResource("3_ukls5")
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/active = false
+shader_parameter/thick = false
+shader_parameter/alpha = 1.0
+
+[node name="Tooltip" type="Panel"]
+self_modulate = Color(0, 0, 0, 0)
+z_index = 99
+offset_right = 16.0
+offset_bottom = 16.0
+mouse_filter = 1
+script = ExtResource("1_fcfki")
+tip_text = "Hello"
+
+[node name="Icon" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_2tl6g")
+centered = false
+
+[node name="info_pivot" type="Node2D" parent="."]
+z_index = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="info_pivot"]
+z_index = -1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -11.0
+offset_right = 28.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_rl8pi")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="info_pivot"]
+offset_top = -11.0
+offset_right = 28.0
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("4_ukls5")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "Hello"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_group_ = true

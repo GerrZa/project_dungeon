@@ -27,7 +27,7 @@ func _physics_process(delta: float) -> void:
 	
 	position = lerp(position, to_pos, 0.15)
 	
-	if curr_scene.selecting_player == self:
+	if curr_scene.selecting_player == self and curr_scene.turn == "p":
 		$spr_pivot/spr.material.set_shader_parameter("active", true)
 		$spr_pivot.position.x = lerp($spr_pivot.position.x, 10.0, 0.2)
 		$spr_pivot/spr.self_modulate.v = 1

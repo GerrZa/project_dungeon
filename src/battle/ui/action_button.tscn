@@ -7,11 +7,11 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s105h"]
 
 [node name="ActionButton" type="Panel"]
-modulate = Color(0.5, 0.5, 0.5, 1)
 self_modulate = Color(0, 0, 0, 0)
 custom_minimum_size = Vector2(0, 18)
 offset_right = 91.0
 offset_bottom = 18.0
+mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_s105h")
 script = ExtResource("1_a33q4")
 

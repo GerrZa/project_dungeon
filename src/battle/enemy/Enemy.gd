@@ -6,6 +6,7 @@ var hp = 100
 
 var to_pos = Vector2.ZERO
 @export var lane = 0
+var follow_to_pos = true
 
 @onready var curr_scene : BattleScene = get_tree().current_scene
 
@@ -19,7 +20,8 @@ func _ready() -> void:
 	hp = max_hp
 
 func _physics_process(delta: float) -> void:
-	position = lerp(position, to_pos, 0.2)
+	if follow_to_pos:
+		position = lerp(position, to_pos, 0.2)
 	
 	modulate.v = 0.6
 	

@@ -8,6 +8,8 @@ var mouse_in = false
 @export var max_value = 100
 @export var value = 100
 
+@export var show_text = true
+
 @export var show_name = true
 @export var show_as_percentage = false
 
@@ -19,13 +21,16 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if show_name:
-		if show_as_percentage:
-			$tooltip.text = "{0}: {1.2f}%".format([value_name, value/max_value])
+	if show_text:
+		if show_name:
+			if show_as_percentage:
+				$tooltip.text = "{0}: {1.2f}%".format([value_name, value/max_value])
+			else:
+				$tooltip.text = "{0}: {1}/{2}".format([value_name, int(round(value)), int(round(max_value))])
 		else:
-			$tooltip.text = "{0}: {1}/{2}".format([value_name, value, max_value])
+			$tooltip.text = "{1}/{2}".format([value_name, int(round(value)), int(round(max_value))])
 	else:
-		$tooltip.text = "{1}/{2}".format([value_name, value, max_value])
+		$tooltip.text = ""
 		
 	
 	

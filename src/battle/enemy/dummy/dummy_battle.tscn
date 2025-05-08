@@ -12,6 +12,7 @@ size = Vector2(42, 60)
 shader = ExtResource("2_k66ct")
 shader_parameter/outline_color = Color(0.57, 0.1026, 0.1026, 1)
 shader_parameter/active = true
+shader_parameter/thick = false
 shader_parameter/alpha = 1.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_atngr"]

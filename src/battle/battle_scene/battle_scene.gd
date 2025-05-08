@@ -15,9 +15,25 @@ var player_lane = []
 @onready var ui = $ui
 
 @export_category("Init enemy")
-@export var lane0_init : PackedStringArray = [] #just put enemy name in it, ex 3 dummy -> "dummy", "dummy", "dummy"
-@export var lane1_init : PackedStringArray = []
-@export var lane2_init : PackedStringArray = []
+@onready var enemy_initiator = $init_enemy
+
+# Combo naming system
+# XoY -> X over Y
+# XYZ -> X Y Z in order count from top to bottom 
+
+var combo_prop = {
+	"RoG" : null
+}
+
+var buff = {
+	
+}
+
+var player_resource = {
+	"STA" : [100.0,100.0],
+	"MP" : [100.0,100.0],
+	"WP" : [100.0,100.0]
+}
 
 #LOW LEVEL
 var lane_y_pos = []
@@ -28,9 +44,12 @@ var selecting_player = null
 var last_selected_player = null
 
 var turn = "setup"
-var turn_count = 0
+var turn_count = -1
 
 var hover_enemy = null
+
+signal enemy_turn_finished
+
 
 func _ready() -> void:
 	player_action_point = max_player_action_point
@@ -68,22 +87,21 @@ func _process(delta: float) -> void:
 					i.position.x -= 200 + (100*ii)
 					ii+=1
 				
-				
 				#init enemy
-				for i in lane0_init:
+				for i in enemy_initiator.lane0:
 					add_enemy(0, "res://src/battle/enemy/" +i+ "/" +i+ "_battle.tscn")
 				if lane_count > 1:
-					for i in lane1_init:
+					for i in enemy_initiator.lane1:
 						add_enemy(1, "res://src/battle/enemy/" +i+ "/" +i+ "_battle.tscn")
 				if lane_count > 2:
-					for i in lane2_init:
+					for i in enemy_initiator.lane2:
 						add_enemy(2, "res://src/battle/enemy/" +i+ "/" +i+ "_battle.tscn")
 				
+				selecting_player = player_lane[clamp(init_player, 0, lane_count)]
 				
 				await get_tree().create_timer(0.3 * lane_count).timeout
 				
-				selecting_player = player_lane[clamp(init_player, 0, lane_count)]
-				print(selecting_player)
+				#print(selecting_player)
 				switch_turn("p")
 		"p":
 			
@@ -111,7 +129,6 @@ func _process(delta: float) -> void:
 				#swap_player(0,2)
 		"e":
 			hover_player = null
-			selecting_player = null
 		"win":
 			$win.visible = true
 			hover_player = null
@@ -128,20 +145,29 @@ func add_action_point(amt = 1):
 	player_action_point += amt
 
 func switch_turn(to_who):
-	turn = to_who
-	match turn:
+	match to_who:
 		"p":
-			reset_action_point()
-			turn_count += 1
-			if last_selected_player != null:
-				selecting_player = last_selected_player
+			$ui/anchor/AnimationPlayer.play("slide_in")
 			$ui.reload_action_list()
+			
+			await $ui/anchor/AnimationPlayer.animation_finished
+			
+			reset_action_point()
+			$ui.reload_action_list()
+			$ui.enable_all_avai()
+			turn_count += 1
 		"e":
-			last_selected_player = selecting_player
+			$ui/anchor/AnimationPlayer.play("slide_out")
+			
+			await $ui/anchor/AnimationPlayer.animation_finished
+			
 			call_enemy_action()
 			$ui.disable_all()
+			
+			emit_signal("enemy_turn_finished")
 		"win":
 			$ui.disable_all()
+	turn = to_who
 
 func check_win():
 	var sum_ene = 0
@@ -230,6 +256,7 @@ func call_enemy_action():
 			
 			await enemy_lane[ii][0].action_finish
 	
+	emit_signal("enemy_turn_finished")
 	switch_turn("p")
 	pass
 

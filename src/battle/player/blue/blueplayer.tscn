@@ -1,8 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://ciugcs0xshn8b"]
+[gd_scene load_steps=12 format=3 uid="uid://ciugcs0xshn8b"]
 
 [ext_resource type="Script" uid="uid://cakb3nkco3lt" path="res://src/battle/player/blue/blueplayer.gd" id="1_pxdyg"]
 [ext_resource type="Shader" uid="uid://snu2d4w8a06f" path="res://src/util/shader/outline_shader.gdshader" id="2_s5517"]
 [ext_resource type="Texture2D" uid="uid://3nxu6i2f38v" path="res://asset/battle/char/witch_battle.png" id="3_h5byj"]
+[ext_resource type="PackedScene" uid="uid://y17u3vtym25o" path="res://src/battle/ui/CustomProgressBar.tscn" id="4_jq5bs"]
+[ext_resource type="Texture2D" uid="uid://qgonas1hkh1l" path="res://asset/battle/char/etc/combo_ring_lower.png" id="5_uldh0"]
+[ext_resource type="Texture2D" uid="uid://do2lgd1ragd1d" path="res://asset/battle/char/etc/combo_ring_upper.png" id="6_73x6o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bttv4"]
 size = Vector2(31, 60)
@@ -12,6 +15,7 @@ resource_local_to_scene = true
 shader = ExtResource("2_s5517")
 shader_parameter/outline_color = Color(0.64, 0.8, 0.770667, 1)
 shader_parameter/active = true
+shader_parameter/thick = false
 shader_parameter/alpha = 1.0
 
 [sub_resource type="Animation" id="Animation_jq5bs"]
@@ -74,6 +78,19 @@ libraries = {
 &"": SubResource("AnimationLibrary_2tmpj")
 }
 
+[node name="combo_ring" type="Node2D" parent="spr_pivot/spr"]
+
+[node name="ComboRingLower" type="Sprite2D" parent="spr_pivot/spr/combo_ring"]
+position = Vector2(-21, -13)
+texture = ExtResource("5_uldh0")
+centered = false
+
+[node name="ComboRingUpper" type="Sprite2D" parent="spr_pivot/spr/combo_ring"]
+z_index = -1
+position = Vector2(-21, -21)
+texture = ExtResource("6_73x6o")
+centered = false
+
 [node name="lane_label" type="Label" parent="."]
 visible = false
 offset_left = -36.0
@@ -81,3 +98,12 @@ offset_top = -38.0
 offset_right = 4.0
 offset_bottom = -15.0
 text = "0"
+
+[node name="mini_hp_bar" parent="." instance=ExtResource("4_jq5bs")]
+modulate = Color(0.87451, 0.278431, 0.0901961, 1)
+offset_left = -20.0
+offset_top = -67.0
+offset_right = 20.0
+offset_bottom = -60.0
+show_text = false
+slow_bar = true

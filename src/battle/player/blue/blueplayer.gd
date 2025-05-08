@@ -1,17 +1,27 @@
 extends Player
 
 var action_list = {
-	"Spell" : {"call" : attack, "cond" : func(): return true},
-	"Some Fantasy shit" : {"call" : attack, "cond" : func(): return false},
-	"MAGIC SHIT" : {"call" : attack, "cond" : func(): return false},
-	"MAGIC PEE" : {"call" : attack, "cond" : func(): return false}
+	"Spell" : {"call" : attack, "desc" : "Test", "cond" : func(): return true},
+	"Some Fantasy shit" : {"call" : attack, "desc" : "Test", "cond" : func(): return false},
 }
 
 var port = preload("res://asset/battle/char/port/witch_port.png")
 
+var used_res = ["MP", "WP"]
+
 func _physics_process(delta: float) -> void:
 	super(delta)
 	$lane_label.text = var_to_str(lane)
+	$mini_hp_bar.modulate.a = 0
+	$mini_hp_bar.modulate.a = 0
+	
+	if curr_scene.turn == "e":
+		$mini_hp_bar.modulate.a = 1
+	elif curr_scene.hover_player == self and curr_scene.selecting_player != curr_scene.hover_player:
+		$mini_hp_bar.modulate.a = 0.7
+	$mini_hp_bar.max_value = max_hp
+	$mini_hp_bar.value = hp
+	
 
 func take_damage(dmg, effect_name = "slash"):
 	super(dmg)
