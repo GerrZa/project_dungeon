@@ -31,7 +31,7 @@ func take_damage(dmg, type):
 	super(dmg, type)
 	
 	if weak == type:
-		dmg = dmg * weak_amp
+		dmg = int(round(dmg * weak_amp))
 		
 		$AnimationPlayer.stop()
 		$AnimationPlayer.play("weak_hurt")

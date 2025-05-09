@@ -35,7 +35,8 @@ func _physics_process(delta: float) -> void:
 
 func take_damage(dmg, from_type):
 	if from_type == weak:
-		dmg *= weak_amp
+		dmg = int(round(dmg * weak_amp))
+		
 	hp -= dmg
 	
 	if hp <= 0:
