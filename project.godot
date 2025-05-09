@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Global="*res://src/util/Global.gd"
+ParticleSpawner="*res://src/util/ParticleSpawner.gd"
 
 [display]
 
@@ -32,6 +33,7 @@ window/stretch/mode="canvas_items"
 
 folder_colors={
 "res://src/battle/": "green",
+"res://src/particle/": "blue",
 "res://src/util/": "purple"
 }
 

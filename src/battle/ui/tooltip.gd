@@ -9,6 +9,16 @@ var mouse_in = false
 var follow_target = null
 var follow_offset = Vector2.ZERO
 
+enum DIR{
+	UR,
+	UL,
+	LL,
+	LR,
+	U
+}
+
+@export var dir := DIR.UR 
+
 @export var text_margin := Vector2(8.0, 3.0)
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -30,7 +40,18 @@ func _physics_process(delta: float) -> void:
 	
 	$info_pivot/NinePatchRect.size = $info_pivot/RichTextLabel.size
 	
-	$info_pivot/RichTextLabel.position = Vector2(0, -$info_pivot/RichTextLabel.size.y)
+	match dir:
+		DIR.UR:
+			$info_pivot/RichTextLabel.position = Vector2(0, -$info_pivot/RichTextLabel.size.y)
+		DIR.UL:
+			$info_pivot/RichTextLabel.position = Vector2(-$info_pivot/RichTextLabel.size.x, -$info_pivot/RichTextLabel.size.y)
+		DIR.LR:
+			$info_pivot/RichTextLabel.position = Vector2(0, 0)
+		DIR.LL:
+			$info_pivot/RichTextLabel.position = Vector2(-$info_pivot/RichTextLabel.size.x, 0)
+		DIR.U:
+			$info_pivot/RichTextLabel.position = Vector2(-$info_pivot/RichTextLabel.size.x/2, -$info_pivot/RichTextLabel.size.y)
+	
 	$info_pivot/NinePatchRect.position = $info_pivot/RichTextLabel.position
 	
 	$Icon.texture = icon_texture
@@ -52,4 +73,4 @@ func _physics_process(delta: float) -> void:
 		$info_pivot.visible = false
 	
 	$info_pivot.global_position.x = clamp($info_pivot.global_position.x, 0, 400 - $info_pivot/NinePatchRect.size.x)
-	$info_pivot.global_position.y = clamp($info_pivot.global_position.y, 0, 300)
+	$info_pivot.global_position.y = clamp($info_pivot.global_position.y, $info_pivot/NinePatchRect.size.y, 300)

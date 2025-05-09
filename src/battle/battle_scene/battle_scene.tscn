@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://dkosn3qlbta03"]
+[gd_scene load_steps=30 format=3 uid="uid://dkosn3qlbta03"]
 
 [ext_resource type="Script" uid="uid://ck3t6pbp8tsvq" path="res://src/battle/battle_scene/battle_scene.gd" id="1_1msw3"]
 [ext_resource type="Script" uid="uid://bwxmgxkfikw88" path="res://src/battle/battle_scene/init_enemy.gd" id="2_6uvr7"]
@@ -21,7 +21,6 @@
 [ext_resource type="Script" uid="uid://iue4bf30f85l" path="res://src/battle/ui/control_sorter.gd" id="14_svtxf"]
 [ext_resource type="Script" uid="uid://jcnhr6j17jio" path="res://src/battle/ui/tooltip.gd" id="15_svtxf"]
 [ext_resource type="Texture2D" uid="uid://dew21ug7ohg6r" path="res://asset/battle/ui/info_panel_9slice.png" id="18_ildep"]
-[ext_resource type="PackedScene" uid="uid://dm6onahdm6ldu" path="res://src/battle/ui/action_point/action_point.tscn" id="19_ildep"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s105h"]
 
@@ -101,7 +100,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, -45)]
+"values": [Vector2(0, -60)]
 }
 
 [sub_resource type="Animation" id="Animation_yxysj"]
@@ -142,7 +141,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(0.25, 1),
 "update": 0,
-"values": [Vector2(0, -45), Vector2(0, 0)]
+"values": [Vector2(0, -60), Vector2(0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_kxpl5"]
@@ -183,7 +182,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(0.307786, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(0, -45)]
+"values": [Vector2(0, 0), Vector2(0, -60)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kxpl5"]
@@ -238,6 +237,8 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 93.0
+offset_bottom = 93.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -293,7 +294,7 @@ metadata/_edit_group_ = true
 [node name="anchor" type="Node2D" parent="ui/anchor/swap_up"]
 modulate = Color(0.5, 0.5, 0.5, 1)
 top_level = true
-position = Vector2(295, 216)
+position = Vector2(295, 309)
 
 [node name="PttButton" type="Sprite2D" parent="ui/anchor/swap_up/anchor"]
 texture = ExtResource("8_2dtis")
@@ -328,7 +329,7 @@ metadata/_edit_group_ = true
 [node name="anchor" type="Node2D" parent="ui/anchor/swap_down"]
 modulate = Color(0.5, 0.5, 0.5, 1)
 top_level = true
-position = Vector2(295, 236)
+position = Vector2(295, 329)
 
 [node name="PttButton" type="Sprite2D" parent="ui/anchor/swap_down/anchor"]
 texture = ExtResource("9_c7sli")
@@ -384,6 +385,7 @@ offset_right = 191.0
 offset_bottom = 268.0
 tip_text = ""
 editor_show_text = false
+dir = 0
 text_margin = Vector2(8, 8)
 
 [node name="res2" parent="ui/anchor" instance=ExtResource("10_b5dvc")]
@@ -408,6 +410,7 @@ offset_right = 191.0
 offset_bottom = 283.0
 tip_text = ""
 editor_show_text = false
+dir = 0
 text_margin = Vector2(8, 8)
 
 [node name="action_button" type="Control" parent="ui/anchor"]
@@ -452,9 +455,12 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -60.0
+offset_bottom = -60.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+metadata/_edit_lock_ = true
 
 [node name="ColorRect" type="ColorRect" parent="ui/upper_anchor"]
 layout_mode = 0
@@ -470,26 +476,19 @@ offset_right = 270.0
 offset_bottom = 24.0
 script = ExtResource("14_svtxf")
 
-[node name="ActionPoint" parent="ui/upper_anchor/action_point_sorter" instance=ExtResource("19_ildep")]
-position = Vector2(19, 11)
-
-[node name="ActionPoint2" parent="ui/upper_anchor/action_point_sorter" instance=ExtResource("19_ildep")]
-position = Vector2(19, 11)
-
-[node name="ActionPoint3" parent="ui/upper_anchor/action_point_sorter" instance=ExtResource("19_ildep")]
-position = Vector2(19, 11)
-
 [node name="combo_ind" type="Panel" parent="ui/upper_anchor"]
 self_modulate = Color(0, 0, 0, 0)
 z_index = 99
 layout_mode = 0
-offset_left = 272.0
-offset_right = 294.0
-offset_bottom = 22.0
+offset_left = 189.0
+offset_top = 26.0
+offset_right = 211.0
+offset_bottom = 48.0
 mouse_filter = 1
 script = ExtResource("15_svtxf")
 tip_text = "Hello"
 icon_texture = ExtResource("14_kxpl5")
+metadata/_edit_group_ = true
 
 [node name="Icon" type="Sprite2D" parent="ui/upper_anchor/combo_ind"]
 material = SubResource("ShaderMaterial_8x15n")

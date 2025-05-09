@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://bkxw0tfamxa7e"]
+
+[ext_resource type="Script" uid="uid://wrgl3g0kdm3v" path="res://src/particle/floating_number/floating_text.gd" id="1_r4aho"]
+[ext_resource type="FontFile" uid="uid://b488m1liu66xo" path="res://asset/place_holder/SmolFont.ttf" id="2_i7ap1"]
+
+[node name="FloatingText" type="Node2D"]
+z_index = 299
+script = ExtResource("1_r4aho")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_right = 71.0
+offset_bottom = 52.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/normal_font = ExtResource("2_i7ap1")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "Hello"
+horizontal_alignment = 1
+vertical_alignment = 1

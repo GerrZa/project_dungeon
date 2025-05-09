@@ -21,6 +21,8 @@ var player_lane = []
 @export_category("Init enemy")
 @onready var enemy_initiator = $init_enemy
 
+var action_point_ind = preload("uid://dm6onahdm6ldu")
+
 # Combo naming system
 # XoY -> X over Y
 # XYZ -> X Y Z in order count from top to bottom 
@@ -76,6 +78,12 @@ func _ready() -> void:
 	player_action_point = max_player_action_point
 	combo_use_list = $combo_list.combo_list
 	
+	for i in range(max_player_action_point):
+		var ap_ins = action_point_ind.instantiate()
+		
+		ui.get_node("upper_anchor/action_point_sorter").add_child(ap_ins)
+	ui.get_node("upper_anchor/action_point_sorter").sort()
+	
 	#set up
 	for i in range(lane_count):
 		enemy_lane.append([])
@@ -130,7 +138,7 @@ func _process(delta: float) -> void:
 			#player mouse checking
 			hover_player = null
 			
-			print(combo_use_list, combo_active, curr_combo)
+			#print(combo_use_list, combo_active, curr_combo)
 			
 			for i in player_lane:
 				if i != null and i.mouse_in:

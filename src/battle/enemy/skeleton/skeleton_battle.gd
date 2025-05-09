@@ -30,8 +30,17 @@ func _process(delta: float) -> void:
 func take_damage(dmg, type):
 	super(dmg, type)
 	
-	$AnimationPlayer.stop()
-	$AnimationPlayer.play("hurt")
+	if weak == type:
+		dmg = dmg * weak_amp
+		
+		$AnimationPlayer.stop()
+		$AnimationPlayer.play("weak_hurt")
+	else:
+		$AnimationPlayer.stop()
+		$AnimationPlayer.play("hurt")
+	
+	ParticleSpawner.spawn(ParticleSpawner.PARTS.FLOATING_TEXT, curr_scene, [global_position - Vector2(0, 30), var_to_str(dmg), true, Color.RED, 50.0, 0.65, true, 2])
+	
 	
 	if hp <= 30:
 		will_escape = true
@@ -66,3 +75,6 @@ func perform_action():
 
 func spr_flash(value : bool):
 	$spr_anchor/spr.material.set_shader_parameter("flashing_enable", value)
+
+func spr_flash_set_color(color : Color):
+	$spr_anchor/spr.material.set_shader_parameter("flashing_color", color)

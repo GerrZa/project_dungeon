@@ -22,6 +22,8 @@ func take_damage(dmg):
 	if curr_scene.curr_buff == "shield" and curr_scene.combo_active:
 		dmg = int(round(dmg * 0.7))
 	
+	ParticleSpawner.spawn(ParticleSpawner.PARTS.FLOATING_TEXT, curr_scene, [global_position - Vector2(0, 30), var_to_str(dmg), true, Color.RED, 50.0, 0.65, true, 2])
+	
 	hp -= dmg
 
 func _physics_process(delta: float) -> void:
