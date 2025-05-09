@@ -2,7 +2,7 @@ class_name Player
 extends MouseDetectArea2D
 
 @export var lane = 0
-@export var char_type : Global.TYPE = Global.TYPE.RED
+@export var char_type := Global.TYPE.RED
 
 var max_hp = 100
 var hp = 100
@@ -19,6 +19,9 @@ func _ready() -> void:
 	hp = max_hp
 
 func take_damage(dmg):
+	if curr_scene.curr_buff == "shield" and curr_scene.combo_active:
+		dmg = int(round(dmg * 0.7))
+	
 	hp -= dmg
 
 func _physics_process(delta: float) -> void:
@@ -40,3 +43,19 @@ func _physics_process(delta: float) -> void:
 		$spr_pivot.position.x = lerp($spr_pivot.position.x, 0.0, 0.2)
 	
 	$spr_pivot/spr.material.set_shader_parameter("alpha", 0.75 + (0.25*abs(cos(PI*Time.get_ticks_msec()/1000))))
+	
+	$mini_hp_bar.modulate.a = 0
+	
+	if curr_scene.turn == "e":
+		$mini_hp_bar.modulate.a = 1
+	elif curr_scene.hover_player == self and curr_scene.selecting_player != curr_scene.hover_player:
+		$mini_hp_bar.modulate.a = 0.7
+	$mini_hp_bar.max_value = max_hp
+	$mini_hp_bar.value = hp
+	
+	$spr_pivot/spr/combo_ring.rotation = -$spr_pivot/spr.rotation
+	
+	if curr_scene.combo_active:
+		$spr_pivot/spr/combo_ring.modulate.a = lerp($spr_pivot/spr/combo_ring.modulate.a, 1.0, 0.1)
+	else:
+		$spr_pivot/spr/combo_ring.modulate.a = lerp($spr_pivot/spr/combo_ring.modulate.a, 0.0, 0.15)

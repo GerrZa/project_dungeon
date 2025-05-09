@@ -14,10 +14,15 @@ signal dead
 signal action_finish
 
 @export var weak : Global.TYPE = Global.TYPE.NONE
+@export var weak_amp := 1.5
+@export var randomize_weak := true
 
 func _ready() -> void:
 	super()
 	hp = max_hp
+	if randomize_weak:
+		randomize()
+		weak = randi_range(0,2)
 
 func _physics_process(delta: float) -> void:
 	if follow_to_pos:
@@ -28,7 +33,9 @@ func _physics_process(delta: float) -> void:
 	if curr_scene.selecting_player != null and curr_scene.selecting_player.lane == lane:
 		modulate.v = 1
 
-func take_damage(dmg):
+func take_damage(dmg, from_type):
+	if from_type == weak:
+		dmg *= weak_amp
 	hp -= dmg
 	
 	if hp <= 0:

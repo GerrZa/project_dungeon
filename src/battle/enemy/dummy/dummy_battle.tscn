@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cbvjdjd72dobi" path="res://src/battle/enemy/dummy/dummy_battle.gd" id="1_pcqhq"]
 [ext_resource type="Texture2D" uid="uid://dfxx66bhhfeiu" path="res://asset/place_holder/char.png" id="1_tvdfv"]
-[ext_resource type="Shader" uid="uid://snu2d4w8a06f" path="res://src/util/shader/outline_shader.gdshader" id="2_k66ct"]
+[ext_resource type="Shader" uid="uid://snu2d4w8a06f" path="res://src/util/shader/outline_flashing_shader.gdshader" id="2_k66ct"]
 [ext_resource type="FontFile" uid="uid://b488m1liu66xo" path="res://asset/place_holder/SmolFont.ttf" id="3_4ikan"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tvdfv"]
@@ -14,6 +14,9 @@ shader_parameter/outline_color = Color(0.57, 0.1026, 0.1026, 1)
 shader_parameter/active = true
 shader_parameter/thick = false
 shader_parameter/alpha = 1.0
+shader_parameter/flashing_enable = false
+shader_parameter/flashing_t_left = 0.0
+shader_parameter/flashing_color = Color(1, 1, 1, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_atngr"]
 font = ExtResource("3_4ikan")

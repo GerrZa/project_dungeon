@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://ciugcs0xshn8b"]
 
 [ext_resource type="Script" uid="uid://cakb3nkco3lt" path="res://src/battle/player/blue/blueplayer.gd" id="1_pxdyg"]
-[ext_resource type="Shader" uid="uid://snu2d4w8a06f" path="res://src/util/shader/outline_shader.gdshader" id="2_s5517"]
+[ext_resource type="Shader" uid="uid://snu2d4w8a06f" path="res://src/util/shader/outline_flashing_shader.gdshader" id="2_s5517"]
 [ext_resource type="Texture2D" uid="uid://3nxu6i2f38v" path="res://asset/battle/char/witch_battle.png" id="3_h5byj"]
 [ext_resource type="PackedScene" uid="uid://y17u3vtym25o" path="res://src/battle/ui/CustomProgressBar.tscn" id="4_jq5bs"]
 [ext_resource type="Texture2D" uid="uid://qgonas1hkh1l" path="res://asset/battle/char/etc/combo_ring_lower.png" id="5_uldh0"]
@@ -17,6 +17,9 @@ shader_parameter/outline_color = Color(0.64, 0.8, 0.770667, 1)
 shader_parameter/active = true
 shader_parameter/thick = false
 shader_parameter/alpha = 1.0
+shader_parameter/flashing_enable = false
+shader_parameter/flashing_t_left = 0.0
+shader_parameter/flashing_color = Color(1, 1, 1, 1)
 
 [sub_resource type="Animation" id="Animation_jq5bs"]
 length = 0.001
@@ -49,6 +52,23 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector2(-8, 0), Vector2(8, 0), Vector2(-5, 0), Vector2(5, 0), Vector2(-2, 0), Vector2(2, 0), Vector2(-1, 0), Vector2(1, 0), Vector2(0, 0)]
 }
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [true],
+"method": &"spr_flash"
+}, {
+"args": [false],
+"method": &"spr_flash"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2tmpj"]
 _data = {
@@ -58,7 +78,7 @@ _data = {
 
 [node name="BluePlayer" type="Area2D"]
 script = ExtResource("1_pxdyg")
-char_type = 2
+char_type = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1.5, -29)
@@ -81,13 +101,13 @@ libraries = {
 [node name="combo_ring" type="Node2D" parent="spr_pivot/spr"]
 
 [node name="ComboRingLower" type="Sprite2D" parent="spr_pivot/spr/combo_ring"]
-position = Vector2(-21, -13)
+position = Vector2(-20, -10)
 texture = ExtResource("5_uldh0")
 centered = false
 
 [node name="ComboRingUpper" type="Sprite2D" parent="spr_pivot/spr/combo_ring"]
 z_index = -1
-position = Vector2(-21, -21)
+position = Vector2(-20, -17)
 texture = ExtResource("6_73x6o")
 centered = false
 

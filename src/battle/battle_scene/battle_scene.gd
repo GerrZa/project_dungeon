@@ -9,6 +9,10 @@ var player_lane = []
 @export var init_player = 1
 @export var lane_count = 3
 
+@export var combo_use_list : PackedStringArray = []
+@export var random_combo_pick := false
+@export var combo_cycle_turn := 3
+
 @export var enemy_base_x_pos = 270
 @export var enemy_gap = 24
 @onready var camera : CameraPlus2D = $CameraPlus2D
@@ -22,12 +26,29 @@ var player_lane = []
 # XYZ -> X Y Z in order count from top to bottom 
 
 var combo_prop = {
-	"RoG" : null
+	"BoG" : {"display" : "Witch over Theif",
+	"desc" : "[color=royalblue]Witch[/color]'s position\nhigher than [color=YelloGreen]Theif[/color]",
+	"icon" : load("uid://bifoui4cjq6a3"),
+	"check" : func() : if get_player_curr_lane()["blue"] > get_player_curr_lane()["green"]: return true else: return false,
+	"buff" : "shield"},
+	
+	"G2" : {"display" : "Theif top",
+	"desc" : "[color=YellowGreen]Theif[/color]'s position is at the top",
+	"icon" : load("uid://cbrfntvbytkt2"),
+	"check" : func() : if get_player_curr_lane()["green"] == 2: return true else: return false,
+	"buff" : "shield"},
+	
+	"R1" : {"display" : "SwordMan center",
+	"desc" : "[color=OrangeRed]SwordMan[/color]'s position is in the center",
+	"icon" : load("uid://luaanmv7muib"),
+	"check" : func() : if get_player_curr_lane()["red"] == 1: return true else: return false,
+	"buff" : "shield"},
 }
 
-var buff = {
-	
-}
+var curr_combo = ""
+var curr_buff = ""
+
+var combo_active = false
 
 var player_resource = {
 	"STA" : [100.0,100.0],
@@ -53,6 +74,7 @@ signal enemy_turn_finished
 
 func _ready() -> void:
 	player_action_point = max_player_action_point
+	combo_use_list = $combo_list.combo_list
 	
 	#set up
 	for i in range(lane_count):
@@ -108,6 +130,8 @@ func _process(delta: float) -> void:
 			#player mouse checking
 			hover_player = null
 			
+			print(combo_use_list, combo_active, curr_combo)
+			
 			for i in player_lane:
 				if i != null and i.mouse_in:
 					hover_player = i
@@ -136,6 +160,7 @@ func _process(delta: float) -> void:
 
 #Game stuff
 func use_action_point(amt = 1):
+	ui.get_node("upper_anchor/action_point_sorter").get_child(player_action_point - 1).disable()
 	player_action_point -= amt
 
 func reset_action_point():
@@ -145,8 +170,33 @@ func add_action_point(amt = 1):
 	player_action_point += amt
 
 func switch_turn(to_who):
+	turn = to_who
 	match to_who:
 		"p":
+			turn_count += 1
+			if turn_count > 0 and turn_count % 3 == 0:
+				if random_combo_pick == false:
+					#cycle the combo list, current combo based on the first element of "combo_use_list" array
+					var pop_comb = combo_use_list[0]
+					combo_use_list.remove_at(0)
+					combo_use_list.append(pop_comb)
+				else:
+					randomize()
+					
+					var rnd_i = randi_range(min(combo_use_list.size()-1,1), combo_use_list.size()-1)
+					var pop_comb = combo_use_list[rnd_i]
+					combo_use_list.remove_at(rnd_i)
+					combo_use_list.insert(0, pop_comb)
+			
+			curr_combo = combo_use_list[0]
+			curr_buff = combo_prop[curr_combo]["buff"]
+			
+			ui.reload_combo_ind()
+			check_combo()
+			
+			for i in ui.get_node("upper_anchor/action_point_sorter").get_children():
+				i.reset()
+			
 			$ui/anchor/AnimationPlayer.play("slide_in")
 			$ui.reload_action_list()
 			
@@ -155,7 +205,7 @@ func switch_turn(to_who):
 			reset_action_point()
 			$ui.reload_action_list()
 			$ui.enable_all_avai()
-			turn_count += 1
+			
 		"e":
 			$ui/anchor/AnimationPlayer.play("slide_out")
 			
@@ -167,7 +217,6 @@ func switch_turn(to_who):
 			emit_signal("enemy_turn_finished")
 		"win":
 			$ui.disable_all()
-	turn = to_who
 
 func check_win():
 	var sum_ene = 0
@@ -197,6 +246,19 @@ func swap_player(from_lane, to_lane):
 	
 	player_lane[from_lane] = to_player
 	player_lane[to_lane] = from_player
+	
+	check_combo()
+
+func check_combo():
+	if combo_prop[curr_combo]["check"].call():
+		combo_active = true
+		return true
+	else:
+		combo_active = false
+		return false	
+
+func get_player_curr_lane():
+	return {"red" : $RedPlayer.lane, "blue" : $BluePlayer.lane, "green" : $GreenPlayer.lane}
 
 #Enemy stuff
 func add_enemy(lane, enemy_file, index = -1):

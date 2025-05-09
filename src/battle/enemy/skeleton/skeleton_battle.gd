@@ -18,23 +18,31 @@ func _physics_process(delta: float) -> void:
 	
 	$spr_anchor/spr.material.set_shader_parameter("active", false)
 	
-	for i in $tooltips.get_children():
+	for i in $CanvasLayer/tooltips.get_children():
 		if i.mouse_in:
 			$spr_anchor/spr.material.set_shader_parameter("active", true)
 			break
 
-func take_damage(dmg):
-	super(dmg)
+func _process(delta: float) -> void:
+	$CanvasLayer/tooltips.global_position = global_position - Vector2(-8, 49) - curr_scene.camera.global_position - curr_scene.camera.offset
+	$CanvasLayer/tooltips/runaway.visible = will_escape
+
+func take_damage(dmg, type):
+	super(dmg, type)
+	
+	$AnimationPlayer.stop()
+	$AnimationPlayer.play("hurt")
 	
 	if hp <= 30:
 		will_escape = true
-		$tooltips/runaway.visible = true
+		$CanvasLayer/tooltips/runaway.visible = true
 
 func perform_action():
 	if will_escape == false:
 		curr_scene.player_lane[lane].take_damage(15)
 		curr_scene.camera.shake(0.2, 4)
 		
+		$AnimationPlayer.stop()
 		$AnimationPlayer.play('attack')
 		
 		await $AnimationPlayer.animation_finished
@@ -55,3 +63,6 @@ func perform_action():
 		remove_self()
 		print("remove")
 		queue_free()
+
+func spr_flash(value : bool):
+	$spr_anchor/spr.material.set_shader_parameter("flashing_enable", value)

@@ -9,7 +9,7 @@ signal player_action_finish
 
 var action_condition = {}
 
-var swap_disable_duration = 0.4
+var swap_disable_duration = 0.2
 
 func _ready() -> void:
 	
@@ -59,7 +59,7 @@ func reload_action_list(): #when switching player
 			#add tool tip
 			var tooltip_ins = load("res://src/battle/ui/tooltip.tscn").instantiate()
 			
-			tooltip_ins.tip_text = "[color=yellow][{0}][/color]\n{1}".format([i, curr_scene.selecting_player.action_list[i]["desc"]])
+			tooltip_ins.tip_text = "[color=yellow][{0}][/color]\n\n{1}".format([i, curr_scene.selecting_player.action_list[i]["desc"]])
 			tooltip_ins.size = act_ins.size
 			
 			act_ins.add_child(tooltip_ins)
@@ -157,6 +157,10 @@ func refresh_hp_and_res(change_player = false):
 	
 	$anchor/share_info2.tip_text = res_tooltip[source.char_type][1]
 	$anchor/share_info2.icon_texture = res_texture[source.char_type][1]
+
+func reload_combo_ind():
+	$upper_anchor/combo_ind.icon_texture = curr_scene.combo_prop[curr_scene.curr_combo]["icon"]
+	$upper_anchor/combo_ind.tip_text = "[color=yellow][{0}][/color]\n".format([curr_scene.combo_prop[curr_scene.curr_combo]["display"]]) + curr_scene.combo_prop[curr_scene.curr_combo]["desc"]
 
 func on_action_pressed(call : Callable): #check for every time action button pressed
 	if can_act == false:

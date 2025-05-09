@@ -1,9 +1,10 @@
-[gd_scene load_steps=23 format=3 uid="uid://dkosn3qlbta03"]
+[gd_scene load_steps=31 format=3 uid="uid://dkosn3qlbta03"]
 
 [ext_resource type="Script" uid="uid://ck3t6pbp8tsvq" path="res://src/battle/battle_scene/battle_scene.gd" id="1_1msw3"]
 [ext_resource type="Script" uid="uid://bwxmgxkfikw88" path="res://src/battle/battle_scene/init_enemy.gd" id="2_6uvr7"]
-[ext_resource type="Script" uid="uid://cnhodbq5x7f4l" path="res://src/battle/battle_scene/ui.gd" id="2_oafii"]
+[ext_resource type="Script" uid="uid://cnhodbq5x7f4l" path="res://src/battle/ui/ui.gd" id="2_oafii"]
 [ext_resource type="PackedScene" uid="uid://dm8p72kolv6jr" path="res://src/battle/ui/tooltip.tscn" id="3_6uvr7"]
+[ext_resource type="Script" uid="uid://tnemu3735n1r" path="res://src/battle/battle_scene/combo_list.gd" id="3_evjvq"]
 [ext_resource type="FontFile" uid="uid://b488m1liu66xo" path="res://asset/place_holder/SmolFont.ttf" id="4_6cbqe"]
 [ext_resource type="Texture2D" uid="uid://dc5brwq7v4wrv" path="res://asset/battle/char/port/port-frame.png" id="5_6uvr7"]
 [ext_resource type="Script" uid="uid://be0vwr4sw3kdf" path="res://src/util/class/CameraPlus2D.gd" id="5_gpduh"]
@@ -15,6 +16,12 @@
 [ext_resource type="Texture2D" uid="uid://dcx3kmr4ii7er" path="res://asset/battle/ui/swap_up_button.png" id="8_2dtis"]
 [ext_resource type="Texture2D" uid="uid://c3sf85q0i3nc2" path="res://asset/battle/ui/swap_down_button.png" id="9_c7sli"]
 [ext_resource type="PackedScene" uid="uid://y17u3vtym25o" path="res://src/battle/ui/CustomProgressBar.tscn" id="10_b5dvc"]
+[ext_resource type="Shader" uid="uid://snu2d4w8a06f" path="res://src/util/shader/outline_flashing_shader.gdshader" id="13_kxpl5"]
+[ext_resource type="Texture2D" uid="uid://bifoui4cjq6a3" path="res://asset/battle/ui/combo_ind/bog_combo.png" id="14_kxpl5"]
+[ext_resource type="Script" uid="uid://iue4bf30f85l" path="res://src/battle/ui/control_sorter.gd" id="14_svtxf"]
+[ext_resource type="Script" uid="uid://jcnhr6j17jio" path="res://src/battle/ui/tooltip.gd" id="15_svtxf"]
+[ext_resource type="Texture2D" uid="uid://dew21ug7ohg6r" path="res://asset/battle/ui/info_panel_9slice.png" id="18_ildep"]
+[ext_resource type="PackedScene" uid="uid://dm6onahdm6ldu" path="res://src/battle/ui/action_point/action_point.tscn" id="19_ildep"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s105h"]
 
@@ -42,7 +49,19 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 42)]
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../upper_anchor:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_evjvq"]
@@ -72,6 +91,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(0, 93)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../upper_anchor:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -45)]
+}
 
 [sub_resource type="Animation" id="Animation_yxysj"]
 resource_name = "slide_in"
@@ -85,7 +116,7 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(-3.73213, 1),
+"transitions": PackedFloat32Array(0.25, 1),
 "update": 0,
 "values": [Vector2(0, 93), Vector2(0, 0)]
 }
@@ -97,9 +128,21 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(-3.73213, 1),
+"transitions": PackedFloat32Array(0.25, 1),
 "update": 0,
 "values": [Vector2(0, -48), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../upper_anchor:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(0.25, 1),
+"update": 0,
+"values": [Vector2(0, -45), Vector2(0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_kxpl5"]
@@ -114,7 +157,7 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(-3.73213, 1),
+"transitions": PackedFloat32Array(0.307786, 1),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(0, 93)]
 }
@@ -126,9 +169,21 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(-3.73213, 1),
+"transitions": PackedFloat32Array(0.307786, 1),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(0, -48)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../upper_anchor:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(0.307786, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -45)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kxpl5"]
@@ -139,6 +194,17 @@ _data = {
 &"slide_out": SubResource("Animation_kxpl5")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8x15n"]
+resource_local_to_scene = true
+shader = ExtResource("13_kxpl5")
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/active = false
+shader_parameter/thick = false
+shader_parameter/alpha = 1.0
+shader_parameter/flashing_enable = false
+shader_parameter/flashing_t_left = 0.0
+shader_parameter/flashing_color = Color(1, 1, 1, 1)
+
 [sub_resource type="LabelSettings" id="LabelSettings_2dtis"]
 font = ExtResource("4_6cbqe")
 font_size = 64
@@ -146,6 +212,7 @@ font_size = 64
 [node name="BattleScene" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_1msw3")
+random_combo_pick = true
 enemy_gap = 32
 
 [node name="init_enemy" type="Node" parent="."]
@@ -153,6 +220,10 @@ script = ExtResource("2_6uvr7")
 lane0 = ["skeleton", "skeleton"]
 lane1 = ["skeleton", "skeleton"]
 lane2 = ["skeleton", "skeleton", "skeleton"]
+
+[node name="combo_list" type="Node" parent="."]
+script = ExtResource("3_evjvq")
+combo_list = ["BoG", "R1", "G2"]
 
 [node name="CameraPlus2D" type="Camera2D" parent="."]
 anchor_mode = 0
@@ -167,12 +238,9 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 42.0
-offset_bottom = 42.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-metadata/_edit_lock_ = true
 
 [node name="ColorRect" type="ColorRect" parent="ui/anchor"]
 layout_mode = 0
@@ -204,9 +272,9 @@ show_percentage = false
 [node name="endturn_button" parent="ui/anchor" instance=ExtResource("5_pfvi3")]
 layout_mode = 0
 offset_left = 295.0
-offset_top = 276.0
+offset_top = 256.0
 offset_right = 386.0
-offset_bottom = 294.0
+offset_bottom = 274.0
 text = "Endturn"
 
 [node name="swap_up" type="Panel" parent="ui/anchor"]
@@ -214,9 +282,9 @@ modulate = Color(0.5, 0.5, 0.5, 1)
 self_modulate = Color(0, 0, 0, 0)
 custom_minimum_size = Vector2(0, 18)
 layout_mode = 0
-offset_left = 313.0
+offset_left = 295.0
 offset_top = 216.0
-offset_right = 367.0
+offset_right = 330.0
 offset_bottom = 234.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_s105h")
 script = ExtResource("7_c7sli")
@@ -225,7 +293,7 @@ metadata/_edit_group_ = true
 [node name="anchor" type="Node2D" parent="ui/anchor/swap_up"]
 modulate = Color(0.5, 0.5, 0.5, 1)
 top_level = true
-position = Vector2(313, 258)
+position = Vector2(295, 216)
 
 [node name="PttButton" type="Sprite2D" parent="ui/anchor/swap_up/anchor"]
 texture = ExtResource("8_2dtis")
@@ -249,9 +317,9 @@ modulate = Color(0.5, 0.5, 0.5, 1)
 self_modulate = Color(0, 0, 0, 0)
 custom_minimum_size = Vector2(0, 18)
 layout_mode = 0
-offset_left = 313.0
+offset_left = 295.0
 offset_top = 236.0
-offset_right = 367.0
+offset_right = 331.0
 offset_bottom = 254.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_s105h")
 script = ExtResource("7_c7sli")
@@ -260,7 +328,7 @@ metadata/_edit_group_ = true
 [node name="anchor" type="Node2D" parent="ui/anchor/swap_down"]
 modulate = Color(0.5, 0.5, 0.5, 1)
 top_level = true
-position = Vector2(313, 278)
+position = Vector2(295, 236)
 
 [node name="PttButton" type="Sprite2D" parent="ui/anchor/swap_down/anchor"]
 texture = ExtResource("9_c7sli")
@@ -379,11 +447,92 @@ libraries = {
 }
 autoplay = "init"
 
+[node name="upper_anchor" type="Control" parent="ui"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="ui/upper_anchor"]
+layout_mode = 0
+offset_left = 130.0
+offset_right = 270.0
+offset_bottom = 24.0
+color = Color(0.12549, 0.121569, 0.145098, 1)
+
+[node name="action_point_sorter" type="Control" parent="ui/upper_anchor"]
+anchors_preset = 0
+offset_left = 130.0
+offset_right = 270.0
+offset_bottom = 24.0
+script = ExtResource("14_svtxf")
+
+[node name="ActionPoint" parent="ui/upper_anchor/action_point_sorter" instance=ExtResource("19_ildep")]
+position = Vector2(19, 11)
+
+[node name="ActionPoint2" parent="ui/upper_anchor/action_point_sorter" instance=ExtResource("19_ildep")]
+position = Vector2(19, 11)
+
+[node name="ActionPoint3" parent="ui/upper_anchor/action_point_sorter" instance=ExtResource("19_ildep")]
+position = Vector2(19, 11)
+
+[node name="combo_ind" type="Panel" parent="ui/upper_anchor"]
+self_modulate = Color(0, 0, 0, 0)
+z_index = 99
+layout_mode = 0
+offset_left = 272.0
+offset_right = 294.0
+offset_bottom = 22.0
+mouse_filter = 1
+script = ExtResource("15_svtxf")
+tip_text = "Hello"
+icon_texture = ExtResource("14_kxpl5")
+
+[node name="Icon" type="Sprite2D" parent="ui/upper_anchor/combo_ind"]
+material = SubResource("ShaderMaterial_8x15n")
+texture = ExtResource("14_kxpl5")
+centered = false
+
+[node name="info_pivot" type="Node2D" parent="ui/upper_anchor/combo_ind"]
+z_index = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="ui/upper_anchor/combo_ind/info_pivot"]
+z_index = -1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -11.0
+offset_right = 28.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("18_ildep")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ui/upper_anchor/combo_ind/info_pivot"]
+offset_top = -11.0
+offset_right = 28.0
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("4_6cbqe")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "Hello"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_group_ = true
+
 [node name="GreenPlayer" parent="." instance=ExtResource("5_uqsyo")]
 position = Vector2(74, 88)
+lane = 2
 
 [node name="RedPlayer" parent="." instance=ExtResource("5_px77a")]
 position = Vector2(73, 135)
+lane = 1
 
 [node name="BluePlayer" parent="." instance=ExtResource("7_pfvi3")]
 position = Vector2(71, 182)

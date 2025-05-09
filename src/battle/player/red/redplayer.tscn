@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://dmfef746xj7hh"]
 
 [ext_resource type="Script" uid="uid://xaon6035edwk" path="res://src/battle/player/red/redplayer.gd" id="1_yle15"]
-[ext_resource type="Shader" uid="uid://snu2d4w8a06f" path="res://src/util/shader/outline_shader.gdshader" id="2_s5517"]
+[ext_resource type="Shader" uid="uid://snu2d4w8a06f" path="res://src/util/shader/outline_flashing_shader.gdshader" id="2_s5517"]
 [ext_resource type="Texture2D" uid="uid://d1xni8ntakguv" path="res://asset/battle/char/sword_man_battle.png" id="3_wj58n"]
 [ext_resource type="PackedScene" uid="uid://y17u3vtym25o" path="res://src/battle/ui/CustomProgressBar.tscn" id="4_il1yj"]
 [ext_resource type="Texture2D" uid="uid://qgonas1hkh1l" path="res://asset/battle/char/etc/combo_ring_lower.png" id="5_sjn8a"]
@@ -17,6 +17,9 @@ shader_parameter/outline_color = Color(0.8, 0.688, 0.64, 1)
 shader_parameter/active = true
 shader_parameter/thick = false
 shader_parameter/alpha = 1.0
+shader_parameter/flashing_enable = false
+shader_parameter/flashing_t_left = 0.0
+shader_parameter/flashing_color = Color(1, 1, 1, 1)
 
 [sub_resource type="Animation" id="Animation_il1yj"]
 length = 0.001
@@ -90,6 +93,23 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector2(-8, 0), Vector2(8, 0), Vector2(-5, 0), Vector2(5, 0), Vector2(-2, 0), Vector2(2, 0), Vector2(-1, 0), Vector2(1, 0), Vector2(0, 0)]
 }
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [true],
+"method": &"spr_flash"
+}, {
+"args": [false],
+"method": &"spr_flash"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2tmpj"]
 _data = {
@@ -100,7 +120,6 @@ _data = {
 
 [node name="RedPlayer" type="Area2D"]
 script = ExtResource("1_yle15")
-lane = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -24.5)
@@ -126,13 +145,13 @@ playback_auto_capture = false
 [node name="combo_ring" type="Node2D" parent="spr_pivot/spr"]
 
 [node name="ComboRingLower" type="Sprite2D" parent="spr_pivot/spr/combo_ring"]
-position = Vector2(-21, -13)
+position = Vector2(-21, -10)
 texture = ExtResource("5_sjn8a")
 centered = false
 
 [node name="ComboRingUpper" type="Sprite2D" parent="spr_pivot/spr/combo_ring"]
 z_index = -1
-position = Vector2(-21, -21)
+position = Vector2(-21, -17)
 texture = ExtResource("6_b5725")
 centered = false
 
