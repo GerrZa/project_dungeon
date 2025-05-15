@@ -1,19 +1,184 @@
-[gd_scene load_steps=2 format=3 uid="uid://b7jpqpvhfppav"]
+[gd_scene load_steps=14 format=3 uid="uid://b7jpqpvhfppav"]
 
-[ext_resource type="PackedScene" uid="uid://tjwasddwhj4o" path="res://src/dungeon/dungeon_system/room_node.tscn" id="1_j6tvo"]
+[ext_resource type="PackedScene" uid="uid://tjwasddwhj4o" path="res://src/dungeon/dungeon_system/room_node/node/room_node.tscn" id="1_j6tvo"]
+[ext_resource type="Script" uid="uid://b83xsurl7siq6" path="res://src/dungeon/dungeon_system/dungeon_temp.gd" id="1_wggg5"]
+[ext_resource type="Shader" uid="uid://dgklmsd8yj6cy" path="res://src/util/shader/palette_shift.gdshader" id="2_y6l2g"]
+[ext_resource type="Texture2D" uid="uid://dbvthdqhc23fp" path="res://asset/place_holder/project_dungeon_palette.png" id="3_wggg5"]
+[ext_resource type="Texture2D" uid="uid://08y32lonkk8e" path="res://asset/dungeon/party_icon.png" id="5_kn5ha"]
+[ext_resource type="Script" uid="uid://bpg7dwpxpwaci" path="res://src/dungeon/dungeon_system/camera_anchor.gd" id="6_06lnx"]
+[ext_resource type="PackedScene" uid="uid://dipkejx3iikx3" path="res://src/dungeon/dungeon_system/room_node/battle_node/battle_node.tscn" id="7_80e7r"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kn5ha"]
+shader = ExtResource("2_y6l2g")
+shader_parameter/palette = ExtResource("3_wggg5")
+shader_parameter/palette_size = 29
+
+[sub_resource type="Animation" id="Animation_2g341"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_06lnx"]
+resource_name = "black_in"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_80e7r"]
+resource_name = "black_out"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_muuyh"]
+resource_name = "init"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2g341"]
+_data = {
+&"RESET": SubResource("Animation_2g341"),
+&"black_in": SubResource("Animation_06lnx"),
+&"black_out": SubResource("Animation_80e7r"),
+&"init": SubResource("Animation_muuyh")
+}
 
 [node name="DungeonTemp" type="Node2D"]
+script = ExtResource("1_wggg5")
+init_room = NodePath("1")
 
-[node name="RoomNode" parent="." instance=ExtResource("1_j6tvo")]
-offset_left = 159.0
-offset_top = 180.0
-offset_right = 177.0
-offset_bottom = 198.0
-connected_node = [NodePath("../RoomNode2")]
+[node name="palette_shift" type="CanvasLayer" parent="."]
+layer = 99
 
-[node name="RoomNode2" parent="." instance=ExtResource("1_j6tvo")]
+[node name="ColorRect" type="ColorRect" parent="palette_shift"]
+material = SubResource("ShaderMaterial_kn5ha")
+offset_right = 400.0
+offset_bottom = 300.0
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="fader" type="CanvasLayer" parent="."]
+
+[node name="fader_rect" type="ColorRect" parent="fader"]
+offset_right = 400.0
+offset_bottom = 300.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+metadata/_edit_lock_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="fader/fader_rect"]
+libraries = {
+&"": SubResource("AnimationLibrary_2g341")
+}
+autoplay = "init"
+
+[node name="party_icon" type="Sprite2D" parent="."]
+z_index = 999
+texture = ExtResource("5_kn5ha")
+offset = Vector2(0, -5)
+
+[node name="camera_anchor" type="Node2D" parent="."]
+position = Vector2(200, 150)
+script = ExtResource("6_06lnx")
+party_node = NodePath("../party_icon")
+
+[node name="Camera2D" type="Camera2D" parent="camera_anchor"]
+
+[node name="1" parent="." instance=ExtResource("1_j6tvo")]
+offset_left = 191.0
+offset_top = 192.0
+offset_right = 209.0
+offset_bottom = 210.0
+connected_node = Array[NodePath]([NodePath("../2-1"), NodePath("../2-2B")])
+
+[node name="2-1" parent="." instance=ExtResource("1_j6tvo")]
+offset_left = 140.0
+offset_top = 151.0
+offset_right = 158.0
+offset_bottom = 169.0
+connected_node = Array[NodePath]([NodePath("../3-1")])
+
+[node name="2-2B" parent="." instance=ExtResource("7_80e7r")]
+offset_left = 237.0
+offset_top = 153.0
+offset_right = 255.0
+offset_bottom = 173.0
+battle_scene = "uid://dkosn3qlbta03"
+connected_node = Array[NodePath]([NodePath("../3-2"), NodePath("../4")])
+
+[node name="3-1" parent="." instance=ExtResource("1_j6tvo")]
+offset_left = 136.0
+offset_top = 102.0
+offset_right = 154.0
+offset_bottom = 120.0
+connected_node = Array[NodePath]([NodePath("../4")])
+
+[node name="3-2" parent="." instance=ExtResource("1_j6tvo")]
 offset_left = 243.0
-offset_top = 126.0
+offset_top = 101.0
 offset_right = 261.0
-offset_bottom = 144.0
-connected_node = []
+offset_bottom = 119.0
+connected_node = Array[NodePath]([NodePath("../4"), NodePath("")])
+
+[node name="4" parent="." instance=ExtResource("1_j6tvo")]
+offset_left = 191.0
+offset_top = 78.0
+offset_right = 209.0
+offset_bottom = 96.0
+connected_node = Array[NodePath]([NodePath("../5")])
+
+[node name="5" parent="." instance=ExtResource("1_j6tvo")]
+offset_left = 166.0
+offset_top = 37.0
+offset_right = 184.0
+offset_bottom = 55.0
+connected_node = Array[NodePath]([NodePath("../6B")])
+
+[node name="6B" parent="." instance=ExtResource("7_80e7r")]
+offset_left = 210.0
+offset_top = -4.0
+offset_right = 228.0
+offset_bottom = 16.0
+battle_scene = "uid://dkosn3qlbta03"

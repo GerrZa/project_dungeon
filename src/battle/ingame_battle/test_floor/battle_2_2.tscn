@@ -1,44 +1,44 @@
-[gd_scene load_steps=41 format=3 uid="uid://dkosn3qlbta03"]
+[gd_scene load_steps=41 format=3 uid="uid://fai4oh7743nc"]
 
-[ext_resource type="Script" uid="uid://ck3t6pbp8tsvq" path="res://src/battle/battle_scene/battle_scene.gd" id="1_1msw3"]
-[ext_resource type="Script" uid="uid://bwxmgxkfikw88" path="res://src/battle/battle_scene/init_enemy.gd" id="2_6uvr7"]
-[ext_resource type="Script" uid="uid://cnhodbq5x7f4l" path="res://src/battle/ui/ui.gd" id="2_oafii"]
-[ext_resource type="PackedScene" uid="uid://dm8p72kolv6jr" path="res://src/battle/ui/tooltip.tscn" id="3_6uvr7"]
-[ext_resource type="Script" uid="uid://tnemu3735n1r" path="res://src/battle/battle_scene/combo_list.gd" id="3_evjvq"]
-[ext_resource type="FontFile" uid="uid://b488m1liu66xo" path="res://asset/place_holder/SmolFont.ttf" id="4_6cbqe"]
-[ext_resource type="Texture2D" uid="uid://dc5brwq7v4wrv" path="res://asset/battle/char/port/port-frame.png" id="5_6uvr7"]
-[ext_resource type="Script" uid="uid://be0vwr4sw3kdf" path="res://src/util/class/CameraPlus2D.gd" id="5_gpduh"]
-[ext_resource type="PackedScene" uid="uid://cwdwpxxcklt1c" path="res://src/battle/ui/action_button.tscn" id="5_pfvi3"]
-[ext_resource type="PackedScene" uid="uid://dmfef746xj7hh" path="res://src/battle/player/red/redplayer.tscn" id="5_px77a"]
-[ext_resource type="PackedScene" uid="uid://b6jepkox3hkts" path="res://src/battle/player/green/greenplayer.tscn" id="5_uqsyo"]
-[ext_resource type="Script" uid="uid://dtx4dkvhp65w4" path="res://src/battle/ui/action_button.gd" id="7_c7sli"]
-[ext_resource type="PackedScene" uid="uid://ciugcs0xshn8b" path="res://src/battle/player/blue/blueplayer.tscn" id="7_pfvi3"]
-[ext_resource type="Texture2D" uid="uid://dcx3kmr4ii7er" path="res://asset/battle/ui/swap_up_button.png" id="8_2dtis"]
-[ext_resource type="Texture2D" uid="uid://c3sf85q0i3nc2" path="res://asset/battle/ui/swap_down_button.png" id="9_c7sli"]
-[ext_resource type="PackedScene" uid="uid://y17u3vtym25o" path="res://src/battle/ui/CustomProgressBar.tscn" id="10_b5dvc"]
-[ext_resource type="Shader" uid="uid://c8pv4xgovwgd3" path="res://src/battle/ui/action_button.gdshader" id="11_r8s0v"]
-[ext_resource type="Shader" uid="uid://snu2d4w8a06f" path="res://src/util/shader/outline_flashing_shader.gdshader" id="13_kxpl5"]
-[ext_resource type="Texture2D" uid="uid://bifoui4cjq6a3" path="res://asset/battle/ui/combo_ind/bog_combo.png" id="14_kxpl5"]
-[ext_resource type="Script" uid="uid://iue4bf30f85l" path="res://src/battle/ui/control_sorter.gd" id="14_svtxf"]
-[ext_resource type="Script" uid="uid://jcnhr6j17jio" path="res://src/battle/ui/tooltip.gd" id="15_svtxf"]
-[ext_resource type="Texture2D" uid="uid://dew21ug7ohg6r" path="res://asset/battle/ui/info_panel_9slice.png" id="18_ildep"]
-[ext_resource type="Shader" uid="uid://dgklmsd8yj6cy" path="res://src/util/shader/palette_shift.gdshader" id="22_8x15n"]
-[ext_resource type="Texture2D" uid="uid://dbvthdqhc23fp" path="res://asset/place_holder/project_dungeon_palette.png" id="23_8x15n"]
+[ext_resource type="Script" uid="uid://ck3t6pbp8tsvq" path="res://src/battle/battle_scene/battle_scene.gd" id="1_s8cm3"]
+[ext_resource type="Shader" uid="uid://dgklmsd8yj6cy" path="res://src/util/shader/palette_shift.gdshader" id="2_8bev8"]
+[ext_resource type="Texture2D" uid="uid://dbvthdqhc23fp" path="res://asset/place_holder/project_dungeon_palette.png" id="3_dx6ie"]
+[ext_resource type="Script" uid="uid://bwxmgxkfikw88" path="res://src/battle/battle_scene/init_enemy.gd" id="4_1a57w"]
+[ext_resource type="Script" uid="uid://tnemu3735n1r" path="res://src/battle/battle_scene/combo_list.gd" id="5_medca"]
+[ext_resource type="Script" uid="uid://be0vwr4sw3kdf" path="res://src/util/class/CameraPlus2D.gd" id="6_50bt8"]
+[ext_resource type="Script" uid="uid://cnhodbq5x7f4l" path="res://src/battle/ui/ui.gd" id="7_635xt"]
+[ext_resource type="Texture2D" uid="uid://dc5brwq7v4wrv" path="res://asset/battle/char/port/port-frame.png" id="8_c5rer"]
+[ext_resource type="FontFile" uid="uid://b488m1liu66xo" path="res://asset/place_holder/SmolFont.ttf" id="9_lxwrv"]
+[ext_resource type="PackedScene" uid="uid://cwdwpxxcklt1c" path="res://src/battle/ui/action_button.tscn" id="10_0w8dp"]
+[ext_resource type="Script" uid="uid://dtx4dkvhp65w4" path="res://src/battle/ui/action_button.gd" id="11_3i8f4"]
+[ext_resource type="Shader" uid="uid://c8pv4xgovwgd3" path="res://src/battle/ui/action_button.gdshader" id="12_fuw23"]
+[ext_resource type="Texture2D" uid="uid://dcx3kmr4ii7er" path="res://asset/battle/ui/swap_up_button.png" id="13_18pm4"]
+[ext_resource type="Texture2D" uid="uid://c3sf85q0i3nc2" path="res://asset/battle/ui/swap_down_button.png" id="14_nth8o"]
+[ext_resource type="PackedScene" uid="uid://y17u3vtym25o" path="res://src/battle/ui/CustomProgressBar.tscn" id="15_ct6ln"]
+[ext_resource type="PackedScene" uid="uid://dm8p72kolv6jr" path="res://src/battle/ui/tooltip.tscn" id="16_heogu"]
+[ext_resource type="Script" uid="uid://iue4bf30f85l" path="res://src/battle/ui/control_sorter.gd" id="17_1clde"]
+[ext_resource type="Script" uid="uid://jcnhr6j17jio" path="res://src/battle/ui/tooltip.gd" id="18_f7sdb"]
+[ext_resource type="Texture2D" uid="uid://bifoui4cjq6a3" path="res://asset/battle/ui/combo_ind/bog_combo.png" id="19_c7lfy"]
+[ext_resource type="Shader" uid="uid://snu2d4w8a06f" path="res://src/util/shader/outline_flashing_shader.gdshader" id="20_yy7b0"]
+[ext_resource type="Texture2D" uid="uid://dew21ug7ohg6r" path="res://asset/battle/ui/info_panel_9slice.png" id="21_whhgm"]
+[ext_resource type="PackedScene" uid="uid://b6jepkox3hkts" path="res://src/battle/player/green/greenplayer.tscn" id="22_qmnbw"]
+[ext_resource type="PackedScene" uid="uid://dmfef746xj7hh" path="res://src/battle/player/red/redplayer.tscn" id="23_kybni"]
+[ext_resource type="PackedScene" uid="uid://ciugcs0xshn8b" path="res://src/battle/player/blue/blueplayer.tscn" id="24_t0y8i"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ildep"]
-shader = ExtResource("22_8x15n")
-shader_parameter/palette = ExtResource("23_8x15n")
+shader = ExtResource("2_8bev8")
+shader_parameter/palette = ExtResource("3_dx6ie")
 shader_parameter/palette_size = 29
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s105h"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_r8s0v"]
 resource_local_to_scene = true
-shader = ExtResource("11_r8s0v")
+shader = ExtResource("12_fuw23")
 shader_parameter/bri = 0.5
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gabcj"]
-shader = ExtResource("11_r8s0v")
+shader = ExtResource("12_fuw23")
 shader_parameter/bri = 0.5
 
 [sub_resource type="Animation" id="Animation_1v401"]
@@ -212,7 +212,7 @@ _data = {
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8x15n"]
 resource_local_to_scene = true
-shader = ExtResource("13_kxpl5")
+shader = ExtResource("20_yy7b0")
 shader_parameter/outline_color = Color(1, 1, 1, 1)
 shader_parameter/active = false
 shader_parameter/thick = false
@@ -295,12 +295,12 @@ _data = {
 }
 
 [sub_resource type="LabelSettings" id="LabelSettings_2dtis"]
-font = ExtResource("4_6cbqe")
+font = ExtResource("9_lxwrv")
 font_size = 64
 
 [node name="BattleScene" type="Node2D"]
 y_sort_enabled = true
-script = ExtResource("1_1msw3")
+script = ExtResource("1_s8cm3")
 random_combo_pick = true
 
 [node name="palette_shift" type="CanvasLayer" parent="."]
@@ -314,22 +314,22 @@ mouse_filter = 2
 metadata/_edit_lock_ = true
 
 [node name="init_enemy" type="Node" parent="."]
-script = ExtResource("2_6uvr7")
+script = ExtResource("4_1a57w")
 lane0 = ["skeleton", "skeleton"]
 lane1 = ["skeleton", "skeleton"]
 lane2 = ["skeleton", "skeleton", "skeleton"]
 
 [node name="combo_list" type="Node" parent="."]
-script = ExtResource("3_evjvq")
+script = ExtResource("5_medca")
 combo_list = ["BoG", "R1", "G2"]
 
 [node name="CameraPlus2D" type="Camera2D" parent="."]
 anchor_mode = 0
-script = ExtResource("5_gpduh")
+script = ExtResource("6_50bt8")
 metadata/_custom_type_script = "uid://be0vwr4sw3kdf"
 
 [node name="ui" type="CanvasLayer" parent="."]
-script = ExtResource("2_oafii")
+script = ExtResource("7_635xt")
 
 [node name="anchor" type="Control" parent="ui"]
 layout_mode = 3
@@ -355,7 +355,7 @@ centered = false
 [node name="Port-frame" type="Sprite2D" parent="ui/anchor/Port"]
 show_behind_parent = true
 position = Vector2(24, 24)
-texture = ExtResource("5_6uvr7")
+texture = ExtResource("8_c5rer")
 
 [node name="hp_bar" type="ProgressBar" parent="ui/anchor"]
 layout_mode = 0
@@ -363,11 +363,11 @@ offset_left = 88.0
 offset_top = 248.0
 offset_right = 184.0
 offset_bottom = 260.0
-theme_override_fonts/font = ExtResource("4_6cbqe")
+theme_override_fonts/font = ExtResource("9_lxwrv")
 theme_override_font_sizes/font_size = 8
 show_percentage = false
 
-[node name="endturn_button" parent="ui/anchor" instance=ExtResource("5_pfvi3")]
+[node name="endturn_button" parent="ui/anchor" instance=ExtResource("10_0w8dp")]
 layout_mode = 0
 offset_left = 295.0
 offset_top = 256.0
@@ -385,7 +385,7 @@ offset_top = 216.0
 offset_right = 330.0
 offset_bottom = 234.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_s105h")
-script = ExtResource("7_c7sli")
+script = ExtResource("11_3i8f4")
 metadata/_edit_group_ = true
 
 [node name="anchor" type="Node2D" parent="ui/anchor/swap_up"]
@@ -395,7 +395,7 @@ position = Vector2(295, 216)
 
 [node name="PttButton" type="Sprite2D" parent="ui/anchor/swap_up/anchor"]
 material = SubResource("ShaderMaterial_r8s0v")
-texture = ExtResource("8_2dtis")
+texture = ExtResource("13_18pm4")
 centered = false
 
 [node name="RichTextLabel" type="RichTextLabel" parent="ui/anchor/swap_up/anchor"]
@@ -403,7 +403,7 @@ offset_right = 91.0
 offset_bottom = 16.0
 mouse_filter = 2
 theme_override_constants/outline_size = 3
-theme_override_fonts/normal_font = ExtResource("4_6cbqe")
+theme_override_fonts/normal_font = ExtResource("9_lxwrv")
 theme_override_font_sizes/normal_font_size = 8
 bbcode_enabled = true
 fit_content = true
@@ -421,7 +421,7 @@ offset_top = 236.0
 offset_right = 331.0
 offset_bottom = 254.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_s105h")
-script = ExtResource("7_c7sli")
+script = ExtResource("11_3i8f4")
 metadata/_edit_group_ = true
 
 [node name="anchor" type="Node2D" parent="ui/anchor/swap_down"]
@@ -431,7 +431,7 @@ position = Vector2(295, 236)
 
 [node name="PttButton" type="Sprite2D" parent="ui/anchor/swap_down/anchor"]
 material = SubResource("ShaderMaterial_gabcj")
-texture = ExtResource("9_c7sli")
+texture = ExtResource("14_nth8o")
 centered = false
 
 [node name="RichTextLabel" type="RichTextLabel" parent="ui/anchor/swap_down/anchor"]
@@ -439,7 +439,7 @@ offset_right = 91.0
 offset_bottom = 16.0
 mouse_filter = 2
 theme_override_constants/outline_size = 3
-theme_override_fonts/normal_font = ExtResource("4_6cbqe")
+theme_override_fonts/normal_font = ExtResource("9_lxwrv")
 theme_override_font_sizes/normal_font_size = 8
 bbcode_enabled = true
 fit_content = true
@@ -447,7 +447,7 @@ scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="hp" parent="ui/anchor" instance=ExtResource("10_b5dvc")]
+[node name="hp" parent="ui/anchor" instance=ExtResource("15_ct6ln")]
 modulate = Color(0.929412, 0.309804, 0.152941, 1)
 layout_mode = 1
 anchors_preset = -1
@@ -462,7 +462,7 @@ offset_bottom = 244.0
 value_name = "HP"
 slow_bar = true
 
-[node name="res1" parent="ui/anchor" instance=ExtResource("10_b5dvc")]
+[node name="res1" parent="ui/anchor" instance=ExtResource("15_ct6ln")]
 modulate = Color(0.9375, 0.739632, 0.270996, 1)
 layout_mode = 1
 anchors_preset = -1
@@ -476,7 +476,7 @@ offset_right = 156.0
 offset_bottom = 261.0
 slow_bar = true
 
-[node name="share_info1" parent="ui/anchor" instance=ExtResource("3_6uvr7")]
+[node name="share_info1" parent="ui/anchor" instance=ExtResource("16_heogu")]
 layout_mode = 0
 offset_left = 181.0
 offset_top = 258.0
@@ -486,7 +486,7 @@ tip_text = ""
 editor_show_text = false
 text_margin = Vector2(8, 8)
 
-[node name="res2" parent="ui/anchor" instance=ExtResource("10_b5dvc")]
+[node name="res2" parent="ui/anchor" instance=ExtResource("15_ct6ln")]
 modulate = Color(0.554504, 0.592212, 0.617188, 1)
 layout_mode = 1
 anchors_preset = -1
@@ -500,7 +500,7 @@ offset_right = 156.0
 offset_bottom = 276.0
 slow_bar = true
 
-[node name="share_info2" parent="ui/anchor" instance=ExtResource("3_6uvr7")]
+[node name="share_info2" parent="ui/anchor" instance=ExtResource("16_heogu")]
 layout_mode = 0
 offset_left = 181.0
 offset_top = 273.0
@@ -519,23 +519,23 @@ offset_bottom = 295.0
 mouse_filter = 2
 metadata/_edit_group_ = true
 
-[node name="action1" parent="ui/anchor/action_button" instance=ExtResource("5_pfvi3")]
+[node name="action1" parent="ui/anchor/action_button" instance=ExtResource("10_0w8dp")]
 layout_mode = 2
 text = "Action"
 
-[node name="action2" parent="ui/anchor/action_button" instance=ExtResource("5_pfvi3")]
+[node name="action2" parent="ui/anchor/action_button" instance=ExtResource("10_0w8dp")]
 layout_mode = 2
 offset_top = 20.0
 offset_bottom = 38.0
 text = "Action"
 
-[node name="action3" parent="ui/anchor/action_button" instance=ExtResource("5_pfvi3")]
+[node name="action3" parent="ui/anchor/action_button" instance=ExtResource("10_0w8dp")]
 layout_mode = 2
 offset_top = 40.0
 offset_bottom = 58.0
 text = "Action"
 
-[node name="action4" parent="ui/anchor/action_button" instance=ExtResource("5_pfvi3")]
+[node name="action4" parent="ui/anchor/action_button" instance=ExtResource("10_0w8dp")]
 layout_mode = 2
 offset_top = 60.0
 offset_bottom = 78.0
@@ -569,7 +569,7 @@ anchors_preset = 0
 offset_left = 130.0
 offset_right = 270.0
 offset_bottom = 24.0
-script = ExtResource("14_svtxf")
+script = ExtResource("17_1clde")
 
 [node name="combo_ind" type="Panel" parent="ui/upper_anchor"]
 self_modulate = Color(0, 0, 0, 0)
@@ -580,14 +580,14 @@ offset_top = 26.0
 offset_right = 211.0
 offset_bottom = 48.0
 mouse_filter = 1
-script = ExtResource("15_svtxf")
+script = ExtResource("18_f7sdb")
 tip_text = "Hello"
-icon_texture = ExtResource("14_kxpl5")
+icon_texture = ExtResource("19_c7lfy")
 metadata/_edit_group_ = true
 
 [node name="Icon" type="Sprite2D" parent="ui/upper_anchor/combo_ind"]
 material = SubResource("ShaderMaterial_8x15n")
-texture = ExtResource("14_kxpl5")
+texture = ExtResource("19_c7lfy")
 centered = false
 
 [node name="info_pivot" type="Node2D" parent="ui/upper_anchor/combo_ind"]
@@ -602,7 +602,7 @@ offset_top = -11.0
 offset_right = 28.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("18_ildep")
+texture = ExtResource("21_whhgm")
 patch_margin_left = 3
 patch_margin_top = 3
 patch_margin_right = 3
@@ -612,7 +612,7 @@ patch_margin_bottom = 3
 offset_top = -11.0
 offset_right = 28.0
 mouse_filter = 2
-theme_override_fonts/normal_font = ExtResource("4_6cbqe")
+theme_override_fonts/normal_font = ExtResource("9_lxwrv")
 theme_override_font_sizes/normal_font_size = 8
 bbcode_enabled = true
 text = "Hello"
@@ -634,15 +634,15 @@ libraries = {
 }
 autoplay = "init"
 
-[node name="GreenPlayer" parent="." instance=ExtResource("5_uqsyo")]
+[node name="GreenPlayer" parent="." instance=ExtResource("22_qmnbw")]
 position = Vector2(74, 88)
 lane = 2
 
-[node name="RedPlayer" parent="." instance=ExtResource("5_px77a")]
+[node name="RedPlayer" parent="." instance=ExtResource("23_kybni")]
 position = Vector2(73, 135)
 lane = 1
 
-[node name="BluePlayer" parent="." instance=ExtResource("7_pfvi3")]
+[node name="BluePlayer" parent="." instance=ExtResource("24_t0y8i")]
 position = Vector2(71, 182)
 
 [node name="win" type="Label" parent="."]

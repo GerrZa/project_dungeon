@@ -33,6 +33,7 @@ window/stretch/mode="viewport"
 
 folder_colors={
 "res://src/battle/": "green",
+"res://src/battle/ingame_battle/": "yellow",
 "res://src/dungeon/": "orange",
 "res://src/particle/": "blue",
 "res://src/util/": "purple"

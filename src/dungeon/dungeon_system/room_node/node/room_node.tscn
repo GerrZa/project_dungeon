@@ -1,0 +1,116 @@
+[gd_scene load_steps=9 format=3 uid="uid://tjwasddwhj4o"]
+
+[ext_resource type="Script" uid="uid://bte4ysspivtdd" path="res://src/dungeon/dungeon_system/room_node/node/room_node.gd" id="1_aocgm"]
+[ext_resource type="Script" uid="uid://jcnhr6j17jio" path="res://src/battle/ui/tooltip.gd" id="2_rhltn"]
+[ext_resource type="Texture2D" uid="uid://4y5ahqph65pu" path="res://asset/dungeon/room/empty_icon.png" id="3_ckdls"]
+[ext_resource type="Shader" uid="uid://snu2d4w8a06f" path="res://src/util/shader/outline_flashing_shader.gdshader" id="4_ahq6m"]
+[ext_resource type="Texture2D" uid="uid://dew21ug7ohg6r" path="res://asset/battle/ui/info_panel_9slice.png" id="5_00mg6"]
+[ext_resource type="FontFile" uid="uid://b488m1liu66xo" path="res://asset/place_holder/SmolFont.ttf" id="6_6tpa1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yog6g"]
+resource_local_to_scene = true
+shader = ExtResource("4_ahq6m")
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/active = false
+shader_parameter/thick = false
+shader_parameter/alpha = 1.0
+shader_parameter/flashing_enable = false
+shader_parameter/flashing_t_left = 0.0
+shader_parameter/flashing_color = Color(1, 1, 1, 1)
+
+[sub_resource type="GDScript" id="GDScript_uchck"]
+script/source = "@tool
+extends Node2D
+
+func _process(delta: float) -> void:
+	queue_redraw()
+	
+	position = get_parent().icon.get_size()/2
+
+func _draw() -> void:
+	#if Engine.is_editor_hint() == false:
+		#return
+	
+	for i in get_parent().connected_node:
+		if i is NodePath and i != NodePath(\"\"):
+			
+			var col = Color.DIM_GRAY
+			
+			if Engine.is_editor_hint() == false and (get_parent(). curr_scene.curr_room.check_can_go(get_node(i)) or get_parent().curr_scene.curr_room == get_parent()):
+				col = Color.WHITE
+			
+			draw_line(get_node(\"../Tooltip/Icon\").position, to_local(get_parent().get_node(i).get_node(\"Tooltip/Icon\").global_position + (get_parent().icon.get_size() / 2)), col, 2, false)
+			
+	
+	for i in get_parent().connected_node:
+		if i is NodePath and i != NodePath(\"\"):
+			if Engine.is_editor_hint():
+				draw_circle(get_node(\"../Tooltip/Icon\").position + (to_global(get_node(\"../Tooltip/Icon\").position).direction_to(get_parent().get_node(i).global_position + (get_parent().get_node(i).icon.get_size() / 2)) * 16), 4, Color.RED, true)
+			
+"
+
+[node name="RoomNode" type="Panel"]
+self_modulate = Color(0, 0, 0, 0)
+offset_right = 18.0
+offset_bottom = 18.0
+script = ExtResource("1_aocgm")
+desc = "[color=yellow][Empty room][/color]"
+disable = false
+oneshot = false
+
+[node name="Tooltip" type="Panel" parent="."]
+self_modulate = Color(0, 0, 0, 0)
+z_index = 99
+layout_mode = 0
+offset_top = -0.826078
+offset_right = 18.0
+offset_bottom = 17.1739
+mouse_filter = 1
+script = ExtResource("2_rhltn")
+tip_text = "[color=yellow][Empty room][/color]"
+icon_texture = ExtResource("3_ckdls")
+editor_show_text = false
+position_clamp = false
+
+[node name="Icon" type="Sprite2D" parent="Tooltip"]
+material = SubResource("ShaderMaterial_yog6g")
+position = Vector2(0, 0.464126)
+texture = ExtResource("3_ckdls")
+centered = false
+
+[node name="info_pivot" type="Node2D" parent="Tooltip"]
+visible = false
+top_level = true
+z_index = 199
+position = Vector2(0, -0.826078)
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Tooltip/info_pivot"]
+z_index = -1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -11.0
+offset_right = 57.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_00mg6")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Tooltip/info_pivot"]
+offset_top = -11.0
+offset_right = 57.0
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("6_6tpa1")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "[color=yellow][Empty room][/color]"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_group_ = true
+
+[node name="debug_line" type="Node2D" parent="."]
+position = Vector2(9, 9)
+script = SubResource("GDScript_uchck")

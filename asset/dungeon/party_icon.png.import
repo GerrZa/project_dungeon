@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cptq25bu4qi0"
-path="res://.godot/imported/dungeon_battle_icon.png-eb0d8996427e3cf64db66ab3e8d39892.ctex"
+uid="uid://08y32lonkk8e"
+path="res://.godot/imported/party_icon.png-6294731de9c69812ee315c386c004007.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asset/dungeon/dungeon_battle_icon.png"
-dest_files=["res://.godot/imported/dungeon_battle_icon.png-eb0d8996427e3cf64db66ab3e8d39892.ctex"]
+source_file="res://asset/dungeon/party_icon.png"
+dest_files=["res://.godot/imported/party_icon.png-6294731de9c69812ee315c386c004007.ctex"]
 
 [params]
 

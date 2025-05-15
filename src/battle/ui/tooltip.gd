@@ -6,6 +6,8 @@ var mouse_in = false
 @export var icon_texture : Texture2D = null
 @export var editor_show_text = true
 
+@export var position_clamp := true
+
 var follow_target = null
 var follow_offset = Vector2.ZERO
 
@@ -72,5 +74,6 @@ func _physics_process(delta: float) -> void:
 	else:
 		$info_pivot.visible = false
 	
-	$info_pivot.global_position.x = clamp($info_pivot.global_position.x, 0, 400 - $info_pivot/NinePatchRect.size.x)
-	$info_pivot.global_position.y = clamp($info_pivot.global_position.y, $info_pivot/NinePatchRect.size.y, 300)
+	if position_clamp:
+		$info_pivot.global_position.x = clamp($info_pivot.global_position.x, 0, 400 - $info_pivot/NinePatchRect.size.x)
+		$info_pivot.global_position.y = clamp($info_pivot.global_position.y, $info_pivot/NinePatchRect.size.y, 300)
