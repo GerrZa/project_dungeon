@@ -39,7 +39,10 @@ func take_damage(dmg, type):
 		$AnimationPlayer.stop()
 		$AnimationPlayer.play("hurt")
 	
-	ParticleSpawner.spawn(ParticleSpawner.PARTS.FLOATING_TEXT, curr_scene, [global_position - Vector2(0, 30), var_to_str(dmg), true, Color.RED, 50.0, 0.65, true, 2])
+	ParticleSpawner.spawn(ParticleSpawner.PARTS.FLOATING_TEXT, curr_scene, [global_position - Vector2(0, 30), var_to_str(dmg), true, Color.WHITE, 50.0, 0.65, true, 2])
+	
+	if weak == type:
+		ParticleSpawner.spawn(ParticleSpawner.PARTS.FLOATING_TEXT, curr_scene, [global_position - Vector2(0, 38), "CRIT", true, Color.RED, 50.0, 0.65, true, 2])
 	
 	
 	if hp <= 30:

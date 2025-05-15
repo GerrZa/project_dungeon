@@ -238,7 +238,6 @@ tip_text = "[color=crimson]This unit will
 evade this turn"
 icon_texture = ExtResource("6_cvv43")
 editor_show_text = false
-dir = 0
 
 [node name="Tooltip" parent="CanvasLayer/tooltips" instance=ExtResource("7_cvv43")]
 offset_left = -1.0

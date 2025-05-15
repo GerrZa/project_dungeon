@@ -9,12 +9,12 @@ var player_lane = []
 @export var init_player = 1
 @export var lane_count = 3
 
-@export var combo_use_list : PackedStringArray = []
+@onready var combo_use_list : PackedStringArray = []
 @export var random_combo_pick := false
 @export var combo_cycle_turn := 3
 
 @export var enemy_base_x_pos = 270
-@export var enemy_gap = 24
+@export var enemy_gap = 32
 @onready var camera : CameraPlus2D = $CameraPlus2D
 @onready var ui = $ui
 
@@ -128,8 +128,10 @@ func _process(delta: float) -> void:
 						add_enemy(2, "res://src/battle/enemy/" +i+ "/" +i+ "_battle.tscn")
 				
 				selecting_player = player_lane[clamp(init_player, 0, lane_count)]
+				$ui/fader/AnimationPlayer.play("black_out")
 				
 				await get_tree().create_timer(0.3 * lane_count).timeout
+				
 				
 				#print(selecting_player)
 				switch_turn("p")
@@ -211,7 +213,8 @@ func switch_turn(to_who):
 			await $ui/anchor/AnimationPlayer.animation_finished
 			
 			reset_action_point()
-			$ui.reload_action_list()
+			#$ui.reload_action_list()
+			$ui.disable_all()
 			$ui.enable_all_avai()
 			
 		"e":

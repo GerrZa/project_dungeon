@@ -44,7 +44,7 @@ func _physics_process(delta: float) -> void:
 		$spr_pivot/spr.material.set_shader_parameter("active", false)
 		$spr_pivot.position.x = lerp($spr_pivot.position.x, 0.0, 0.2)
 	
-	$spr_pivot/spr.material.set_shader_parameter("alpha", 0.75 + (0.25*abs(cos(PI*Time.get_ticks_msec()/1000))))
+	$spr_pivot/spr.material.set_shader_parameter("alpha", 0.5 + (0.5*abs(cos(PI*Time.get_ticks_msec()/500))))
 	
 	$mini_hp_bar.modulate.a = 0
 	

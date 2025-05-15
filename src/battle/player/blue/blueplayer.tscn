@@ -13,13 +13,13 @@ size = Vector2(31, 60)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gsw3i"]
 resource_local_to_scene = true
 shader = ExtResource("2_s5517")
-shader_parameter/outline_color = Color(0.64, 0.8, 0.770667, 1)
+shader_parameter/outline_color = Color(0.956863, 0.960784, 0.941176, 1)
 shader_parameter/active = true
 shader_parameter/thick = false
 shader_parameter/alpha = 1.0
 shader_parameter/flashing_enable = false
 shader_parameter/flashing_t_left = 0.0
-shader_parameter/flashing_color = Color(1, 1, 1, 1)
+shader_parameter/flashing_color = Color(0.956863, 0.960784, 0.941176, 1)
 
 [sub_resource type="Animation" id="Animation_jq5bs"]
 length = 0.001
@@ -81,6 +81,7 @@ script = ExtResource("1_pxdyg")
 char_type = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(1.5, -29)
 shape = SubResource("RectangleShape2D_bttv4")
 

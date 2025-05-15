@@ -64,10 +64,10 @@ func _physics_process(delta: float) -> void:
 			$info_pivot.visible = false
 		return
 	
-	$info_pivot.global_position = get_global_mouse_position()
+	$info_pivot.global_position = round(get_global_mouse_position())
 	
 	if mouse_in:
-		$info_pivot.global_position = get_global_mouse_position()
+		$info_pivot.global_position = round(get_global_mouse_position())
 		$info_pivot.visible = true
 	else:
 		$info_pivot.visible = false

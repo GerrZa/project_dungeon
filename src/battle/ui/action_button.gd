@@ -12,22 +12,25 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	super(delta)
 	
-	var render_modulate = Color.WHITE
+	var render_modulate = 1.0
 	
 	$anchor/RichTextLabel.text = text
 	
 	if mouse_in:
-		render_modulate.v = 1
-	else:
-		render_modulate.v = 0.8
+		render_modulate = 1.2
 	
 	if pressing:
-		render_modulate.v = 0.5
+		render_modulate = 0.5
 	
 	if disable:
-		render_modulate.v = 0.5
+		render_modulate = 0.5
 	
-	$anchor.modulate = render_modulate
+	$anchor/PttButton.material.set_shader_parameter("bri", render_modulate)
+	
+	var mod_col = Color.WHITE
+	mod_col.v = render_modulate
+	
+	$anchor.modulate = mod_col
 	
 	$anchor.z_index = anchor_z_index
 

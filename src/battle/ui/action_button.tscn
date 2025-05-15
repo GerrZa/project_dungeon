@@ -1,10 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://cwdwpxxcklt1c"]
+[gd_scene load_steps=7 format=3 uid="uid://cwdwpxxcklt1c"]
 
 [ext_resource type="Script" uid="uid://dtx4dkvhp65w4" path="res://src/battle/ui/action_button.gd" id="1_a33q4"]
+[ext_resource type="Shader" uid="uid://c8pv4xgovwgd3" path="res://src/battle/ui/action_button.gdshader" id="2_657al"]
 [ext_resource type="Texture2D" uid="uid://vhqsfptucw36" path="res://asset/place_holder/ptt_button.png" id="2_s105h"]
 [ext_resource type="FontFile" uid="uid://b488m1liu66xo" path="res://asset/place_holder/SmolFont.ttf" id="3_i4h52"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s105h"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_657al"]
+resource_local_to_scene = true
+shader = ExtResource("2_657al")
+shader_parameter/bri = 0.5
 
 [node name="ActionButton" type="Panel"]
 self_modulate = Color(0, 0, 0, 0)
@@ -20,6 +26,7 @@ modulate = Color(0.5, 0.5, 0.5, 1)
 top_level = true
 
 [node name="PttButton" type="Sprite2D" parent="anchor"]
+material = SubResource("ShaderMaterial_657al")
 texture = ExtResource("2_s105h")
 centered = false
 

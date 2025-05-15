@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://dkosn3qlbta03"]
+[gd_scene load_steps=41 format=3 uid="uid://dkosn3qlbta03"]
 
 [ext_resource type="Script" uid="uid://ck3t6pbp8tsvq" path="res://src/battle/battle_scene/battle_scene.gd" id="1_1msw3"]
 [ext_resource type="Script" uid="uid://bwxmgxkfikw88" path="res://src/battle/battle_scene/init_enemy.gd" id="2_6uvr7"]
@@ -16,13 +16,30 @@
 [ext_resource type="Texture2D" uid="uid://dcx3kmr4ii7er" path="res://asset/battle/ui/swap_up_button.png" id="8_2dtis"]
 [ext_resource type="Texture2D" uid="uid://c3sf85q0i3nc2" path="res://asset/battle/ui/swap_down_button.png" id="9_c7sli"]
 [ext_resource type="PackedScene" uid="uid://y17u3vtym25o" path="res://src/battle/ui/CustomProgressBar.tscn" id="10_b5dvc"]
+[ext_resource type="Shader" uid="uid://c8pv4xgovwgd3" path="res://src/battle/ui/action_button.gdshader" id="11_r8s0v"]
 [ext_resource type="Shader" uid="uid://snu2d4w8a06f" path="res://src/util/shader/outline_flashing_shader.gdshader" id="13_kxpl5"]
 [ext_resource type="Texture2D" uid="uid://bifoui4cjq6a3" path="res://asset/battle/ui/combo_ind/bog_combo.png" id="14_kxpl5"]
 [ext_resource type="Script" uid="uid://iue4bf30f85l" path="res://src/battle/ui/control_sorter.gd" id="14_svtxf"]
 [ext_resource type="Script" uid="uid://jcnhr6j17jio" path="res://src/battle/ui/tooltip.gd" id="15_svtxf"]
 [ext_resource type="Texture2D" uid="uid://dew21ug7ohg6r" path="res://asset/battle/ui/info_panel_9slice.png" id="18_ildep"]
+[ext_resource type="Shader" uid="uid://dgklmsd8yj6cy" path="res://src/util/shader/palette_shift.gdshader" id="22_8x15n"]
+[ext_resource type="Texture2D" uid="uid://dbvthdqhc23fp" path="res://asset/place_holder/project_dungeon_palette.png" id="23_8x15n"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ildep"]
+shader = ExtResource("22_8x15n")
+shader_parameter/palette = ExtResource("23_8x15n")
+shader_parameter/palette_size = 29
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s105h"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r8s0v"]
+resource_local_to_scene = true
+shader = ExtResource("11_r8s0v")
+shader_parameter/bri = 0.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gabcj"]
+shader = ExtResource("11_r8s0v")
+shader_parameter/bri = 0.5
 
 [sub_resource type="Animation" id="Animation_1v401"]
 length = 0.001
@@ -204,57 +221,97 @@ shader_parameter/flashing_enable = false
 shader_parameter/flashing_t_left = 0.0
 shader_parameter/flashing_color = Color(1, 1, 1, 1)
 
+[sub_resource type="Animation" id="Animation_r8s0v"]
+length = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_gabcj"]
+resource_name = "black_in"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_hxwcg"]
+resource_name = "black_out"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_8x15n"]
+resource_name = "init"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r8s0v"]
+_data = {
+&"RESET": SubResource("Animation_r8s0v"),
+&"black_in": SubResource("Animation_gabcj"),
+&"black_out": SubResource("Animation_hxwcg"),
+&"init": SubResource("Animation_8x15n")
+}
+
 [sub_resource type="LabelSettings" id="LabelSettings_2dtis"]
 font = ExtResource("4_6cbqe")
 font_size = 64
-
-[sub_resource type="Shader" id="Shader_svtxf"]
-code = "shader_type canvas_item;
-
-uniform vec4 palette[16] : source_color;
-uniform int palette_size = 16;
-
-uniform sampler2D screen_texture : hint_screen_texture, repeat_disable, filter_nearest;
-
-void vertex() {
-}
-
-void fragment() {
-	vec4 screen_col = textureLod(screen_texture, SCREEN_UV, 0.0);
-	vec3 input_rgb = screen_col.rgb;
-	
-	vec3 closest = vec3(1.0,1.0,1.0);
-	float min_dist = 99999.0;
-	
-	for(int i = 0; i < palette_size; i++){
-		vec3 diff = input_rgb - palette[i].rgb;
-		float dist = dot(diff, diff);
-		
-		if (dist < min_dist){
-			min_dist = dist;
-			closest = palette[i].rgb;
-		}
-	}
-	
-	COLOR = vec4(closest, 1.0);
-}
-
-//void light() {
-//	// Called for every pixel for every light affecting the CanvasItem.
-//	// Uncomment to replace the default light processing function with this one.
-//}
-"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ildep"]
-shader = SubResource("Shader_svtxf")
-shader_parameter/palette = PackedColorArray(0, 0, 0, 1, 0.137255, 0.137255, 0.137255, 1, 0.376471, 0.133333, 0.0901961, 1, 0.227451, 0.247059, 0.247059, 1, 0.505882, 0.34902, 0.219608, 1, 0.384314, 0.392157, 0.223529, 1, 0.407843, 0.435294, 0.435294, 1, 0.286275, 0.478431, 0.654902, 1, 0.803922, 0.4, 0.152941, 1, 0.529412, 0.607843, 0.258824, 1, 0.686275, 0.568627, 0.337255, 1, 0.368627, 0.635294, 0.690196, 1, 0.623529, 0.627451, 0.537255, 1, 0.643137, 0.745098, 0.756863, 1, 0.858824, 0.807843, 0.176471, 1, 1, 1, 1, 1)
-shader_parameter/palette_size = 16
 
 [node name="BattleScene" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_1msw3")
 random_combo_pick = true
-enemy_gap = 32
+
+[node name="palette_shift" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="ColorRect" type="ColorRect" parent="palette_shift"]
+material = SubResource("ShaderMaterial_ildep")
+offset_right = 400.0
+offset_bottom = 300.0
+mouse_filter = 2
+metadata/_edit_lock_ = true
 
 [node name="init_enemy" type="Node" parent="."]
 script = ExtResource("2_6uvr7")
@@ -282,20 +339,20 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+metadata/_edit_lock_ = true
 
 [node name="ColorRect" type="ColorRect" parent="ui/anchor"]
 layout_mode = 0
 offset_top = 211.0
 offset_right = 400.0
 offset_bottom = 300.0
-color = Color(0.125848, 0.119866, 0.143806, 1)
+color = Color(0.298039, 0.227451, 0.2, 1)
 
 [node name="Port" type="Sprite2D" parent="ui/anchor"]
 position = Vector2(20, 232)
 centered = false
 
 [node name="Port-frame" type="Sprite2D" parent="ui/anchor/Port"]
-modulate = Color(0.306152, 0.363773, 0.445313, 1)
 show_behind_parent = true
 position = Vector2(24, 24)
 texture = ExtResource("5_6uvr7")
@@ -334,9 +391,10 @@ metadata/_edit_group_ = true
 [node name="anchor" type="Node2D" parent="ui/anchor/swap_up"]
 modulate = Color(0.5, 0.5, 0.5, 1)
 top_level = true
-position = Vector2(295, 309)
+position = Vector2(295, 216)
 
 [node name="PttButton" type="Sprite2D" parent="ui/anchor/swap_up/anchor"]
+material = SubResource("ShaderMaterial_r8s0v")
 texture = ExtResource("8_2dtis")
 centered = false
 
@@ -369,9 +427,10 @@ metadata/_edit_group_ = true
 [node name="anchor" type="Node2D" parent="ui/anchor/swap_down"]
 modulate = Color(0.5, 0.5, 0.5, 1)
 top_level = true
-position = Vector2(295, 329)
+position = Vector2(295, 236)
 
 [node name="PttButton" type="Sprite2D" parent="ui/anchor/swap_down/anchor"]
+material = SubResource("ShaderMaterial_gabcj")
 texture = ExtResource("9_c7sli")
 centered = false
 
@@ -389,7 +448,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="hp" parent="ui/anchor" instance=ExtResource("10_b5dvc")]
-modulate = Color(0.890625, 0.334528, 0.24353, 1)
+modulate = Color(0.929412, 0.309804, 0.152941, 1)
 layout_mode = 1
 anchors_preset = -1
 anchor_left = -0.0025
@@ -425,7 +484,6 @@ offset_right = 191.0
 offset_bottom = 268.0
 tip_text = ""
 editor_show_text = false
-dir = 0
 text_margin = Vector2(8, 8)
 
 [node name="res2" parent="ui/anchor" instance=ExtResource("10_b5dvc")]
@@ -450,7 +508,6 @@ offset_right = 191.0
 offset_bottom = 283.0
 tip_text = ""
 editor_show_text = false
-dir = 0
 text_margin = Vector2(8, 8)
 
 [node name="action_button" type="Control" parent="ui/anchor"]
@@ -563,6 +620,20 @@ horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_group_ = true
 
+[node name="fader" type="ColorRect" parent="ui"]
+modulate = Color(1, 1, 1, 0)
+offset_right = 400.0
+offset_bottom = 252.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+metadata/_edit_lock_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ui/fader"]
+libraries = {
+&"": SubResource("AnimationLibrary_r8s0v")
+}
+autoplay = "init"
+
 [node name="GreenPlayer" parent="." instance=ExtResource("5_uqsyo")]
 position = Vector2(74, 88)
 lane = 2
@@ -582,13 +653,3 @@ text = "WIN!"
 label_settings = SubResource("LabelSettings_2dtis")
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="palette_shift" type="CanvasLayer" parent="."]
-layer = 10
-
-[node name="ColorRect" type="ColorRect" parent="palette_shift"]
-material = SubResource("ShaderMaterial_ildep")
-offset_right = 400.0
-offset_bottom = 300.0
-mouse_filter = 2
-metadata/_edit_lock_ = true

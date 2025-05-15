@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7jpqpvhfppav"]
+
+[ext_resource type="PackedScene" uid="uid://tjwasddwhj4o" path="res://src/dungeon/dungeon_system/room_node.tscn" id="1_j6tvo"]
+
+[node name="DungeonTemp" type="Node2D"]
+
+[node name="RoomNode" parent="." instance=ExtResource("1_j6tvo")]
+offset_left = 159.0
+offset_top = 180.0
+offset_right = 177.0
+offset_bottom = 198.0
+connected_node = [NodePath("../RoomNode2")]
+
+[node name="RoomNode2" parent="." instance=ExtResource("1_j6tvo")]
+offset_left = 243.0
+offset_top = 126.0
+offset_right = 261.0
+offset_bottom = 144.0
+connected_node = []

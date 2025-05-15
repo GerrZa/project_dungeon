@@ -13,13 +13,13 @@ size = Vector2(30, 51)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gsw3i"]
 resource_local_to_scene = true
 shader = ExtResource("2_s5517")
-shader_parameter/outline_color = Color(0.8, 0.688, 0.64, 1)
+shader_parameter/outline_color = Color(0.956863, 0.960784, 0.941176, 1)
 shader_parameter/active = true
 shader_parameter/thick = false
 shader_parameter/alpha = 1.0
 shader_parameter/flashing_enable = false
 shader_parameter/flashing_t_left = 0.0
-shader_parameter/flashing_color = Color(1, 1, 1, 1)
+shader_parameter/flashing_color = Color(0.956863, 0.960784, 0.941176, 1)
 
 [sub_resource type="Animation" id="Animation_il1yj"]
 length = 0.001

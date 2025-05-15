@@ -64,8 +64,6 @@ func reload_action_list(): #when switching player
 			
 			act_ins.add_child(tooltip_ins)
 			
-			print(tooltip_ins)
-			
 			k+=1
 		
 		#for i in action_condition.keys():
@@ -103,9 +101,9 @@ func enable_all_avai():
 func refresh_hp_and_res(change_player = false):
 	var source = null
 	var res_color = {
-		"STA" : Color.YELLOW,
-		"MP" : Color.DODGER_BLUE,
-		"WP" : Color.ORANGE
+		"STA" : Color("c5e857"),
+		"MP" : Color("6378a6"),
+		"WP" : Color("925678")
 	}
 	
 	var res_tooltip = {
