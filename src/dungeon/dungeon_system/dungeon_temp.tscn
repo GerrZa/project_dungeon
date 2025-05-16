@@ -115,7 +115,7 @@ libraries = {
 autoplay = "init"
 
 [node name="party_icon" type="Sprite2D" parent="."]
-z_index = 999
+z_index = 29
 texture = ExtResource("5_kn5ha")
 offset = Vector2(0, -5)
 
@@ -145,7 +145,6 @@ offset_left = 237.0
 offset_top = 153.0
 offset_right = 255.0
 offset_bottom = 173.0
-battle_scene = "uid://dkosn3qlbta03"
 connected_node = Array[NodePath]([NodePath("../3-2"), NodePath("../4")])
 
 [node name="3-1" parent="." instance=ExtResource("1_j6tvo")]
@@ -181,4 +180,5 @@ offset_left = 210.0
 offset_top = -4.0
 offset_right = 228.0
 offset_bottom = 16.0
-battle_scene = "uid://dkosn3qlbta03"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]

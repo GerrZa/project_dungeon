@@ -6,6 +6,7 @@
 [ext_resource type="Shader" uid="uid://snu2d4w8a06f" path="res://src/util/shader/outline_flashing_shader.gdshader" id="4_ka5do"]
 [ext_resource type="Texture2D" uid="uid://dew21ug7ohg6r" path="res://asset/battle/ui/info_panel_9slice.png" id="5_hxjpn"]
 [ext_resource type="FontFile" uid="uid://b488m1liu66xo" path="res://asset/place_holder/SmolFont.ttf" id="6_fr38f"]
+[ext_resource type="Script" uid="uid://bow5tn5jjnti7" path="res://src/dungeon/dungeon_system/room_node/node/debug_line.gd" id="7_0bx3x"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yog6g"]
 resource_local_to_scene = true
@@ -18,43 +19,11 @@ shader_parameter/flashing_enable = false
 shader_parameter/flashing_t_left = 0.0
 shader_parameter/flashing_color = Color(1, 1, 1, 1)
 
-[sub_resource type="GDScript" id="GDScript_uchck"]
-script/source = "@tool
-extends Node2D
-
-func _process(delta: float) -> void:
-	queue_redraw()
-	
-	position = get_parent().icon.get_size()/2
-
-func _draw() -> void:
-	#if Engine.is_editor_hint() == false:
-		#return
-	
-	for i in get_parent().connected_node:
-		if i is NodePath and i != NodePath(\"\"):
-			
-			var col = Color.DIM_GRAY
-			
-			if Engine.is_editor_hint() == false and (get_parent(). curr_scene.curr_room.check_can_go(get_node(i)) or get_parent().curr_scene.curr_room == get_parent()):
-				col = Color.WHITE
-			
-			draw_line(get_node(\"../Tooltip/Icon\").position, to_local(get_parent().get_node(i).get_node(\"Tooltip/Icon\").global_position + (get_parent().icon.get_size() / 2)), col, 2, false)
-			
-	
-	for i in get_parent().connected_node:
-		if i is NodePath and i != NodePath(\"\"):
-			if Engine.is_editor_hint():
-				draw_circle(get_node(\"../Tooltip/Icon\").position + (to_global(get_node(\"../Tooltip/Icon\").position).direction_to(get_parent().get_node(i).global_position + (get_parent().get_node(i).icon.get_size() / 2)) * 16), 4, Color.RED, true)
-			
-"
-
 [node name="RoomNode" type="Panel"]
 self_modulate = Color(0, 0, 0, 0)
 offset_right = 18.0
 offset_bottom = 20.0
 script = ExtResource("1_posgm")
-battle_scene = null
 icon = ExtResource("2_posgm")
 desc = "[color=red][Battle][/color]
 [color=gray]-----------[/color]"
@@ -63,7 +32,7 @@ oneshot = false
 
 [node name="Tooltip" type="Panel" parent="."]
 self_modulate = Color(0, 0, 0, 0)
-z_index = 99
+z_index = 19
 layout_mode = 0
 offset_top = -0.826078
 offset_right = 18.0
@@ -77,7 +46,7 @@ position_clamp = false
 
 [node name="Icon" type="Sprite2D" parent="Tooltip"]
 material = SubResource("ShaderMaterial_yog6g")
-position = Vector2(0, 0.541791)
+position = Vector2(0, -1.70567)
 texture = ExtResource("2_posgm")
 centered = false
 
@@ -116,4 +85,4 @@ metadata/_edit_group_ = true
 
 [node name="debug_line" type="Node2D" parent="."]
 position = Vector2(9, 10)
-script = SubResource("GDScript_uchck")
+script = ExtResource("7_0bx3x")

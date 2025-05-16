@@ -9,6 +9,8 @@ extends ButtonPanel
 
 @onready var curr_scene = get_tree().current_scene
 
+signal room_action_finished
+
 func _ready() -> void:
 	super()
 	add_to_group("room_node")
@@ -28,7 +30,7 @@ func _process(delta: float) -> void:
 	$Tooltip.get_node("Icon").position.y = 1 + cos((Time.get_ticks_msec()/500.0) + (h/50.0) + (w/50.0)) * 3
 	
 	if Engine.is_editor_hint() == false:
-		if curr_scene.curr_room.check_can_go(self) or curr_scene.curr_room == self:
+		if curr_scene.curr_room.check_can_go(self):# or curr_scene.curr_room == self:
 			$Tooltip/Icon.modulate.v = 1.0
 		else:
 			$Tooltip/Icon.modulate.v = 0.5
@@ -42,3 +44,4 @@ func check_can_go(node):
 
 func perform_node():
 	print("entered : " + name)
+	emit_signal("room_action_finished")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://dkosn3qlbta03"]
+[gd_scene load_steps=42 format=3 uid="uid://dkosn3qlbta03"]
 
 [ext_resource type="Script" uid="uid://ck3t6pbp8tsvq" path="res://src/battle/battle_scene/battle_scene.gd" id="1_1msw3"]
 [ext_resource type="Script" uid="uid://bwxmgxkfikw88" path="res://src/battle/battle_scene/init_enemy.gd" id="2_6uvr7"]
@@ -18,11 +18,12 @@
 [ext_resource type="PackedScene" uid="uid://y17u3vtym25o" path="res://src/battle/ui/CustomProgressBar.tscn" id="10_b5dvc"]
 [ext_resource type="Shader" uid="uid://c8pv4xgovwgd3" path="res://src/battle/ui/action_button.gdshader" id="11_r8s0v"]
 [ext_resource type="Shader" uid="uid://snu2d4w8a06f" path="res://src/util/shader/outline_flashing_shader.gdshader" id="13_kxpl5"]
-[ext_resource type="Texture2D" uid="uid://bifoui4cjq6a3" path="res://asset/battle/ui/combo_ind/bog_combo.png" id="14_kxpl5"]
+[ext_resource type="Texture2D" uid="uid://bifoui4cjq6a3" path="res://asset/battle/ui/combo_ind/over/bog_combo.png" id="14_kxpl5"]
 [ext_resource type="Script" uid="uid://iue4bf30f85l" path="res://src/battle/ui/control_sorter.gd" id="14_svtxf"]
 [ext_resource type="Script" uid="uid://jcnhr6j17jio" path="res://src/battle/ui/tooltip.gd" id="15_svtxf"]
 [ext_resource type="Texture2D" uid="uid://dew21ug7ohg6r" path="res://asset/battle/ui/info_panel_9slice.png" id="18_ildep"]
 [ext_resource type="Shader" uid="uid://dgklmsd8yj6cy" path="res://src/util/shader/palette_shift.gdshader" id="22_8x15n"]
+[ext_resource type="AudioStream" uid="uid://vhgpml0y05fs" path="res://asset/battle/sound/sfx/button_click.mp3" id="22_gabcj"]
 [ext_resource type="Texture2D" uid="uid://dbvthdqhc23fp" path="res://asset/place_holder/project_dungeon_palette.png" id="23_8x15n"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ildep"]
@@ -316,12 +317,10 @@ metadata/_edit_lock_ = true
 [node name="init_enemy" type="Node" parent="."]
 script = ExtResource("2_6uvr7")
 lane0 = ["skeleton", "skeleton"]
-lane1 = ["skeleton", "skeleton"]
 lane2 = ["skeleton", "skeleton", "skeleton"]
 
 [node name="combo_list" type="Node" parent="."]
 script = ExtResource("3_evjvq")
-combo_list = ["BoG", "R1", "G2"]
 
 [node name="CameraPlus2D" type="Camera2D" parent="."]
 anchor_mode = 0
@@ -329,6 +328,7 @@ script = ExtResource("5_gpduh")
 metadata/_custom_type_script = "uid://be0vwr4sw3kdf"
 
 [node name="ui" type="CanvasLayer" parent="."]
+layer = 2
 script = ExtResource("2_oafii")
 
 [node name="anchor" type="Control" parent="ui"]
@@ -633,6 +633,11 @@ libraries = {
 &"": SubResource("AnimationLibrary_r8s0v")
 }
 autoplay = "init"
+
+[node name="button_click_sfx" type="AudioStreamPlayer" parent="ui"]
+stream = ExtResource("22_gabcj")
+volume_db = -10.0
+bus = &"Sfx"
 
 [node name="GreenPlayer" parent="." instance=ExtResource("5_uqsyo")]
 position = Vector2(74, 88)

@@ -223,7 +223,6 @@ libraries = {
 playback_auto_capture = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = 2
 
 [node name="tooltips" type="Node2D" parent="CanvasLayer"]
 position = Vector2(9, -49)

@@ -51,7 +51,7 @@ func take_damage(dmg, type):
 
 func perform_action():
 	if will_escape == false:
-		curr_scene.player_lane[lane].take_damage(15)
+		curr_scene.player_lane[lane].take_damage(50)
 		curr_scene.camera.shake(0.2, 4)
 		
 		$AnimationPlayer.stop()

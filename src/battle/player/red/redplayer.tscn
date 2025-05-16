@@ -1,9 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://dmfef746xj7hh"]
+[gd_scene load_steps=15 format=3 uid="uid://dmfef746xj7hh"]
 
 [ext_resource type="Script" uid="uid://xaon6035edwk" path="res://src/battle/player/red/redplayer.gd" id="1_yle15"]
 [ext_resource type="Shader" uid="uid://snu2d4w8a06f" path="res://src/util/shader/outline_flashing_shader.gdshader" id="2_s5517"]
 [ext_resource type="Texture2D" uid="uid://d1xni8ntakguv" path="res://asset/battle/char/sword_man_battle.png" id="3_wj58n"]
+[ext_resource type="PackedScene" uid="uid://dm8p72kolv6jr" path="res://src/battle/ui/tooltip.tscn" id="4_i6coe"]
 [ext_resource type="PackedScene" uid="uid://y17u3vtym25o" path="res://src/battle/ui/CustomProgressBar.tscn" id="4_il1yj"]
+[ext_resource type="Texture2D" uid="uid://djsin3qk2ew7h" path="res://asset/battle/ui/tooltip/member_death_icon.png" id="5_1ht30"]
 [ext_resource type="Texture2D" uid="uid://qgonas1hkh1l" path="res://asset/battle/char/etc/combo_ring_lower.png" id="5_sjn8a"]
 [ext_resource type="Texture2D" uid="uid://do2lgd1ragd1d" path="res://asset/battle/char/etc/combo_ring_upper.png" id="6_b5725"]
 
@@ -35,18 +37,6 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector2(7.62939e-06, 0)]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("spr_pivot/spr:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
 
 [sub_resource type="Animation" id="Animation_wj58n"]
 resource_name = "attack"
@@ -63,18 +53,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(0.297302, -2.92817, 1),
 "update": 0,
 "values": [Vector2(7.62939e-06, 0), Vector2(24, 0), Vector2(7.62939e-06, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("spr_pivot/spr:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.07, 0.27),
-"transitions": PackedFloat32Array(0.297302, -2.92817, 1),
-"update": 0,
-"values": [0.0, 0.139626, 0.0]
 }
 
 [sub_resource type="Animation" id="Animation_ge14e"]
@@ -142,6 +120,16 @@ libraries = {
 &"": SubResource("AnimationLibrary_2tmpj")
 }
 playback_auto_capture = false
+
+[node name="death_icon" parent="spr_pivot/spr" instance=ExtResource("4_i6coe")]
+visible = false
+offset_left = -6.0
+offset_top = -52.0
+offset_right = 10.0
+offset_bottom = -36.0
+tip_text = "[color=red]This party member is dead[/color]"
+icon_texture = ExtResource("5_1ht30")
+editor_show_text = false
 
 [node name="combo_ring" type="Node2D" parent="spr_pivot/spr"]
 

@@ -9,6 +9,12 @@ var port = preload("res://asset/battle/char/port/theif_port.png")
 
 var used_res = ["STA", "MP"]
 
+func _ready() -> void:
+	super()
+	
+	max_hp = 500
+	hp = 500
+
 func _physics_process(delta: float) -> void:
 	super(delta)
 	$lane_label.text = var_to_str(lane)

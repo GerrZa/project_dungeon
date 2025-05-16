@@ -17,12 +17,12 @@ func _physics_process(delta: float) -> void:
 		Global.TYPE.RED:
 			$Icon.frame = 0
 			
-			tip_text = "[color=OrangeRed][SwordMan][/color] will deal more damage on this unit"
+			tip_text = "[color=OrangeRed][SwordMan][/color] will deal more\ndamage on this unit"
 		Global.TYPE.BLUE:
 			$Icon.frame = 1
 			
-			tip_text = "[color=RoyalBlue][Witch][/color] will deal more damage on this unit"
+			tip_text = "[color=RoyalBlue][Witch][/color] will deal more\ndamage on this unit"
 		Global.TYPE.GREEN:
 			$Icon.frame = 2
 			
-			tip_text = "[color=YellowGreen][Thief][/color] will deal more damage on this unit"
+			tip_text = "[color=YellowGreen][Thief][/color] will deal more\ndamage on this unit"

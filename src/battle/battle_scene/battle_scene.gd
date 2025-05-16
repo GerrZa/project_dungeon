@@ -34,17 +34,96 @@ var combo_prop = {
 	"check" : func() : if get_player_curr_lane()["blue"] > get_player_curr_lane()["green"]: return true else: return false,
 	"buff" : "shield"},
 	
-	"G2" : {"display" : "Theif top",
+	"GoB" : {"display" : "Theif over Witch",
+	"desc" : "[color=YelloGreen]Theif[/color]'s position\nhigher than [color=royalblue]Witch[/color]",
+	"icon" : load("uid://das2s8mpwo55t"),
+	"check" : func() : if get_player_curr_lane()["green"] > get_player_curr_lane()["blue"]: return true else: return false,
+	"buff" : "shield"},
+	
+	"RoG" : {"display" : "SwordMan over Theif",
+	"desc" : "[color=OrangeRed]SwordMan[/color]'s position\nhigher than [color=YellowGreen]Theif[/color]",
+	"icon" : load("uid://bdm0xfbhn2owb"),
+	"check" : func() : if get_player_curr_lane()["red"] > get_player_curr_lane()["green"]: return true else: return false,
+	"buff" : "shield"},
+	
+	"GoR" : {"display" : "Theif over SwordMan",
+	"desc" : "[color=YelloGreen]Theif[/color]'s position\nhigher than [color=OrangeRed]SwordMan[/color]",
+	"icon" : load("uid://b3s40ivpx1sh4"),
+	"check" : func() : if get_player_curr_lane()["green"] > get_player_curr_lane()["red"]: return true else: return false,
+	"buff" : "shield"},
+	
+	"BoR" : {"display" : "Witch over SwordMan",
+	"desc" : "[color=RoaylBlue]Witch[/color]'s position\nhigher than [color=OrangeRed]SwordMan[/color]",
+	"icon" : load("uid://j4xpssly46a3"),
+	"check" : func() : if get_player_curr_lane()["blue"] > get_player_curr_lane()["red"]: return true else: return false,
+	"buff" : "shield"},
+	
+	"RoB" : {"display" : "SwordMan over Witch",
+	"desc" : "[color=OrangeRed]SwordMan[/color]'s position\nhigher than [color=royalblue]Witch[/color]",
+	"icon" : load("uid://bhpbgqrf3bkye"),
+	"check" : func() : if get_player_curr_lane()["red"] > get_player_curr_lane()["blue"]: return true else: return false,
+	"buff" : "shield"},
+	
+	
+	
+	"R0" : {"display" : "SwordMan Top",
 	"desc" : "[color=YellowGreen]Theif[/color]'s position is at the top",
-	"icon" : load("uid://cbrfntvbytkt2"),
+	"icon" : load("uid://cpp8xd8wi4ijd"),
 	"check" : func() : if get_player_curr_lane()["green"] == 2: return true else: return false,
 	"buff" : "shield"},
 	
-	"R1" : {"display" : "SwordMan center",
-	"desc" : "[color=OrangeRed]SwordMan[/color]'s position is in the center",
+	"R1" : {"display" : "SwordMan Center",
+	"desc" : "[color=YellowGreen]Theif[/color]'s position is at the top",
 	"icon" : load("uid://luaanmv7muib"),
+	"check" : func() : if get_player_curr_lane()["green"] == 2: return true else: return false,
+	"buff" : "shield"},
+	
+	"R2" : {"display" : "SwordMan Bottom",
+	"desc" : "[color=YellowGreen]Theif[/color]'s position is at the top",
+	"icon" : load("uid://cigeyrbmru8ig"),
+	"check" : func() : if get_player_curr_lane()["green"] == 2: return true else: return false,
+	"buff" : "shield"},
+	
+	"G0" : {"display" : "Theif Top",
+	"desc" : "[color=YellowGreen]Theif[/color]'s position is at the top",
+	"icon" : load("uid://dy8o8h5h4g817"),
+	"check" : func() : if get_player_curr_lane()["green"] == 2: return true else: return false,
+	"buff" : "shield"},
+	
+	"G1" : {"display" : "Theif Center",
+	"desc" : "[color=YellowGreen]Theif[/color]'s position is at the top",
+	"icon" : load("uid://7ckij20fra7u"),
+	"check" : func() : if get_player_curr_lane()["green"] == 2: return true else: return false,
+	"buff" : "shield"},
+	
+	"G2" : {"display" : "Theif Bottom",
+	"desc" : "[color=OrangeRed]SwordMan[/color]'s position is in the center",
+	"icon" : load("uid://cbrfntvbytkt2"),
 	"check" : func() : if get_player_curr_lane()["red"] == 1: return true else: return false,
 	"buff" : "shield"},
+	
+	"B0" : {"display" : "Witch Top",
+	"desc" : "[color=YellowGreen]Theif[/color]'s position is at the top",
+	"icon" : load("uid://cv0bha1wpf0a2"),
+	"check" : func() : if get_player_curr_lane()["green"] == 2: return true else: return false,
+	"buff" : "shield"},
+	
+	"B1" : {"display" : "Witch Center",
+	"desc" : "[color=YellowGreen]Theif[/color]'s position is at the top",
+	"icon" : load("uid://by3f4hislb4xg"),
+	"check" : func() : if get_player_curr_lane()["green"] == 2: return true else: return false,
+	"buff" : "shield"},
+	
+	"B2" : {"display" : "Witch Bottom",
+	"desc" : "[color=OrangeRed]SwordMan[/color]'s position is in the center",
+	"icon" : load("uid://b2m5dchve84h8"),
+	"check" : func() : if get_player_curr_lane()["red"] == 1: return true else: return false,
+	"buff" : "shield"},
+}
+
+var buff_desc = {
+	"shield" : {"display" : "[color=Cyan]Holy Shield[/color]", "desc" : "Take less damage from enemy."},
+	"test" : {"display" : "[color=Fuchsia]TEST[/color]", "desc" : "Just for testing shit-ish"},
 }
 
 var curr_combo = ""
@@ -143,7 +222,7 @@ func _process(delta: float) -> void:
 			#print(combo_use_list, combo_active, curr_combo)
 			
 			for i in player_lane:
-				if i != null and i.mouse_in:
+				if i != null and i.alive and i.mouse_in:
 					hover_player = i
 					
 					if Input.is_action_just_pressed("m1"):
@@ -164,6 +243,11 @@ func _process(delta: float) -> void:
 		"e":
 			hover_player = null
 		"win":
+			$win.visible = true
+			hover_player = null
+			selecting_player = null
+		"lose":
+			$win.text = "LOSE"
 			$win.visible = true
 			hover_player = null
 			selecting_player = null
@@ -241,6 +325,14 @@ func check_win():
 	
 	return false
 
+func check_lose():
+	for i in player_lane:
+		if i.alive:
+			return false
+	
+	switch_turn("lose")
+	return true
+
 #Player stuff
 func swap_player(from_lane, to_lane):
 	var from_pos = player_lane[from_lane].to_pos
@@ -289,10 +381,11 @@ func add_enemy(lane, enemy_file, index = -1):
 	rearrange_enemy()
 	pass
 
-func swap_enemy(who, to_lane, to_index):
+func swap_enemy(who, to_lane, to_index): #who : Node2D
 	var from_lane = 0
 	var from_index = 0
 	
+	#finiding "who"
 	for i in range(enemy_lane.size()):
 		for j in range(enemy_lane[i].size()):
 			
@@ -305,6 +398,8 @@ func swap_enemy(who, to_lane, to_index):
 			if i == enemy_lane.size() and j == enemy_lane[i].size():
 				return
 			pass
+	
+	who.lane = to_lane
 	
 	enemy_lane[from_lane].erase(who)
 	enemy_lane[to_lane].insert(clamp(to_index, 0, enemy_lane[to_lane].size()), who)
@@ -320,18 +415,70 @@ func rearrange_enemy():
 			
 
 func call_enemy_action():
-	for i in (enemy_lane.size()):
+	var to_action_enemy_list = []
+	
+	for i in range(enemy_lane.size()):
 		var ii = enemy_lane.size() - i - 1
+		
 		if enemy_lane[ii].size() > 0:
-			enemy_lane[ii][0].perform_action()
-			
-			ui.refresh_hp_and_res()
-			
-			await enemy_lane[ii][0].action_finish
+			to_action_enemy_list.append(enemy_lane[ii][0])
+	
+	for i in to_action_enemy_list:
+		i.perform_action()
+		
+		ui.refresh_hp_and_res()
+		
+		await i.action_finish
+		
+		for j in range(lane_count):
+			if player_lane[j].alive == false and enemy_lane[j].size() > 0:
+				await immigrate_enemy(j)
+		
 	
 	emit_signal("enemy_turn_finished")
 	switch_turn("p")
 	pass
+
+func immigrate_enemy(lane):
+	var immigrate_lane
+	
+	if check_lose():
+		return false
+	
+	if lane_count == 3 and lane == 1:
+		var pool = []
+		
+		for i in player_lane:
+			if i.alive:
+				pool.append(i.lane)
+		randomize()
+		
+		immigrate_lane = pool.pick_random()
+		
+	else:
+		if lane == 0:
+			if player_lane[lane+1].alive:
+				immigrate_lane = lane+1
+			else:
+				immigrate_lane = lane+2
+		elif lane == lane_count - 1:
+			if player_lane[lane-1].alive:
+				immigrate_lane = lane-1
+			else:
+				immigrate_lane = lane-2
+	
+	var enemy_inlane = []
+	
+	for i in enemy_lane[lane]:
+		enemy_inlane.append(i)
+	
+	for i in enemy_inlane:
+		print(enemy_inlane)
+		swap_enemy(i, immigrate_lane, 99)
+		
+		await get_tree().create_timer(0.1).timeout
+	
+	return true
 
 func _draw() -> void:
 	#for i in lane_y_pos:

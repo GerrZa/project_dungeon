@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bifoui4cjq6a3"
-path="res://.godot/imported/bog_combo.png-d65fe774b7137c22b323fc0d0dddf03f.ctex"
+uid="uid://luaanmv7muib"
+path="res://.godot/imported/r1_combo.png-da20e202afe3b872a86cc9c176ac156b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asset/battle/ui/combo_ind/bog_combo.png"
-dest_files=["res://.godot/imported/bog_combo.png-d65fe774b7137c22b323fc0d0dddf03f.ctex"]
+source_file="res://asset/battle/ui/combo_ind/one_fix/r1_combo.png"
+dest_files=["res://.godot/imported/r1_combo.png-da20e202afe3b872a86cc9c176ac156b.ctex"]
 
 [params]
 

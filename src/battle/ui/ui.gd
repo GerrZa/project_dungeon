@@ -158,13 +158,15 @@ func refresh_hp_and_res(change_player = false):
 
 func reload_combo_ind():
 	$upper_anchor/combo_ind.icon_texture = curr_scene.combo_prop[curr_scene.curr_combo]["icon"]
-	$upper_anchor/combo_ind.tip_text = "[color=yellow][{0}][/color]\n".format([curr_scene.combo_prop[curr_scene.curr_combo]["display"]]) + curr_scene.combo_prop[curr_scene.curr_combo]["desc"]
+	$upper_anchor/combo_ind.tip_text = "[color=yellow][{0}][/color]\n{1}\n\n[color=dimgray]-------Buff-------[/color]\n{2}\n{3}".format([curr_scene.combo_prop[curr_scene.curr_combo]["display"], curr_scene.combo_prop[curr_scene.curr_combo]["desc"], curr_scene.buff_desc[curr_scene.combo_prop[curr_scene.curr_combo]["buff"]]["display"], curr_scene.buff_desc[curr_scene.combo_prop[curr_scene.curr_combo]["buff"]]["desc"]])
 
 func on_action_pressed(call : Callable): #check for every time action button pressed
 	if can_act == false:
 		return
 	
 	disable_all()
+	
+	$button_click_sfx.play()
 	
 	can_act = false
 	await call.call()
@@ -187,6 +189,10 @@ func swap_up():
 	
 	can_act = false
 	
+	for j in range(curr_scene.lane_count):
+		if curr_scene.player_lane[j].alive == false and curr_scene.enemy_lane[j].size() > 0:
+			await curr_scene.immigrate_enemy(j)
+	
 	await get_tree().create_timer(swap_disable_duration).timeout
 	
 	can_act = true
@@ -202,6 +208,10 @@ func swap_down():
 	curr_scene.use_action_point()
 	
 	can_act = false
+	
+	for j in range(curr_scene.lane_count):
+		if curr_scene.player_lane[j].alive == false and curr_scene.enemy_lane[j].size() > 0:
+			await curr_scene.immigrate_enemy(j)
 	
 	await get_tree().create_timer(swap_disable_duration).timeout
 	

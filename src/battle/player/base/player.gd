@@ -12,6 +12,9 @@ var to_pos = Vector2.ZERO
 @onready var ui = curr_scene.ui
 
 signal action_finish
+signal died(lane)
+
+var alive = true
 
 func _ready() -> void:
 	super()
@@ -25,6 +28,10 @@ func take_damage(dmg):
 	ParticleSpawner.spawn(ParticleSpawner.PARTS.FLOATING_TEXT, curr_scene, [global_position - Vector2(0, 30), var_to_str(dmg), true, Color.RED, 50.0, 0.65, true, 2])
 	
 	hp -= dmg
+	
+	if hp <= 0:
+		emit_signal("died", lane)
+		alive = false
 
 func _physics_process(delta: float) -> void:
 	if get_tree().current_scene.player_lane.has(self) == false:
@@ -32,17 +39,27 @@ func _physics_process(delta: float) -> void:
 	
 	position = lerp(position, to_pos, 0.15)
 	
-	if curr_scene.selecting_player == self and curr_scene.turn == "p":
-		$spr_pivot/spr.material.set_shader_parameter("active", true)
-		$spr_pivot.position.x = lerp($spr_pivot.position.x, 10.0, 0.2)
-		$spr_pivot/spr.self_modulate.v = 1
-	elif curr_scene.hover_player == self:
-		$spr_pivot/spr.self_modulate.v = 1
-		$spr_pivot.position.x = lerp($spr_pivot.position.x, 6.0, 0.2)
+	#$spr_pivot/spr/death_icon.visible = false
+	
+	if alive:
+		$spr_pivot/spr/death_icon.visible = false
+		if curr_scene.selecting_player == self and curr_scene.turn == "p":
+			$spr_pivot/spr.material.set_shader_parameter("active", true)
+			$spr_pivot.position.x = lerp($spr_pivot.position.x, 10.0, 0.2)
+			$spr_pivot/spr.self_modulate.v = 1
+		elif curr_scene.hover_player == self:
+			$spr_pivot/spr.self_modulate.v = 1
+			$spr_pivot.position.x = lerp($spr_pivot.position.x, 6.0, 0.2)
+		else:
+			$spr_pivot/spr.self_modulate.v = 0.7
+			$spr_pivot/spr.material.set_shader_parameter("active", false)
+			$spr_pivot.position.x = lerp($spr_pivot.position.x, 0.0, 0.2)
 	else:
-		$spr_pivot/spr.self_modulate.v = 0.7
+		$spr_pivot/spr/death_icon.visible = true
+		$spr_pivot/spr.self_modulate.v = 0.5
 		$spr_pivot/spr.material.set_shader_parameter("active", false)
-		$spr_pivot.position.x = lerp($spr_pivot.position.x, 0.0, 0.2)
+		$spr_pivot.position.x = lerp($spr_pivot.position.x, -16.0, 0.2)
+		
 	
 	$spr_pivot/spr.material.set_shader_parameter("alpha", 0.5 + (0.5*abs(cos(PI*Time.get_ticks_msec()/500))))
 	

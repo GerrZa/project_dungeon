@@ -32,10 +32,8 @@ func move_to_room(node):
 	curr_room = node
 	
 	can_move = false
-	await get_tree().create_timer(0.5).timeout
+	await get_tree().create_timer(0.5).timeout #wait for party step on room
+	
+	curr_room.connect("room_action_finished", func(): can_move = true)
 	
 	curr_room.perform_node()
-	
-	can_move = true
-	
-	
