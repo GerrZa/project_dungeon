@@ -45,6 +45,7 @@ func take_damage(dmg, from_type):
 func remove_self():
 	curr_scene.enemy_lane[lane].erase(self)
 	curr_scene.rearrange_enemy()
+	curr_scene.check_win()
 
 func perform_action():
 	

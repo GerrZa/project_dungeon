@@ -33,7 +33,6 @@ centered = false
 hframes = 3
 
 [node name="info_pivot" type="Node2D" parent="."]
-visible = false
 z_index = 1
 
 [node name="NinePatchRect" type="NinePatchRect" parent="info_pivot"]

@@ -45,3 +45,18 @@ func check_can_go(node):
 func perform_node():
 	print("entered : " + name)
 	emit_signal("room_action_finished")
+
+func set_last_room():
+	Global.last_room = name
+
+func get_room_data():
+	return {
+		"icon" : icon,
+		"desc" : desc,
+		"connected_node" : connected_node
+		}
+
+func load_data(dat):
+	icon = dat["icon"]
+	desc = dat["desc"]
+	connected_node = dat["connected_node"]

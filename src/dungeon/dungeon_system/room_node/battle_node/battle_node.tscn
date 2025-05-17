@@ -24,6 +24,8 @@ self_modulate = Color(0, 0, 0, 0)
 offset_right = 18.0
 offset_bottom = 20.0
 script = ExtResource("1_posgm")
+lane0 = Array[String](["skeleton"])
+combo_list = Array[String](["BoG"])
 icon = ExtResource("2_posgm")
 desc = "[color=red][Battle][/color]
 [color=gray]-----------[/color]"
@@ -46,12 +48,11 @@ position_clamp = false
 
 [node name="Icon" type="Sprite2D" parent="Tooltip"]
 material = SubResource("ShaderMaterial_yog6g")
-position = Vector2(0, -1.70567)
+position = Vector2(0, -1.98075)
 texture = ExtResource("2_posgm")
 centered = false
 
 [node name="info_pivot" type="Node2D" parent="Tooltip"]
-visible = false
 top_level = true
 z_index = 199
 position = Vector2(0, -0.826078)

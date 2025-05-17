@@ -85,6 +85,9 @@ func disable_all():
 			i.disable = true
 
 func enable_all_avai():
+	if curr_scene.selecting_player == null:
+		return
+	
 	if curr_scene.player_action_point <= 0:
 		$anchor/endturn_button.disable = false
 	else:

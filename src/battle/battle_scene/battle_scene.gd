@@ -206,8 +206,12 @@ func _process(delta: float) -> void:
 					for i in enemy_initiator.lane2:
 						add_enemy(2, "res://src/battle/enemy/" +i+ "/" +i+ "_battle.tscn")
 				
+				for j in range(lane_count):
+					if player_lane[j].alive == false and enemy_lane[j].size() > 0:
+						await immigrate_enemy(j)
+				
 				selecting_player = player_lane[clamp(init_player, 0, lane_count)]
-				$ui/fader/AnimationPlayer.play("black_out")
+				$ui/fader_layer/fader/AnimationPlayer.play("black_out")
 				
 				await get_tree().create_timer(0.3 * lane_count).timeout
 				
@@ -312,6 +316,18 @@ func switch_turn(to_who):
 			emit_signal("enemy_turn_finished")
 		"win":
 			$ui.disable_all()
+			
+			change_scene_back_to_dungeon()
+			for i in player_lane:
+				i.save_data()
+
+func change_scene_back_to_dungeon():
+			await get_tree().create_timer(1).timeout
+			$ui/fader_layer/fader/AnimationPlayer.play("black_in")
+			
+			await $ui/fader_layer/fader/AnimationPlayer.animation_finished
+			
+			Global.get_tree().change_scene_to_file(Global.last_level_uid)
 
 func check_win():
 	var sum_ene = 0
@@ -434,7 +450,8 @@ func call_enemy_action():
 			if player_lane[j].alive == false and enemy_lane[j].size() > 0:
 				await immigrate_enemy(j)
 		
-	
+	if check_win():
+		return
 	emit_signal("enemy_turn_finished")
 	switch_turn("p")
 	pass

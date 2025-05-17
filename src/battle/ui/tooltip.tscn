@@ -30,7 +30,6 @@ material = SubResource("ShaderMaterial_2tl6g")
 centered = false
 
 [node name="info_pivot" type="Node2D" parent="."]
-visible = false
 top_level = true
 z_index = 199
 

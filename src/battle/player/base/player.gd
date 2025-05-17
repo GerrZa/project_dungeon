@@ -19,7 +19,9 @@ var alive = true
 func _ready() -> void:
 	super()
 	to_pos = position
-	hp = max_hp
+	max_hp = PlayerData.member_info[char_type]["max_hp"]
+	hp = PlayerData.member_info[char_type]["hp"]
+	alive = PlayerData.member_info[char_type]["alive"]
 
 func take_damage(dmg):
 	if curr_scene.curr_buff == "shield" and curr_scene.combo_active:
@@ -38,8 +40,6 @@ func _physics_process(delta: float) -> void:
 		curr_scene.player_lane[lane] = self
 	
 	position = lerp(position, to_pos, 0.15)
-	
-	#$spr_pivot/spr/death_icon.visible = false
 	
 	if alive:
 		$spr_pivot/spr/death_icon.visible = false
@@ -78,3 +78,8 @@ func _physics_process(delta: float) -> void:
 		$spr_pivot/spr/combo_ring.modulate.a = lerp($spr_pivot/spr/combo_ring.modulate.a, 1.0, 0.1)
 	else:
 		$spr_pivot/spr/combo_ring.modulate.a = lerp($spr_pivot/spr/combo_ring.modulate.a, 0.0, 0.15)
+
+func save_data():
+	PlayerData.member_info[char_type]["hp"] = hp
+	PlayerData.member_info[char_type]["max_hp"] = max_hp
+	PlayerData.member_info[char_type]["alive"] = alive

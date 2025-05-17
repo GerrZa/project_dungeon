@@ -10,6 +10,10 @@ func _ready() -> void:
 	if curr_room == null:
 		curr_room = get_node(init_room)
 	
+	if Global.last_room_name != null:
+		curr_room = get_node(Global.last_room_name)
+		load_room_data()
+	
 	$party_icon.global_position = curr_room.get_node("Tooltip/Icon").global_position + (curr_room.icon.get_size()/2)
 	
 	$camera_anchor.global_position.y = $party_icon.global_position.y
@@ -19,6 +23,8 @@ func _ready() -> void:
 	await $fader/fader_rect/AnimationPlayer.animation_finished
 	
 	can_move = true
+	
+	Global.last_level_uid = scene_file_path
 
 
 func _physics_process(delta: float) -> void:
@@ -37,3 +43,10 @@ func move_to_room(node):
 	curr_room.connect("room_action_finished", func(): can_move = true)
 	
 	curr_room.perform_node()
+
+func load_room_data():
+	for i in get_tree().get_nodes_in_group("room_node"):
+		if Global.room_data is Dictionary and Global.room_data.has(i.name):
+			i.load_data(Global.room_data[i.name])
+	
+	Global.room_data = null

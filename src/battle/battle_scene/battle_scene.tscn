@@ -236,6 +236,30 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:mouse_force_pass_scroll_events")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:mouse_filter")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
 
 [sub_resource type="Animation" id="Animation_gabcj"]
 resource_name = "black_in"
@@ -252,6 +276,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:mouse_force_pass_scroll_events")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_hxwcg"]
@@ -270,6 +306,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:mouse_filter")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
 
 [sub_resource type="Animation" id="Animation_8x15n"]
 resource_name = "init"
@@ -285,6 +333,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:mouse_filter")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_r8s0v"]
@@ -305,7 +365,7 @@ script = ExtResource("1_1msw3")
 random_combo_pick = true
 
 [node name="palette_shift" type="CanvasLayer" parent="."]
-layer = 10
+layer = 29
 
 [node name="ColorRect" type="ColorRect" parent="palette_shift"]
 material = SubResource("ShaderMaterial_ildep")
@@ -316,8 +376,6 @@ metadata/_edit_lock_ = true
 
 [node name="init_enemy" type="Node" parent="."]
 script = ExtResource("2_6uvr7")
-lane0 = ["skeleton", "skeleton"]
-lane2 = ["skeleton", "skeleton", "skeleton"]
 
 [node name="combo_list" type="Node" parent="."]
 script = ExtResource("3_evjvq")
@@ -591,7 +649,6 @@ texture = ExtResource("14_kxpl5")
 centered = false
 
 [node name="info_pivot" type="Node2D" parent="ui/upper_anchor/combo_ind"]
-visible = false
 z_index = 1
 
 [node name="NinePatchRect" type="NinePatchRect" parent="ui/upper_anchor/combo_ind/info_pivot"]
@@ -621,15 +678,19 @@ horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_group_ = true
 
-[node name="fader" type="ColorRect" parent="ui"]
+[node name="fader_layer" type="CanvasLayer" parent="ui"]
+layer = 19
+
+[node name="fader" type="ColorRect" parent="ui/fader_layer"]
 modulate = Color(1, 1, 1, 0)
 offset_right = 400.0
 offset_bottom = 300.0
 mouse_filter = 2
+mouse_force_pass_scroll_events = false
 color = Color(0, 0, 0, 1)
 metadata/_edit_lock_ = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="ui/fader"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ui/fader_layer/fader"]
 libraries = {
 &"": SubResource("AnimationLibrary_r8s0v")
 }
