@@ -32,27 +32,23 @@ oneshot = false
 self_modulate = Color(0, 0, 0, 0)
 z_index = 19
 layout_mode = 0
-offset_top = -0.826078
 offset_right = 18.0
-offset_bottom = 17.1739
+offset_bottom = 18.0
 mouse_filter = 1
 script = ExtResource("2_rhltn")
 tip_text = "[color=yellow][Empty room][/color]"
 icon_texture = ExtResource("3_ckdls")
-editor_show_text = false
 position_clamp = false
 
 [node name="Icon" type="Sprite2D" parent="Tooltip"]
 material = SubResource("ShaderMaterial_yog6g")
-position = Vector2(0, -1.32009)
+position = Vector2(0, -1.84858)
 texture = ExtResource("3_ckdls")
 centered = false
 
 [node name="info_pivot" type="Node2D" parent="Tooltip"]
-visible = false
 top_level = true
 z_index = 199
-position = Vector2(0, -0.826078)
 
 [node name="NinePatchRect" type="NinePatchRect" parent="Tooltip/info_pivot"]
 z_index = -1

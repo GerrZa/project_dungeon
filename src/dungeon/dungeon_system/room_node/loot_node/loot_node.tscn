@@ -1,0 +1,98 @@
+[gd_scene load_steps=9 format=3 uid="uid://crbdi2yuouhc6"]
+
+[ext_resource type="Script" uid="uid://bc3xilxj1hhsp" path="res://src/dungeon/dungeon_system/room_node/loot_node/loot_node.gd" id="1_c51jj"]
+[ext_resource type="Script" uid="uid://jcnhr6j17jio" path="res://src/battle/ui/tooltip.gd" id="2_38mt8"]
+[ext_resource type="Texture2D" uid="uid://bs06l5dvmddba" path="res://asset/dungeon/room/loot_node.png" id="2_c51jj"]
+[ext_resource type="Shader" uid="uid://snu2d4w8a06f" path="res://src/util/shader/outline_flashing_shader.gdshader" id="4_xul4d"]
+[ext_resource type="Texture2D" uid="uid://dew21ug7ohg6r" path="res://asset/battle/ui/info_panel_9slice.png" id="5_u3pj6"]
+[ext_resource type="FontFile" uid="uid://b488m1liu66xo" path="res://asset/place_holder/SmolFont.ttf" id="6_7lxs4"]
+[ext_resource type="Script" uid="uid://bow5tn5jjnti7" path="res://src/dungeon/dungeon_system/room_node/node/debug_line.gd" id="7_ny5wf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yog6g"]
+resource_local_to_scene = true
+shader = ExtResource("4_xul4d")
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/active = false
+shader_parameter/thick = false
+shader_parameter/alpha = 1.0
+shader_parameter/flashing_enable = false
+shader_parameter/flashing_t_left = 0.0
+shader_parameter/flashing_color = Color(1, 1, 1, 1)
+
+[node name="RoomNode" type="Panel"]
+self_modulate = Color(0, 0, 0, 0)
+offset_right = 18.0
+offset_bottom = 17.0
+script = ExtResource("1_c51jj")
+icon = ExtResource("2_c51jj")
+desc = "[color=RoyalBlue][Loot][/color]
+[color=gray]-----------[/color]
+[color=yellow]Include:[/color]
+Potion
+Weapon
+Shits"
+disable = false
+oneshot = false
+
+[node name="Tooltip" type="Panel" parent="."]
+self_modulate = Color(0, 0, 0, 0)
+z_index = 19
+layout_mode = 0
+offset_right = 18.0
+offset_bottom = 17.0
+mouse_filter = 1
+script = ExtResource("2_38mt8")
+tip_text = "[color=RoyalBlue][Loot][/color]
+[color=gray]-----------[/color]
+[color=yellow]Include:[/color]
+Potion
+Weapon
+Shits"
+icon_texture = ExtResource("2_c51jj")
+position_clamp = false
+
+[node name="Icon" type="Sprite2D" parent="Tooltip"]
+material = SubResource("ShaderMaterial_yog6g")
+position = Vector2(0, -1.97156)
+texture = ExtResource("2_c51jj")
+centered = false
+
+[node name="info_pivot" type="Node2D" parent="Tooltip"]
+top_level = true
+z_index = 199
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Tooltip/info_pivot"]
+z_index = -1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -51.0
+offset_right = 52.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_u3pj6")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Tooltip/info_pivot"]
+offset_top = -51.0
+offset_right = 52.0
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("6_7lxs4")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "[color=RoyalBlue][Loot][/color]
+[color=gray]-----------[/color]
+[color=yellow]Include:[/color]
+Potion
+Weapon
+Shits"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_group_ = true
+
+[node name="debug_line" type="Node2D" parent="."]
+position = Vector2(9, 8.5)
+script = ExtResource("7_ny5wf")

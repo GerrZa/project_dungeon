@@ -4,6 +4,8 @@ extends MouseDetectArea2D
 @export var lane = 0
 @export var char_type := Global.TYPE.RED
 
+#var action_list = {}
+
 var max_hp = 100
 var hp = 100
 

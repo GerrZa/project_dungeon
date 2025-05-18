@@ -22,6 +22,8 @@ func _process(delta: float) -> void:
 	size = icon.get_size()
 	$Tooltip.size = icon.get_size()
 	
+	$Tooltip.position = Vector2.ZERO
+	
 	$Tooltip.tip_text = desc
 	$Tooltip.icon_texture = icon
 	

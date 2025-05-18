@@ -12,7 +12,11 @@ resource_local_to_scene = true
 shader = ExtResource("2_0jkna")
 shader_parameter/outline_color = Color(1, 1, 1, 1)
 shader_parameter/active = true
+shader_parameter/thick = false
 shader_parameter/alpha = 1.0
+shader_parameter/flashing_enable = false
+shader_parameter/flashing_t_left = 0.0
+shader_parameter/flashing_color = Color(1, 1, 1, 1)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2tmpj"]
 

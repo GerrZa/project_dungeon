@@ -11,6 +11,8 @@ extends RoomNode
 
 @export var buff_override := {}
 
+@export var random_combo_pick : bool = false
+
 func _ready() -> void:
 	super()
 
@@ -32,5 +34,6 @@ func transfer_battle_data():
 		"lane1" : lane1,
 		"lane2" : lane2,
 		"combo_list" : combo_list,
-		"buff_override" : buff_override
+		"buff_override" : buff_override,
+		"random_combo_pick" : random_combo_pick
 	}

@@ -35,7 +35,7 @@ var combo_prop = {
 	"buff" : "shield"},
 	
 	"GoB" : {"display" : "Theif over Witch",
-	"desc" : "[color=YelloGreen]Theif[/color]'s position\nhigher than [color=royalblue]Witch[/color]",
+	"desc" : "[color=YellowGreen]Theif[/color]'s position\nhigher than [color=royalblue]Witch[/color]",
 	"icon" : load("uid://das2s8mpwo55t"),
 	"check" : func() : if get_player_curr_lane()["green"] > get_player_curr_lane()["blue"]: return true else: return false,
 	"buff" : "shield"},
@@ -47,7 +47,7 @@ var combo_prop = {
 	"buff" : "shield"},
 	
 	"GoR" : {"display" : "Theif over SwordMan",
-	"desc" : "[color=YelloGreen]Theif[/color]'s position\nhigher than [color=OrangeRed]SwordMan[/color]",
+	"desc" : "[color=YellowGreen]Theif[/color]'s position\nhigher than [color=OrangeRed]SwordMan[/color]",
 	"icon" : load("uid://b3s40ivpx1sh4"),
 	"check" : func() : if get_player_curr_lane()["green"] > get_player_curr_lane()["red"]: return true else: return false,
 	"buff" : "shield"},
@@ -67,21 +67,21 @@ var combo_prop = {
 	
 	
 	"R0" : {"display" : "SwordMan Top",
-	"desc" : "[color=YellowGreen]Theif[/color]'s position is at the top",
+	"desc" : "[color=OrangeRed]SwordMan[/color]'s position is at the top",
 	"icon" : load("uid://cpp8xd8wi4ijd"),
-	"check" : func() : if get_player_curr_lane()["green"] == 2: return true else: return false,
+	"check" : func() : if get_player_curr_lane()["red"] == 2: return true else: return false,
 	"buff" : "shield"},
 	
 	"R1" : {"display" : "SwordMan Center",
-	"desc" : "[color=YellowGreen]Theif[/color]'s position is at the top",
+	"desc" : "[color=OrangeRed]SwordMan[/color]'s position is at the center",
 	"icon" : load("uid://luaanmv7muib"),
-	"check" : func() : if get_player_curr_lane()["green"] == 2: return true else: return false,
+	"check" : func() : if get_player_curr_lane()["red"] == 1: return true else: return false,
 	"buff" : "shield"},
 	
 	"R2" : {"display" : "SwordMan Bottom",
-	"desc" : "[color=YellowGreen]Theif[/color]'s position is at the top",
+	"desc" : "[color=OrangeRed]SwordMan[/color]'s position is at the bottom",
 	"icon" : load("uid://cigeyrbmru8ig"),
-	"check" : func() : if get_player_curr_lane()["green"] == 2: return true else: return false,
+	"check" : func() : if get_player_curr_lane()["red"] == 0: return true else: return false,
 	"buff" : "shield"},
 	
 	"G0" : {"display" : "Theif Top",
@@ -91,33 +91,33 @@ var combo_prop = {
 	"buff" : "shield"},
 	
 	"G1" : {"display" : "Theif Center",
-	"desc" : "[color=YellowGreen]Theif[/color]'s position is at the top",
+	"desc" : "[color=YellowGreen]Theif[/color]'s position is at the center",
 	"icon" : load("uid://7ckij20fra7u"),
-	"check" : func() : if get_player_curr_lane()["green"] == 2: return true else: return false,
+	"check" : func() : if get_player_curr_lane()["green"] == 1: return true else: return false,
 	"buff" : "shield"},
 	
 	"G2" : {"display" : "Theif Bottom",
-	"desc" : "[color=OrangeRed]SwordMan[/color]'s position is in the center",
+	"desc" : "[color=OrangeRed]SwordMan[/color]'s position is in the bottom",
 	"icon" : load("uid://cbrfntvbytkt2"),
-	"check" : func() : if get_player_curr_lane()["red"] == 1: return true else: return false,
+	"check" : func() : if get_player_curr_lane()["green"] == 0: return true else: return false,
 	"buff" : "shield"},
 	
 	"B0" : {"display" : "Witch Top",
-	"desc" : "[color=YellowGreen]Theif[/color]'s position is at the top",
+	"desc" : "[color=RoyalBlue]Witch[/color]'s position is at the top",
 	"icon" : load("uid://cv0bha1wpf0a2"),
-	"check" : func() : if get_player_curr_lane()["green"] == 2: return true else: return false,
+	"check" : func() : if get_player_curr_lane()["blue"] == 2: return true else: return false,
 	"buff" : "shield"},
 	
 	"B1" : {"display" : "Witch Center",
-	"desc" : "[color=YellowGreen]Theif[/color]'s position is at the top",
+	"desc" : "[color=RoyalBlue]Witch[/color]'s position is at the center",
 	"icon" : load("uid://by3f4hislb4xg"),
-	"check" : func() : if get_player_curr_lane()["green"] == 2: return true else: return false,
+	"check" : func() : if get_player_curr_lane()["blue"] == 1: return true else: return false,
 	"buff" : "shield"},
 	
 	"B2" : {"display" : "Witch Bottom",
-	"desc" : "[color=OrangeRed]SwordMan[/color]'s position is in the center",
+	"desc" : "[color=RoyalBlue]Witch[/color]'s position is in the bottom",
 	"icon" : load("uid://b2m5dchve84h8"),
-	"check" : func() : if get_player_curr_lane()["red"] == 1: return true else: return false,
+	"check" : func() : if get_player_curr_lane()["blue"] == 0: return true else: return false,
 	"buff" : "shield"},
 }
 
@@ -152,6 +152,8 @@ var hover_enemy = null
 
 signal enemy_turn_finished
 
+func _init() -> void:
+	random_combo_pick = Global.battle_data["random_combo_pick"]
 
 func _ready() -> void:
 	player_action_point = max_player_action_point

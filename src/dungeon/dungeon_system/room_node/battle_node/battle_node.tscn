@@ -19,7 +19,7 @@ shader_parameter/flashing_enable = false
 shader_parameter/flashing_t_left = 0.0
 shader_parameter/flashing_color = Color(1, 1, 1, 1)
 
-[node name="RoomNode" type="Panel"]
+[node name="BattleNode" type="Panel"]
 self_modulate = Color(0, 0, 0, 0)
 offset_right = 18.0
 offset_bottom = 20.0
@@ -36,26 +36,26 @@ oneshot = false
 self_modulate = Color(0, 0, 0, 0)
 z_index = 19
 layout_mode = 0
-offset_top = -0.826078
 offset_right = 18.0
-offset_bottom = 19.1739
+offset_bottom = 20.0
 mouse_filter = 1
 script = ExtResource("2_soiw0")
 tip_text = "[color=red][Battle][/color]
 [color=gray]-----------[/color]"
 icon_texture = ExtResource("2_posgm")
+editor_show_text = false
 position_clamp = false
 
 [node name="Icon" type="Sprite2D" parent="Tooltip"]
 material = SubResource("ShaderMaterial_yog6g")
-position = Vector2(0, -1.98075)
+position = Vector2(0, 0.961552)
 texture = ExtResource("2_posgm")
 centered = false
 
 [node name="info_pivot" type="Node2D" parent="Tooltip"]
+visible = false
 top_level = true
 z_index = 199
-position = Vector2(0, -0.826078)
 
 [node name="NinePatchRect" type="NinePatchRect" parent="Tooltip/info_pivot"]
 z_index = -1

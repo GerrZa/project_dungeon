@@ -20,3 +20,25 @@ var member_info = {
 		"weapon" : "regular_sword"
 	}
 }
+
+# weapon template
+
+#[name_id] : {
+	#"display" : [display_name],
+	#"desc" : [description],
+	#"action_list" : {
+		#[action_display_name] : [short_description]
+	#}
+#}
+
+var weapon_list = {
+	Global.TYPE.RED : {
+		"filthy_sword" : {
+			"display" : "Filthy Sword",
+			"desc" : "Filthy sword for a filthy user.",
+			"action_list" : {
+				"Slash" : "Deal minimal damage"
+			}
+		}
+	}
+}
