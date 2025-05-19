@@ -9,6 +9,8 @@ extends ButtonPanel
 
 @onready var curr_scene = get_tree().current_scene
 
+@export var editor_show_text := false
+
 signal room_action_finished
 
 func _ready() -> void:
@@ -26,6 +28,8 @@ func _process(delta: float) -> void:
 	
 	$Tooltip.tip_text = desc
 	$Tooltip.icon_texture = icon
+	
+	$Tooltip.editor_show_text = editor_show_text
 	
 	var h = 300 - global_position.y
 	var w = global_position.x

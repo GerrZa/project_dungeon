@@ -1,0 +1,132 @@
+[gd_scene load_steps=10 format=3 uid="uid://c8awx43ky0e0q"]
+
+[ext_resource type="Texture2D" uid="uid://cy61rwjp04q33" path="res://asset/dungeon/ui/window_nine_slice.png" id="1_4sbq6"]
+[ext_resource type="Script" uid="uid://ctqh13h0mjg3y" path="res://src/dungeon/dungeon_system/room_node/potion_node/heal_screen/heal_screen.gd" id="1_cauom"]
+[ext_resource type="Texture2D" uid="uid://d1xni8ntakguv" path="res://asset/battle/char/sword_man_battle.png" id="3_1f3l1"]
+[ext_resource type="Texture2D" uid="uid://2bberxk6pi22" path="res://asset/battle/char/theif_battle.png" id="4_xapcx"]
+[ext_resource type="Texture2D" uid="uid://3nxu6i2f38v" path="res://asset/battle/char/witch_battle.png" id="5_84tva"]
+
+[sub_resource type="Animation" id="Animation_dj7el"]
+resource_name = "open"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(0.277392, 1),
+"update": 0,
+"values": [Vector2(248, 6), Vector2(248, 186)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(0.277392, 1),
+"update": 0,
+"values": [Vector2(76, 147), Vector2(76, 57)]
+}
+
+[sub_resource type="Animation" id="Animation_doxc5"]
+resource_name = "close"
+length = 0.3
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(0.196146, 1),
+"update": 0,
+"values": [Vector2(248, 186), Vector2(248, 6)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(0.196146, 1),
+"update": 0,
+"values": [Vector2(76, 57), Vector2(76, 147)]
+}
+
+[sub_resource type="Animation" id="Animation_1f3l1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(248, 186)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(76, 57)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xapcx"]
+_data = {
+&"RESET": SubResource("Animation_1f3l1"),
+&"close": SubResource("Animation_doxc5"),
+&"open": SubResource("Animation_dj7el")
+}
+
+[node name="HealScreen" type="CanvasLayer"]
+script = ExtResource("1_cauom")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+offset_left = 76.0
+offset_top = 57.0
+offset_right = 324.0
+offset_bottom = 243.0
+texture = ExtResource("1_4sbq6")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="NinePatchRect"]
+libraries = {
+&"": SubResource("AnimationLibrary_xapcx")
+}
+
+[node name="SwordManBattle" type="Sprite2D" parent="."]
+position = Vector2(179, 99)
+texture = ExtResource("3_1f3l1")
+centered = false
+
+[node name="TheifBattle" type="Sprite2D" parent="."]
+position = Vector2(113, 98)
+texture = ExtResource("4_xapcx")
+centered = false
+
+[node name="WitchBattle" type="Sprite2D" parent="."]
+position = Vector2(239, 85)
+texture = ExtResource("5_84tva")
+centered = false

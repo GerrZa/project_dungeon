@@ -25,9 +25,11 @@ offset_right = 16.0
 offset_bottom = 21.0
 script = ExtResource("1_w1qnv")
 icon = ExtResource("2_wduix")
-desc = "[color=green][Potion][/color]
+desc = "[color=#93c82b][Potion][/color]
 [color=gray]-----------[/color]
 Heal your party"
+editor_show_text = null
+metadata/_edit_group_ = true
 
 [node name="Tooltip" type="Panel" parent="."]
 self_modulate = Color(0, 0, 0, 0)
@@ -37,21 +39,20 @@ offset_right = 16.0
 offset_bottom = 21.0
 mouse_filter = 1
 script = ExtResource("2_8ca3h")
-tip_text = "[color=green][Potion][/color]
+tip_text = "[color=#93c82b][Potion][/color]
 [color=gray]-----------[/color]
 Heal your party"
 icon_texture = ExtResource("2_wduix")
-editor_show_text = false
+editor_show_text = null
 position_clamp = false
 
 [node name="Icon" type="Sprite2D" parent="Tooltip"]
 material = SubResource("ShaderMaterial_yog6g")
-position = Vector2(0, 2.45536)
+position = Vector2(0, 3.57067)
 texture = ExtResource("2_wduix")
 centered = false
 
 [node name="info_pivot" type="Node2D" parent="Tooltip"]
-visible = false
 top_level = true
 z_index = 199
 
@@ -77,7 +78,7 @@ mouse_filter = 2
 theme_override_fonts/normal_font = ExtResource("6_6hgrg")
 theme_override_font_sizes/normal_font_size = 8
 bbcode_enabled = true
-text = "[color=green][Potion][/color]
+text = "[color=#93c82b][Potion][/color]
 [color=gray]-----------[/color]
 Heal your party"
 horizontal_alignment = 1
