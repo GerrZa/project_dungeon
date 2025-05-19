@@ -25,7 +25,7 @@ func _process(delta: float) -> void:
 	if disable:
 		render_modulate = 0.5
 	
-	$anchor/PttButton.material.set_shader_parameter("bri", render_modulate)
+	$anchor/PttButton.material.set_shader_parameter("bri", lerp($anchor/PttButton.material.get_shader_parameter("bri"), render_modulate, 0.5))
 	
 	var mod_col = Color.WHITE
 	mod_col.v = render_modulate

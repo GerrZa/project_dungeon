@@ -152,6 +152,9 @@ var hover_enemy = null
 
 signal enemy_turn_finished
 
+signal enter_player_turn
+signal enter_enemy_turn
+
 func _init() -> void:
 	random_combo_pick = Global.battle_data["random_combo_pick"]
 
@@ -273,6 +276,7 @@ func switch_turn(to_who):
 	turn = to_who
 	match to_who:
 		"p":
+			emit_signal("enter_player_turn")
 			turn_count += 1
 			if turn_count > 0 and turn_count % 3 == 0:
 				if random_combo_pick == false:
@@ -308,6 +312,7 @@ func switch_turn(to_who):
 			$ui.enable_all_avai()
 			
 		"e":
+			emit_signal("enter_enemy_turn")
 			$ui/anchor/AnimationPlayer.play("slide_out")
 			
 			await $ui/anchor/AnimationPlayer.animation_finished

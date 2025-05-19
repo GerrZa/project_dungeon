@@ -53,6 +53,8 @@ func reload_action_list(): #when switching player
 			
 			$anchor/action_button.add_child(act_ins)
 			
+			act_ins.get_node("anchor").position.y -= 4
+			
 			act_ins.position = Vector2(0,20 * k)
 			act_ins.anchor_z_index = 30 - k
 			
@@ -68,6 +70,11 @@ func reload_action_list(): #when switching player
 		
 		#for i in action_condition.keys():
 			#print(i)
+		
+		#char info tooltip
+		var tooltip_text = PlayerData.member_info[curr_scene.selecting_player.char_type]["name"]
+		
+		$anchor/Port/Tooltip.tip_text = tooltip_text
 		
 		disable_all()
 		enable_all_avai()
@@ -106,14 +113,14 @@ func refresh_hp_and_res(change_player = false):
 	var res_color = {
 		"STA" : Color("c5e857"),
 		"MP" : Color("6378a6"),
-		"WP" : Color("925678")
+		"WP" : Color("f4f5f0")
 	}
 	
 	var res_tooltip = {
 		Global.TYPE.RED : ["[color=Gainsboro ][color=Gold][Stamina][/color] will\nbe shared with [color=Yellowgreen] [Theif]",
-							"[color=Gainsboro ][color=Orange][WillPower][/color] will\nbe shared with [color=Royalblue] [Witch]"],
+							"[color=Gainsboro ][color=#f4f5f0][WillPower][/color] will\nbe shared with [color=Royalblue] [Witch]"],
 		Global.TYPE.BLUE : ["[color=Gainsboro ][color=Royalblue][ManaPoint][/color] will\nbe shared with [color=Yellowgreen] [Theif]",
-							"[color=Gainsboro ][color=Gold][WillPower][/color] will\nbe shared with [color=Orangered] [SwordMan]"],
+							"[color=Gainsboro ][color=#f4f5f0][WillPower][/color] will\nbe shared with [color=Orangered] [SwordMan]"],
 		Global.TYPE.GREEN : ["[color=Gainsboro ][color=Gold][Stamina][/color] will\nbe shared with [color=Orangered] [SwordMan]",
 							"[color=Gainsboro ][color=Royalblue][ManaPoint][/color] will\nbe shared with [color=Royalblue] [Witch]"]
 	}

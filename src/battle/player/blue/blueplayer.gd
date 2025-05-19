@@ -1,13 +1,30 @@
 extends Player
 
-var action_list = {
-	"Spell" : {"call" : attack, "desc" : "Test", "cond" : func(): return true},
-	"Some Fantasy shit" : {"call" : attack, "desc" : "Test", "cond" : func(): return false},
+#weapon action list
+var sword_action_list = {
+	"Slash" : {"call" : attack,
+				 "desc" : "Deal [color=red]15 damages[/color] to\nthe front enemy in the line\n\n-Use  15  [color=yellow]Stamina (STA)[/color]",
+				 "cond" : func(): 
+		if curr_scene.player_resource["STA"][0] < 15:
+			return false
+		else:
+			return true}
 }
 
+#weapon library
+var weapon_action_list = {
+	"regular_sword" : sword_action_list
+}
+
+#dont touch
 var port = preload("res://asset/battle/char/port/witch_port.png")
 
+#dont touch
 var used_res = ["MP", "WP"]
+
+func _ready() -> void:
+	super()
+	action_list = weapon_action_list[PlayerData.member_info[char_type]["weapon"]]
 
 func _physics_process(delta: float) -> void:
 	super(delta)

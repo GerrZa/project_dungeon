@@ -1,8 +1,19 @@
 extends Player
 
-var action_list = {
-	"Stealll" : {"call" : attack, "desc" : "Test", "cond" : func(): return true},
-	"WVINKKK" : {"call" : attack, "desc" : "Test", "cond" : func(): return true}
+#weapon action list
+var sword_action_list = {
+	"Slash" : {"call" : attack,
+				 "desc" : "Deal [color=red]15 damages[/color] to\nthe front enemy in the line\n\n-Use  15  [color=yellow]Stamina (STA)[/color]",
+				 "cond" : func(): 
+		if curr_scene.player_resource["STA"][0] < 15:
+			return false
+		else:
+			return true}
+}
+
+#weapon library
+var weapon_action_list = {
+	"regular_sword" : sword_action_list
 }
 
 var port = preload("res://asset/battle/char/port/theif_port.png")
@@ -11,9 +22,7 @@ var used_res = ["STA", "MP"]
 
 func _ready() -> void:
 	super()
-	
-	max_hp = 500
-	hp = 500
+	action_list = weapon_action_list[PlayerData.member_info[char_type]["weapon"]]
 
 func _physics_process(delta: float) -> void:
 	super(delta)

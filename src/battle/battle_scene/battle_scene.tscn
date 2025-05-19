@@ -397,6 +397,10 @@ color = Color(0.298039, 0.227451, 0.2, 1)
 position = Vector2(20, 232)
 centered = false
 
+[node name="Tooltip" parent="ui/anchor/Port" instance=ExtResource("3_6uvr7")]
+offset_right = 48.0
+offset_bottom = 49.0
+
 [node name="Port-frame" type="Sprite2D" parent="ui/anchor/Port"]
 show_behind_parent = true
 position = Vector2(24, 24)
@@ -415,9 +419,9 @@ show_percentage = false
 [node name="endturn_button" parent="ui/anchor" instance=ExtResource("5_pfvi3")]
 layout_mode = 0
 offset_left = 295.0
-offset_top = 256.0
-offset_right = 386.0
-offset_bottom = 274.0
+offset_top = 271.0
+offset_right = 387.0
+offset_bottom = 289.0
 text = "Endturn"
 
 [node name="swap_up" type="Panel" parent="ui/anchor"]
@@ -425,10 +429,10 @@ modulate = Color(0.5, 0.5, 0.5, 1)
 self_modulate = Color(0, 0, 0, 0)
 custom_minimum_size = Vector2(0, 18)
 layout_mode = 0
-offset_left = 295.0
-offset_top = 216.0
-offset_right = 330.0
-offset_bottom = 234.0
+offset_left = 303.0
+offset_top = 221.0
+offset_right = 379.0
+offset_bottom = 239.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_s105h")
 script = ExtResource("7_c7sli")
 metadata/_edit_group_ = true
@@ -436,7 +440,7 @@ metadata/_edit_group_ = true
 [node name="anchor" type="Node2D" parent="ui/anchor/swap_up"]
 modulate = Color(0.5, 0.5, 0.5, 1)
 top_level = true
-position = Vector2(295, 216)
+position = Vector2(303, 221)
 
 [node name="PttButton" type="Sprite2D" parent="ui/anchor/swap_up/anchor"]
 material = SubResource("ShaderMaterial_r8s0v")
@@ -461,10 +465,10 @@ modulate = Color(0.5, 0.5, 0.5, 1)
 self_modulate = Color(0, 0, 0, 0)
 custom_minimum_size = Vector2(0, 18)
 layout_mode = 0
-offset_left = 295.0
-offset_top = 236.0
-offset_right = 331.0
-offset_bottom = 254.0
+offset_left = 303.0
+offset_top = 243.0
+offset_right = 379.0
+offset_bottom = 261.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_s105h")
 script = ExtResource("7_c7sli")
 metadata/_edit_group_ = true
@@ -472,7 +476,7 @@ metadata/_edit_group_ = true
 [node name="anchor" type="Node2D" parent="ui/anchor/swap_down"]
 modulate = Color(0.5, 0.5, 0.5, 1)
 top_level = true
-position = Vector2(295, 236)
+position = Vector2(303, 243)
 
 [node name="PttButton" type="Sprite2D" parent="ui/anchor/swap_down/anchor"]
 material = SubResource("ShaderMaterial_gabcj")
@@ -507,6 +511,16 @@ offset_bottom = 244.0
 value_name = "HP"
 slow_bar = true
 
+[node name="outline" type="ColorRect" parent="ui/anchor/hp"]
+show_behind_parent = true
+layout_mode = 0
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 101.0
+offset_bottom = 18.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
 [node name="res1" parent="ui/anchor" instance=ExtResource("10_b5dvc")]
 modulate = Color(0.9375, 0.739632, 0.270996, 1)
 layout_mode = 1
@@ -520,6 +534,16 @@ offset_top = 258.0
 offset_right = 156.0
 offset_bottom = 261.0
 slow_bar = true
+
+[node name="outline" type="ColorRect" parent="ui/anchor/res1"]
+show_behind_parent = true
+layout_mode = 0
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 101.0
+offset_bottom = 13.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
 
 [node name="share_info1" parent="ui/anchor" instance=ExtResource("3_6uvr7")]
 layout_mode = 0
@@ -545,6 +569,16 @@ offset_right = 156.0
 offset_bottom = 276.0
 slow_bar = true
 
+[node name="outline" type="ColorRect" parent="ui/anchor/res2"]
+show_behind_parent = true
+layout_mode = 0
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 101.0
+offset_bottom = 13.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
 [node name="share_info2" parent="ui/anchor" instance=ExtResource("3_6uvr7")]
 layout_mode = 0
 offset_left = 181.0
@@ -559,7 +593,7 @@ text_margin = Vector2(8, 8)
 anchors_preset = 0
 offset_left = 194.0
 offset_top = 216.0
-offset_right = 285.0
+offset_right = 286.0
 offset_bottom = 295.0
 mouse_filter = 2
 metadata/_edit_group_ = true
@@ -692,7 +726,7 @@ position = Vector2(74, 88)
 lane = 2
 
 [node name="RedPlayer" parent="." instance=ExtResource("5_px77a")]
-position = Vector2(73, 135)
+position = Vector2(72, 135)
 lane = 1
 
 [node name="BluePlayer" parent="." instance=ExtResource("7_pfvi3")]
