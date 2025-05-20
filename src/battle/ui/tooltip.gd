@@ -75,5 +75,10 @@ func _physics_process(delta: float) -> void:
 		$info_pivot.visible = false
 	
 	if position_clamp:
-		$info_pivot.global_position.x = clamp($info_pivot.global_position.x, 0, 400 - $info_pivot/NinePatchRect.size.x)
-		$info_pivot.global_position.y = clamp($info_pivot.global_position.y, $info_pivot/NinePatchRect.size.y, 300)
+		match dir:
+			DIR.UR:
+				$info_pivot.global_position.x = clamp($info_pivot.global_position.x, 0, 400 - $info_pivot/NinePatchRect.size.x)
+				$info_pivot.global_position.y = clamp($info_pivot.global_position.y, $info_pivot/NinePatchRect.size.y, 300)
+			DIR.U:
+				$info_pivot.global_position.x = clamp($info_pivot.global_position.x, $info_pivot/NinePatchRect.size.x/2, 400 - ($info_pivot/NinePatchRect.size.x/2))
+				$info_pivot.global_position.y = clamp($info_pivot.global_position.y, $info_pivot/NinePatchRect.size.y, 300)

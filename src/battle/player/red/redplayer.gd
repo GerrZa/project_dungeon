@@ -1,11 +1,15 @@
 extends Player
 
+#NOTE
+#every call must end with "return true"
+
 #weapon action list
 var sword_action_list = {
 	"Slash" : {"call" : func():
 						attack(15)
 						use_sta(5)
-						use_act_point(),
+						use_act_point()
+						return true,
 				 "desc" : "Deal [color=red]15 damages[/color] to\nthe front enemy in the line\n\n-Use  5  [color=yellow]Stamina (STA)[/color]",
 				 "cond" : func(): 
 		if curr_scene.player_resource["STA"][0] >= 5 and curr_scene.enemy_lane[lane].size() > 0:
@@ -15,8 +19,9 @@ var sword_action_list = {
 	"Block" : {"call" : func():
 						add_shield(20)
 						use_sta(10)
-						use_act_point(),
-				 "desc" : "Create [color=#56b2b4]20 shield units[/color]\nSubtract incoming damage\n\n-Use  10  [color=yellow]Stamina (STA)[/color]",
+						use_act_point()
+						return true,
+				 "desc" : "Create [color=#56b2b4]20 shield units[/color]\nSubtract incoming damage\n[color=yellow]Last 1 turn[/color]\n\n-Use  10  [color=yellow]Stamina (STA)[/color]",
 				 "cond" : func(): 
 		if curr_scene.player_resource["STA"][0] >= 10:
 			return true
@@ -28,7 +33,8 @@ var battle_axe_action_list = {
 	"Big Slash" : {"call" : func():
 						attack(45)
 						use_sta(20)
-						use_act_point(),
+						use_act_point()
+						return true,
 				 "desc" : "Deal [color=red]45 damages[/color] to\nthe front enemy in the line\n\n-Use  20  [color=yellow]Stamina (STA)[/color]",
 				 "cond" : func(): 
 		if curr_scene.player_resource["STA"][0] >= 20 and curr_scene.enemy_lane[lane].size() > 0:
@@ -77,8 +83,6 @@ func attack(dmg):
 		$spr_pivot/spr/AnimationPlayer.play("attack")
 		
 		await $spr_pivot/spr/AnimationPlayer.animation_finished
-		
-		return true
 
 #region Shield
 func set_shield(amt):

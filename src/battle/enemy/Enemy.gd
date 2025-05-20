@@ -13,9 +13,13 @@ var follow_to_pos = true
 signal dead
 signal action_finish
 
+var will_attack = false #for attack order registeration
+
 @export var weak : Global.TYPE = Global.TYPE.NONE
 @export var weak_amp := 1.5
 @export var randomize_weak := true
+
+var turn_count = 0 #since enter battle
 
 func _ready() -> void:
 	super()
@@ -30,8 +34,17 @@ func _physics_process(delta: float) -> void:
 	
 	modulate.v = 0.6
 	
-	if curr_scene.selecting_player != null and curr_scene.selecting_player.lane == lane:
-		modulate.v = 1
+	if curr_scene.turn == "p":
+		if curr_scene.selecting_player != null and curr_scene.selecting_player.lane == lane:
+			modulate.v = 1
+	elif curr_scene.turn == "e":
+		if curr_scene.to_action_enemy_list.has(self):
+			modulate.v = 1
+	
+	if curr_scene.enemy_lane[lane][0] == self:
+		will_attack = true
+	else:
+		will_attack = false
 
 func take_damage(dmg, from_type):
 	if from_type == weak:

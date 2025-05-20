@@ -75,6 +75,9 @@ func perform_action():
 		remove_self()
 		print("remove")
 		queue_free()
+	
+	curr_scene.check_win()
+	curr_scene.check_lose()
 
 func spr_flash(value : bool):
 	$spr_anchor/spr.material.set_shader_parameter("flashing_enable", value)

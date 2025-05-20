@@ -113,14 +113,14 @@ func refresh_hp_and_res(change_player = false):
 	var res_color = {
 		"STA" : Color("c5e857"),
 		"MP" : Color("6378a6"),
-		"WP" : Color("f4f5f0")
+		"WP" : Color("b9f9e0")
 	}
 	
 	var res_tooltip = {
 		Global.TYPE.RED : ["[color=Gainsboro ][color=Gold][Stamina][/color] will\nbe shared with [color=Yellowgreen] [Theif]",
-							"[color=Gainsboro ][color=#f4f5f0][WillPower][/color] will\nbe shared with [color=Royalblue] [Witch]"],
+							"[color=Gainsboro ][color=#80e6bf][WillPower][/color] will\nbe shared with [color=Royalblue] [Witch]"],
 		Global.TYPE.BLUE : ["[color=Gainsboro ][color=Royalblue][ManaPoint][/color] will\nbe shared with [color=Yellowgreen] [Theif]",
-							"[color=Gainsboro ][color=#f4f5f0][WillPower][/color] will\nbe shared with [color=Orangered] [SwordMan]"],
+							"[color=Gainsboro ][color=#80e6bf][WillPower][/color] will\nbe shared with [color=Orangered] [SwordMan]"],
 		Global.TYPE.GREEN : ["[color=Gainsboro ][color=Gold][Stamina][/color] will\nbe shared with [color=Orangered] [SwordMan]",
 							"[color=Gainsboro ][color=Royalblue][ManaPoint][/color] will\nbe shared with [color=Royalblue] [Witch]"]
 	}

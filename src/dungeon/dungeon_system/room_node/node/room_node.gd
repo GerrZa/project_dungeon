@@ -11,6 +11,10 @@ extends ButtonPanel
 
 @export var editor_show_text := false
 
+#modulate
+var to_mod := Color.WHITE
+var mod := Color.WHITE
+
 signal room_action_finished
 
 func _ready() -> void:
@@ -36,10 +40,13 @@ func _process(delta: float) -> void:
 	$Tooltip.get_node("Icon").position.y = 1 + cos((Time.get_ticks_msec()/500.0) + (h/50.0) + (w/50.0)) * 3
 	
 	if Engine.is_editor_hint() == false:
-		if curr_scene.curr_room.check_can_go(self):# or curr_scene.curr_room == self:
-			$Tooltip/Icon.modulate.v = 1.0
+		if (curr_scene.curr_room.check_can_go(self) and curr_scene.can_move) or (curr_scene.curr_room == self and curr_scene.can_move == false):# or curr_scene.curr_room == self:
+			to_mod.v = 1.0
 		else:
-			$Tooltip/Icon.modulate.v = 0.5
+			to_mod.v = 0.5
+		
+		mod = lerp(mod, to_mod, 0.2)
+		$Tooltip/Icon.modulate = mod
 
 func check_can_go(node):
 	for i in connected_node:

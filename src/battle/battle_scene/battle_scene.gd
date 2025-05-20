@@ -150,6 +150,8 @@ var turn_count = -1
 
 var hover_enemy = null
 
+var to_action_enemy_list = []
+
 signal enemy_turn_finished
 
 signal enter_player_turn
@@ -312,6 +314,7 @@ func switch_turn(to_who):
 			$ui.enable_all_avai()
 			
 		"e":
+			get_to_action_enemy_list()
 			emit_signal("enter_enemy_turn")
 			$ui/anchor/AnimationPlayer.play("slide_out")
 			
@@ -322,6 +325,7 @@ func switch_turn(to_who):
 			
 			emit_signal("enemy_turn_finished")
 		"win":
+			
 			$ui.disable_all()
 			
 			change_scene_back_to_dungeon()
@@ -342,7 +346,11 @@ func check_win():
 	for i in enemy_lane:
 		sum_ene += i.size()
 	
+	
 	if sum_ene <= 0:
+		if turn == "p":
+			$ui/anchor/AnimationPlayer.play("slide_out")
+		
 		switch_turn("win")
 		return true
 	
@@ -437,16 +445,23 @@ func rearrange_enemy():
 			enemy_lane[i][j].z_index = enemy_lane[i].size()-j + ((enemy_lane.size() - i)*10)
 			
 
-func call_enemy_action():
-	var to_action_enemy_list = []
+func get_to_action_enemy_list():
+	to_action_enemy_list = []
 	
 	for i in range(enemy_lane.size()):
 		var ii = enemy_lane.size() - i - 1
 		
-		if enemy_lane[ii].size() > 0:
-			to_action_enemy_list.append(enemy_lane[ii][0])
+		for j in enemy_lane[ii]:
+			if j.will_attack:
+				to_action_enemy_list.append(j)
+
+func call_enemy_action():
+	get_to_action_enemy_list()
 	
 	for i in to_action_enemy_list:
+		if turn != "e":
+			break
+		
 		i.perform_action()
 		
 		ui.refresh_hp_and_res()
@@ -456,9 +471,17 @@ func call_enemy_action():
 		for j in range(lane_count):
 			if player_lane[j].alive == false and enemy_lane[j].size() > 0:
 				await immigrate_enemy(j)
-		
+	
+	for i in enemy_lane:
+		for j in i:
+			j.turn_count += 1
+	
 	if check_win():
 		return
+	
+	if check_lose():
+		return
+	
 	emit_signal("enemy_turn_finished")
 	switch_turn("p")
 	pass

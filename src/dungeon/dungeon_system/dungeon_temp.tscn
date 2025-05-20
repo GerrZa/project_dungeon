@@ -241,7 +241,6 @@ offset_top = 194.0
 offset_right = 208.0
 offset_bottom = 212.0
 connected_node = Array[NodePath]([NodePath("../2-1"), NodePath("../2-2B")])
-editor_show_text = false
 
 [node name="2-1" parent="." instance=ExtResource("1_j6tvo")]
 offset_left = 124.0
@@ -249,13 +248,15 @@ offset_top = 161.0
 offset_right = 142.0
 offset_bottom = 179.0
 connected_node = Array[NodePath]([NodePath("../3-1")])
-editor_show_text = false
 
 [node name="2-2B" parent="." instance=ExtResource("7_80e7r")]
 offset_left = 245.0
 offset_top = 140.0
 offset_right = 263.0
 offset_bottom = 160.0
+lane0 = Array[String](["skeleton", "skeleton"])
+lane1 = Array[String](["skeleton", "skeleton"])
+lane2 = Array[String](["skeleton", "skeleton"])
 combo_list = Array[String](["BoG", "GoR", "R1"])
 random_combo_pick = true
 connected_node = Array[NodePath]([NodePath("../3-2HP"), NodePath("../4L")])
@@ -267,7 +268,6 @@ offset_top = 98.0
 offset_right = 156.0
 offset_bottom = 116.0
 connected_node = Array[NodePath]([NodePath("../4L")])
-editor_show_text = false
 
 [node name="3-2HP" parent="." instance=ExtResource("8_muuyh")]
 offset_left = 266.0
@@ -292,7 +292,6 @@ offset_top = 45.0
 offset_right = 230.0
 offset_bottom = 63.0
 connected_node = Array[NodePath]([NodePath("../6B")])
-editor_show_text = false
 
 [node name="6B" parent="." instance=ExtResource("7_80e7r")]
 offset_left = 165.0

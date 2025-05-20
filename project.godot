@@ -33,6 +33,9 @@ window/stretch/mode="viewport"
 [file_customization]
 
 folder_colors={
+"res://asset/battle/": "green",
+"res://asset/dungeon/": "orange",
+"res://asset/place_holder/": "gray",
 "res://src/battle/": "green",
 "res://src/battle/ingame_battle/": "yellow",
 "res://src/dungeon/": "orange",

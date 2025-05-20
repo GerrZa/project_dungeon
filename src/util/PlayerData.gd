@@ -34,14 +34,13 @@ var member_info = {
 	#}
 #}
 
-var weapon_list = {
-	Global.TYPE.RED : {
-		"regular_sword" : {
-			"display" : "Filthy Sword",
-			"desc" : "Filthy sword for a filthy user.",
-			"action_list" : {
-				"Slash" : "Deal minimal damage"
-			}
+var weapon_detail = {
+	"regular_sword" : {
+		"display" : "Regular Sword",
+		"desc" : "Regular sword that so cheap, they give away to newbie for free.",
+		"action_list" : {
+			"Slash" : "Deal minimal damage",
+			"Block" : "Create shield that substact incoming damages\nonly last for 1 turn."
 		}
 	}
 }
