@@ -44,7 +44,7 @@ position_clamp = false
 
 [node name="Icon" type="Sprite2D" parent="Tooltip"]
 material = SubResource("ShaderMaterial_yog6g")
-position = Vector2(0, -1.41721)
+position = Vector2(0, -1.97154)
 texture = ExtResource("3_ckdls")
 centered = false
 

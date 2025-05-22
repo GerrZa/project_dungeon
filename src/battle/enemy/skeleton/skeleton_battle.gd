@@ -1,6 +1,5 @@
 extends Enemy
 
-var will_escape = false
 
 func _ready() -> void:
 	super()
@@ -25,7 +24,6 @@ func _physics_process(delta: float) -> void:
 
 func _process(delta: float) -> void:
 	$CanvasLayer/tooltips.global_position = global_position - Vector2(-8, 49) - curr_scene.camera.global_position - curr_scene.camera.offset
-	$CanvasLayer/tooltips/runaway.visible = will_escape
 
 func take_damage(dmg, type):
 	super(dmg, type)
@@ -44,37 +42,22 @@ func take_damage(dmg, type):
 	if weak == type:
 		ParticleSpawner.spawn(ParticleSpawner.PARTS.FLOATING_TEXT, curr_scene, [global_position - Vector2(0, 38), "CRIT", true, Color.RED, 50.0, 0.65, true, 2])
 	
-	
-	if hp <= 30:
-		will_escape = true
-		$CanvasLayer/tooltips/runaway.visible = true
 
 func perform_action():
-	if will_escape == false:
-		curr_scene.player_lane[lane].take_damage(50)
-		curr_scene.camera.shake(0.2, 4)
-		
-		$AnimationPlayer.stop()
-		$AnimationPlayer.play('attack')
-		
-		await $AnimationPlayer.animation_finished
-		
-		super()
-	else:
-		var tween = get_tree().create_tween()
-		tween.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BOUNCE)
-		
-		tween.tween_property(self, "global_position", Vector2(450, global_position.y), 0.2)
-		
-		await tween.finished
-		
-		super()
-		
-		follow_to_pos = false
-		
-		remove_self()
-		print("remove")
-		queue_free()
+	var tween = get_tree().create_tween()
+	tween.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BOUNCE)
+	
+	tween.tween_property(self, "global_position", Vector2(450, global_position.y), 0.2)
+	
+	await tween.finished
+	
+	super()
+	
+	follow_to_pos = false
+	
+	remove_self()
+	print("remove")
+	queue_free()
 	
 	curr_scene.check_win()
 	curr_scene.check_lose()
