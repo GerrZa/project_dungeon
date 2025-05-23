@@ -260,7 +260,6 @@ lane2 = Array[String](["skeleton", "skeleton"])
 combo_list = Array[String](["BoG", "GoR", "R1"])
 random_combo_pick = true
 connected_node = Array[NodePath]([NodePath("../3-2HP"), NodePath("../4L")])
-editor_show_text = false
 
 [node name="3-1" parent="." instance=ExtResource("1_j6tvo")]
 offset_left = 138.0
@@ -275,7 +274,6 @@ offset_top = 90.0
 offset_right = 282.0
 offset_bottom = 111.0
 connected_node = Array[NodePath]([NodePath("../5")])
-editor_show_text = false
 disable = false
 oneshot = false
 
@@ -298,4 +296,3 @@ offset_left = 165.0
 offset_top = 8.0
 offset_right = 183.0
 offset_bottom = 28.0
-editor_show_text = false

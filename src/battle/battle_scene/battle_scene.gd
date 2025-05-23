@@ -474,7 +474,7 @@ func call_enemy_action():
 	
 	for i in enemy_lane:
 		for j in i:
-			j.turn_count += 1
+			j.add_turn_count()
 	
 	if check_win():
 		return

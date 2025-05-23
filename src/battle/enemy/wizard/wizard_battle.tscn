@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://d0o3ccayjpga3"]
 
-[ext_resource type="Script" uid="uid://cuhkdmib7reak" path="res://src/battle/enemy/skeleton/skeleton_battle.gd" id="1_vs7mv"]
+[ext_resource type="Script" uid="uid://cqfo5ejs3yhba" path="res://src/battle/enemy/wizard/wizard_battle.gd" id="1_7gw5i"]
 [ext_resource type="Shader" uid="uid://snu2d4w8a06f" path="res://src/util/shader/outline_flashing_shader.gdshader" id="2_hhsox"]
 [ext_resource type="Texture2D" uid="uid://d327yk4pdkagw" path="res://asset/battle/enemy/wizard/wizard_battle.png" id="3_7gw5i"]
 [ext_resource type="FontFile" uid="uid://b488m1liu66xo" path="res://asset/place_holder/SmolFont.ttf" id="4_pcmlv"]
@@ -155,9 +155,7 @@ _data = {
 }
 
 [node name="WizardBattle" type="Area2D"]
-script = ExtResource("1_vs7mv")
-max_hp = 50
-weak = 1
+script = ExtResource("1_7gw5i")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-2.5, -26)

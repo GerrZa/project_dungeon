@@ -29,7 +29,6 @@ combo_list = Array[String](["BoG"])
 icon = ExtResource("2_posgm")
 desc = "[color=red][Battle][/color]
 [color=gray]-----------[/color]"
-editor_show_text = null
 disable = false
 oneshot = false
 metadata/_edit_group_ = true
@@ -55,6 +54,7 @@ texture = ExtResource("2_posgm")
 centered = false
 
 [node name="info_pivot" type="Node2D" parent="Tooltip"]
+visible = false
 top_level = true
 z_index = 199
 

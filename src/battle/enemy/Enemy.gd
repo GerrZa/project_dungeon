@@ -65,3 +65,6 @@ func perform_action():
 	#custom code
 	
 	emit_signal("action_finish")
+
+func add_turn_count(amt=1):
+	turn_count += amt

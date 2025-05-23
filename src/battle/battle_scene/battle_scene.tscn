@@ -718,6 +718,7 @@ texture = ExtResource("14_kxpl5")
 centered = false
 
 [node name="info_pivot" type="Node2D" parent="ui/upper_anchor/combo_ind"]
+visible = false
 z_index = 1
 
 [node name="NinePatchRect" type="NinePatchRect" parent="ui/upper_anchor/combo_ind/info_pivot"]
